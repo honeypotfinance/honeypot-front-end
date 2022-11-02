@@ -25,7 +25,7 @@ export const state = () => ({
     instagram: undefined,
     twitter: undefined,
     telegram: undefined,
-    user: false,
+    logged: false,
     tier: 2,
     balance: 0,
     dataSocial: [],
@@ -46,7 +46,7 @@ export const mutations = {
     if (wallet.isSignedIn() && typeof data === 'string') {
       state.dataUser.avatar = require('~/assets/sources/images/avatar.png');
       state.dataUser.accountId = data;
-      state.dataUser.user = true;
+      state.dataUser.logged = true;
     } else if (wallet.isSignedIn() && typeof data === 'object') {
       state.dataUser.accountId = data.wallet;
       state.dataUser.banner = data.banner ? this.$axios.defaults.baseURL+data.banner : undefined;
@@ -83,7 +83,7 @@ export const mutations = {
         // push data socials
         state.dataUser.dataSocial.push({ icon: keys, link: values })
       }
-      state.dataUser.user = true;
+      state.dataUser.logged = true;
     };
   },
   signIn() {
@@ -93,7 +93,7 @@ export const mutations = {
   },
   signOut(state) {
     wallet.signOut();
-    state.dataUser.user = false;
+    state.dataUser.logged = false;
     this.$router.push(this.localePath('/'));
   },
 };

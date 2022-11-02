@@ -80,7 +80,7 @@
 
     <!--////////////// menues //////////////-->
     <!-- menu login -->
-    <v-menu activator=".openMenuLogin" right offset-x>
+    <v-menu activator=".openMenuLogin" bottom offset-y>
       <v-list class="font2" color="var(--secondary)" style="--c:#fff">
         <v-list-item-group active-class="activeClass">
           <v-list-item
@@ -146,8 +146,6 @@ export default {
         { icon:"twitch", url:"#" }
       ],
       dataMenuLogin: [
-        { key:"profile", name:"Profile" },
-        { key:"library", name:"Library" },
         { key:"logout", name:"Log out" },
       ],
     };

@@ -300,12 +300,28 @@ $breakpoints: (
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
 
 
+//- parent -//
+@mixin parent() {
+  max-width: var(--parent) !important;
+  width: 100%;
+  margin-inline: auto;
+}
+
+
+//- subparent -//
+@mixin subparent() {
+  max-width: var(--subparent) !important;
+  width: 100%;
+  margin-inline: auto;
+}
+
+
 //- buttons -//
 @mixin btn() {
   --bg: var(--primary);
   --c: #000000;
   --b: initial;
-  --p: .5em 1em;
+  --p: 12px;
   --w: initial;
   --max-w: none;
   --min-w: none;
@@ -314,11 +330,11 @@ $breakpoints: (
   --min-h: 36px;
   --ml: none;
   --mr: none;
-  --br: 2vmax;
-  --bs: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  --br: 30px;
+  --bs: none;
   --fs: 1em;
-  --fw: 300;
-  --ls: -0.005em;
+  --fw: 700;
+  --ls: normal;
   --lh: 1;
   --f: initial;
   --t: initial;

@@ -23,7 +23,7 @@
   /* // // sizes // // */
   --margin-global: 9em; // too can use 6em
   @include media(max, small) {--margin-global: clamp(1em, 5vw, 4em)}
-  --parent: 1440px;
+  --parent: 1600px;
   --subparent: 1900px;
   --h-header: 100px;
   @include media(max, small) {--h-header: 80px}

@@ -36,14 +36,10 @@ div.v-card::before {background: transparent !important}
 /* // // limit size // // */ 
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
 .parent {
-  max-width: var(--parent) !important;
-  width: 100%;
-  margin-inline: auto;
+  @include parent;
 }
 .subparent {
-  max-width: var(--subparent) !important;
-  width: 100%;
-  margin-inline: auto;
+  @include subparent;
 }
 .margin_global {
   padding-inline: var(--margin-global);
