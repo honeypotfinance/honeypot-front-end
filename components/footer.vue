@@ -3,7 +3,7 @@
     <v-row no-gutters class="align" style="gap: 4em">
       <!-- content -->
       <section class="fill_w space gap2 divcolmobile">
-        <aside class="left divcol eliminarmobile gap1">
+        <aside class="left divcol deletemobile gap1">
           <img class="aspect" src="~/assets/sources/logos/near.svg" alt="Logo" style="--w:5.4875em; --f:invert(75%)">
 
           <p class="h11_em p">
@@ -21,8 +21,8 @@
         </aside>
 
         <aside class="right">
-          <v-card v-for="(item,i) in dataFooter" :key="i" color="transparent" :class="{eliminarmobile: !item.input}">
-            <img class="logo vermobile align" src="~/assets/sources/logos/near.svg" alt="logo near" style="--f:invert(75%)">
+          <v-card v-for="(item,i) in dataFooter" :key="i" color="transparent" :class="{deletemobile: !item.input}">
+            <img class="logo showmobile align" src="~/assets/sources/logos/near.svg" alt="logo near" style="--f:invert(75%)">
             <label class="h11_em tcentermobile">{{ item.title }}</label>
 
             <a v-for="(item2, i2) in item.links" v-show="item.links" :key="i2" class="h11_em hover_line" @click="$scrollTo(item2.to)">

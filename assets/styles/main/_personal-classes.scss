@@ -356,9 +356,9 @@
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
 /* // // mobile // // */ 
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
-@include media(min, 881px) {.vermobile {display: none !important}}
+@include media(min, 881px) {.showmobile {display: none !important}}
 @include media(max, small) {
-  .eliminarmobile {display: none !important}
+  .deletemobile {display: none !important}
   .font1mobile {font-family:var(--font1) !important}
   .font2mobile {font-family:var(--font2) !important}
   .h1mobile {font-size: var(--step-8) !important}

@@ -15,7 +15,7 @@
 :is(html, body) {
   font-size: 16px;
   scroll-behavior: smooth;
-  scroll-padding-top: calc(var(--h-header) + 2em);
+  scroll-padding-top: calc(var(--h-navbar) + 2em);
 }
 :is(#app, #layout, #error, #login) {font-family: var(--font1)}
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
@@ -174,52 +174,49 @@ button:not(.not_typography, .not) {&::first-letter, & ::first-letter {text-trans
 :is(p, a, span, h1, h2, h3, h4, h5, h6):not(.not_typography, .not) {line-height: 1}
 h1:not(.not_typography, .not) {
   --fs: clamp(3em, 4vw, 4em);
+  --fw: 400;
 
   font-family: var(--font2);
-  font-weight: 400;
+  font-weight: var(--fw);
   font-size: var(--fs);
   letter-spacing: 0.625em;
   text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
 }
 h2:not(.not_typography, .not) {
-  --fs: clamp(3.5em, 4vw, 4em);
+  --fs: clamp(1.8em, 2vw + 1em, 2em);
+  --fw: 700;
 
-  font-family: var(--font1);
-  font-weight: 400;
+  font-family: var(--font2);
+  font-weight: var(--fw);
   font-size: var(--fs);
   letter-spacing: 0.03em;
 }
 h3:not(.not_typography, .not) {
-  --fs: clamp(2em, 2.5vw, 2.5em);
+  --fs: clamp(1.1em, 1.3125vw + 1em, 1.3125em);
+  --fw: 400;
 
   font-family: var(--font1);
-  font-weight: 400;
+  font-weight: var(--fw);
   font-size: var(--fs);
   letter-spacing: 0.03em;  
 }
-h4:not(.not_typography, .not) {
-  --fs: 1.5em;
-
-  font-family: var(--font1);
-  font-weight: 400;
-  font-size: var(--fs);
-  letter-spacing: 0.03em;
-}
-h6:not(.not_typography, .not) {
-  --fs: 1em;
-  
-  font-family: var(--font1);
-  font-weight: 400;
-  font-size: var(--fs);
-  letter-spacing: 0.03em;
-}
 p:not(.not_typography, .not) {
   --fs: 1.05em;
+  --fw: 400;
   
   font-family: var(--font1);
-  font-weight: 400;
+  font-weight: var(--fw);
   font-size: var(--fs);
   line-height: 1.1;
+}
+label:not(.v-input label.not_typography, .not) {
+  --fs: 0.8em;
+  --fw: 700;
+  --c: var(--accent);
+  
+  font-family: var(--font2);
+  font-weight: var(--fw);
+  font-size: var(--fs);
 }
 
 

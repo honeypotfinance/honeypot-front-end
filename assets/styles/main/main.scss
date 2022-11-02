@@ -24,14 +24,14 @@
   width: var(--w-drawer) !important;
   background: var(--secondary) !important;
   .v-navigation-drawer__content {
-    --h-drawer-header: 170px;
+    --h-drawer-navbar: 170px;
     //
-    --padding-drawer-header: 1.5em;
-    --margin-bottom-drawer-header: .5em;
-    &--header {
+    --padding-drawer-navbar: 1.5em;
+    --margin-bottom-drawer-navbar: .5em;
+    &--navbar {
       padding: 1em;
-      padding-block: var(--padding-drawer-header);
-      margin-bottom: var(--margin-bottom-drawer-header);
+      padding-block: var(--padding-drawer-navbar);
+      margin-bottom: var(--margin-bottom-drawer-navbar);
       position: relative;
       // line
       &::before {
@@ -53,7 +53,7 @@
     }
 
     &--content {
-      height: calc(100% - (var(--h-drawer-header) + var(--padding-drawer-header) + var(--margin-bottom-drawer-header)) );
+      height: calc(100% - (var(--h-drawer-navbar) + var(--padding-drawer-navbar) + var(--margin-bottom-drawer-navbar)) );
       & > :is(.v-expansion-panels, .v-list .v-list-item) {
         span, img {
           font-weight: 400;

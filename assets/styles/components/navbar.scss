@@ -1,12 +1,9 @@
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
-// // // header // // // 
+// // // navbar // // // 
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
-#header {
-  font-size: 16px;
-  @include media(min, 2500px) {font-size: 19px !important}
-  @include media(max, 1000px) {font-size: 14px !important}
-  
-  height: var(--h-header) !important;
+#navbar {
+  font-size: clamp(12px, 1vw, 16px);
+  height: var(--h-navbar) !important;
   animation: movedown .5s $ease-return;
   transition: 0.4s ease-in-out;
   // &::before {
@@ -21,9 +18,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 12px;
     @include parent;
     padding-inline: var(--margin-global);
-    height: var(--h-header) !important;
+    height: var(--h-navbar) !important;
     // overflow: hidden;
     // line
     &::after {
@@ -39,7 +37,7 @@
       a {
         --c: var(--accent);
         --fw: 700;
-        font-size: 21px;
+        font-size: 1.3125em;
         transition: .5s $ease;
         &.active {--c: #fff}
       }
@@ -50,12 +48,12 @@
       .v-btn {
         --bg: var(--clr-card);
         --bs: none;
-        --fs: 16px;
+        --p: clamp(.8em, 1vw, 1em);
       }
     }
   }
 }
 
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
-// // // menu header // // // 
+// // // menu navbar // // // 
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /

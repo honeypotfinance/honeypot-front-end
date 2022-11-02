@@ -15,9 +15,9 @@
   }
   // footer margin modifiable
   & .with {
-    padding-block: calc(var(--h-header) + 20px) var(--h-footer) !important
+    padding-block: calc(var(--h-navbar) + 60px) var(--h-footer) !important
   }
   & .without {
-    padding-block: calc(var(--h-header) + 20px) 0 !important
+    padding-block: calc(var(--h-navbar) + 60px) 0 !important
   }
 }
