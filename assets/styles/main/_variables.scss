@@ -11,14 +11,14 @@
   --error: #ff4081;
   --warning: #FFC260;
   --success: #3CD4A0;
-  --clr-gradient: linear-gradient(to right top,#356D74,#2A505C,#21394A,#1A293D,#172035,#161D33,#161E34,#192539,#1E3143,#244251,#2D5862,#387378,#449492,#53B9B1,#63E2D2);
+  // --clr-gradient: linear-gradient(to right top,#356D74,#2A505C,#21394A,#1A293D,#172035,#161D33,#161E34,#192539,#1E3143,#244251,#2D5862,#387378,#449492,#53B9B1,#63E2D2);
   --c: var(--clr);
   --stroke: var(--stroke-size) var(--stroke-color);
   --stroke-size: none;
   --stroke-color: none;
   /* // // fonts // // */
-  --font1: 'League Gothic', sans-serif;
-  --font2: 'Lekton', sans-serif;
+  --font1: 'DM Sans', sans-serif;
+  --font2: 'Segoe', sans-serif;
   --fw: initial;
   /* // // sizes // // */
   --margin-global: 9em; // too can use 6em
@@ -39,13 +39,11 @@ html {
     /*--/ default color /--*/
     --bg-ap: #4ddaeb;
     --clr: #000000;
-    --clr-inv: #FFFFFF;
     --clr-hover: hsl(288 90% 10%);
     --clr-scroll: var(--primary);
     --clr-bg-scroll: var(--secondary);
     /*--/ cards /--*/
     --clr-card: #FFFFFF;
-    --clr-card-inv: #191919;
     /*--/ buttons /--*/
     --clr-btn: var(--primary);
     /*--clr-btn-pressed: #AD0FD5;
@@ -59,25 +57,23 @@ html {
   }
   &.dark {
     /*--/ default color /--*/
-    --bg-ap: #000000;
+    --bg-ap: #161513;
     --clr: #FFFFFF;
-    --clr-inv: #111011;
     --clr-hover: hsl(288 90% 90%);
     --clr-scroll: var(--primary);
     --clr-bg-scroll: var(--secondary);
     /*--/ cards /--*/
-    --clr-card: #191919;
-    --clr-card-inv: #FFFFFF;
+    --clr-card: var(--secondary);
     /*--/ buttons /--*/
     --clr-btn: var(--primary);
     /*--clr-btn-pressed: #AD0FD5;
     --clr-btn-inactive: #AD0FD5;*/
-    --clr-text-btn: #FFFFFF;
+    --clr-text-btn: #1F1C14;
     /*--/ badge /--*/
     --clr-badge: var(--primary);
-    --clr-text-badge: #000000;
+    --clr-text-badge: #1F1C14;
     /*--/ line /--*/
-    --clr-line: hsl(59, 83%, 53%, .5);
+    --clr-line: #292724;
   }
 }
 
@@ -94,6 +90,7 @@ $sombra-filter: drop-shadow(0px 4px 1px rgba(0, 0, 0, 0.3));
 // Colors //
 $primary:           #EAE823;
 $secondary:         #000000;
+$accent:            #574F42;
 $error:             #ff4081;
 $warning:           #FFC260;
 $success:           #3CD4A0;
@@ -140,17 +137,15 @@ $skew-left: skewX(-12deg) translateX(-1px);
 // custome classes //
 .clr_primary {background-color: var(--primary) !important}
 .clr_secondary {background-color: var(--secondary) !important}
+.clr_accent {background-color: var(--accent) !important}
 //
 .clr {color: var(--clr) !important}
-.clr_inv {color: var(--clr-inv) !important}
 .clr_btn {background-color: var(--clr-btn) !important}
 .clr_btn_pressed {background-color: var(--clr-btn-pressed) !important}
 .clr_btn_inactive {background-color: var(--clr-btn-inactive) !important}
 .clr_text_btn {color: var(--clr-text-btn) !important}
 .clr_card {background-color: var(--clr-card) !important}
-.clr_card-inv {background-color: var(--clr-card-inv) !important}
 .clr_svg {fill: var(--clr) !important}
-.clr_svg_inv {fill: var(--clr-inv) !important}
 .flr {filter: invert(100%) !important}
 .flr_inv {filter: invert(0%) !important}
 .clr-gradient {background: var(--clr-gradient) !important}

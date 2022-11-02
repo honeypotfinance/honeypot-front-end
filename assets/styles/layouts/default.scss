@@ -2,8 +2,7 @@
 // // // layout // // // 
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
 #layout {
-  background: center no-repeat fixed url(~/assets/sources/images/bg.jpg);
-  @include media(max, small) {background-image: url(~/assets/sources/images/bg-mobile.jpg)};
+  background: center no-repeat fixed var(--bg-app);
   background-size: cover;
   // overflow: hidden;
   //- responsive font size -//

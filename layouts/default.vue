@@ -5,7 +5,7 @@
     <v-main :class="wrapperSpace?'with':'without'" class="parent">
       <nuxt-child />
     </v-main>
-    <Footer ref="footer"></Footer>
+    <!-- <Footer ref="footer"></Footer> -->
   </v-app>
 </template>
 
@@ -24,10 +24,10 @@ export default {
   },
   mounted() {
     this.scrollX();
-    this.footerHeightListener();
+    // this.footerHeightListener();
     
     // resize listener
-    window.addEventListener("resize", this.footerHeightListener);
+    // window.addEventListener("resize", this.footerHeightListener);
   },
   beforeDestroy() {
     window.removeEventListener("resize", this.footerHeightListener);

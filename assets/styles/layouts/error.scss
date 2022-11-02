@@ -2,7 +2,7 @@
 // // // error // // // 
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
 #error {
-  background: center no-repeat fixed url(~/assets/sources/images/bg.jpg), var(--bg-ap);
+  background: center no-repeat fixed var(--bg-ap);
   background-size: cover;
   .error-page {
     height: 100%;

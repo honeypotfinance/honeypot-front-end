@@ -79,21 +79,6 @@
 
 
     <!--////////////// menues //////////////-->
-    <!-- menu market -->
-    <v-menu activator=".openMenuMarket" right offset-x>
-      <v-list id="menuMarket" class="font2">
-        <v-list-item-group active-class="activeClass">
-          <v-list-item disabled>
-            <v-list-item-title>MARKETPLACE</v-list-item-title>
-          </v-list-item>
-
-          <v-list-item v-for="(item,i) in dataDrawer.expansion[0].selection" :key="i" :to="localePath(item.to)">
-            <v-list-item-title>{{item.name}}</v-list-item-title>
-          </v-list-item>
-        </v-list-item-group>
-      </v-list>
-    </v-menu>
-
     <!-- menu login -->
     <v-menu activator=".openMenuLogin" right offset-x>
       <v-list class="font2" color="var(--secondary)" style="--c:#fff">

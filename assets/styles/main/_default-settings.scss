@@ -6,12 +6,11 @@
 /* // // default settings // // */ 
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
 @font-face {
-  font-family: 'Lekton';
-  src: local('Lektom'),
-      url(~/static/fonts/Lekton-400.ttf) format('truetype'),
-      url(~/static/fonts/Lekton-Bold.ttf) format('truetype'),
-      url(~/static/fonts/Lekton-Italic.ttf) format('truetype'),
-      url(~/static/fonts/Lekton-Regular.ttf) format('truetype');
+  font-family: 'Segoe';
+  src: url(~/static/fonts/segoe-ui/Segoe-UI.ttf) format('truetype'),
+      url(~/static/fonts/segoe-ui/Segoe-UI-Bold.ttf) format('truetype'),
+      url(~/static/fonts/segoe-ui/Segoe-UI-Bold-Italic.ttf) format('truetype'),
+      url(~/static/fonts/segoe-ui/Segoe-UI-Italic.ttf) format('truetype');
 }
 :is(html, body) {
   font-size: 16px;
