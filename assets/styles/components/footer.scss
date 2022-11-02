@@ -1,0 +1,41 @@
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
+// // // footer // // // 
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
+.v-footer {
+  transition: 0.5s $ease-return;
+  padding: clamp(2em, 4vw, 4em);
+  @include media(max, small) {font-size: 18px !important}
+  @include media(max, x-small) {font-size: 14px !important}
+  .row {
+    letter-spacing: 0.03em;
+    max-width: 80%;
+    @include media(max, 1078px) {max-width: 100% !important}
+    @include media(max, small) {padding-inline: 1em !important;gap: 0em !important}
+    .left {
+      width: 16em;
+      @include media(max, small) {justify-content: baseline !important;align-items: baseline !important}
+    }
+    .right {
+      display: grid;
+      grid-template-columns: repeat(4, max-content);
+      grid-gap: 2em;
+      @include media(max, small) {display: flex !important;min-width:  min(100%, 9.945em) !important;
+        margin-inline: auto}
+      .v-card {
+        display: flex;
+        flex-direction: column;
+        width: max-content;
+        gap: 0.5em;
+        &:last-child {width: 100%;grid-column: span 4}
+      }
+    }
+    p {font-weight: 400;color: $clr-text-btn !important}
+    label:not(.v-label) {
+      font-weight: 700;
+      color: $clr-text-btn !important;
+      text-transform: uppercase;
+    }
+    a {color: $clr-text-btn !important;font-weight: 400}
+    span:not(.v-btn__content) {color: $clr-text-btn !important;font-weight: 300}
+  }
+}

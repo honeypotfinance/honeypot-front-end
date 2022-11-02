@@ -1,0 +1,80 @@
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
+// // // header // // // 
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
+#header {
+  font-size: 16px;
+  @include media(min, 2500px) {font-size: 19px !important}
+  @include media(max, 1000px) {font-size: 14px !important}
+  
+  @include media(min, small) {margin-inline: 3em}
+  height: var(--h-header) !important;
+  animation: movedown .5s $ease-return;
+  transition: 0.4s ease-in-out;
+  // &::before {
+  //   content: "";
+  //   position: absolute;
+  //   inset: 0;
+  //   background: var(--clr-btn);
+  //   transition: 0.4s ease-in-out;
+  // }
+  // &.hide::before {opacity: 0}
+  .v-toolbar__content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-inline: 2em;
+    height: var(--h-header) !important;
+    // overflow: hidden;
+    .sidebar {
+      @include absolute(32px,27px);
+      .focus {
+        @include absolute(0,var(--distanceInitial),0);
+        transform: translateY(calc(var(--distance)));
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background-color: $primary;
+        transition: transform .6s $ease-return;
+        z-index: -1;
+      }
+      &.active {
+        transition: background-color .5s $ease-return;
+        transform: translate(-14px, -16px);
+        width: 76px;
+        height: 678px;
+        background: #000000;
+        box-shadow: 7px 4px 6px rgba(0, 0, 0, 0.25);
+        border-radius: 40px;
+        padding: 16px;
+        @include animation(.5s $ease-return) {
+          from {height: 48px}
+          to {height: 678px}
+        }
+      }
+    }
+  }
+}
+
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
+// // // menu header // // // 
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
+#menuMarket {
+  --width: 20px;
+  background-color: #000000;
+  margin-left: calc(var(--width) * 2);
+  position: relative;
+  // triangule
+  &::before {
+    content: "";
+    @include absolute(calc(var(--width) * -1));
+    border-block: var(--width) solid transparent;
+    border-right: calc(var(--width) * 2) solid #000000;
+  }
+  & .v-list {
+    &-item {
+      &__title {
+        color: #FFFFFF;
+      }
+    }
+  }
+}

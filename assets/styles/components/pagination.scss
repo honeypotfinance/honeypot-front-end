@@ -1,0 +1,11 @@
+// pagination
+.pagination .v-btn {
+  min-width: max-content !important;
+  border: none !important;
+  &::before {display: none !important}
+  &.active {
+    background-color: hsl(0, 84%, 58%, .6) !important;
+    color: var(--clr-text-btn) !important;
+    & * {color: var(--clr-text-btn) !important}
+  }
+}

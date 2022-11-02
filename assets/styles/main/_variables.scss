@@ -1,0 +1,161 @@
+// @use "mixins" as *;
+@import '~vuetify/src/styles/styles.sass';
+@import "mixins";
+
+:root {
+  /* // // color // // */
+  --primary: #FFCD4D;
+  --secondary: #1A1917;
+  --accent: #574F42;
+  --active: var(--primary);
+  --error: #ff4081;
+  --warning: #FFC260;
+  --success: #3CD4A0;
+  --clr-gradient: linear-gradient(to right top,#356D74,#2A505C,#21394A,#1A293D,#172035,#161D33,#161E34,#192539,#1E3143,#244251,#2D5862,#387378,#449492,#53B9B1,#63E2D2);
+  --c: var(--clr);
+  --stroke: var(--stroke-size) var(--stroke-color);
+  --stroke-size: none;
+  --stroke-color: none;
+  /* // // fonts // // */
+  --font1: 'League Gothic', sans-serif;
+  --font2: 'Lekton', sans-serif;
+  --fw: initial;
+  /* // // sizes // // */
+  --margin-global: 9em; // too can use 6em
+  @include media(max, small) {--margin-global: clamp(1em, 5vw, 4em)}
+  --parent: 1440px;
+  --subparent: 1900px;
+  --h-header: 100px;
+  @include media(max, small) {--h-header: 80px}
+  /* // // shadows // // */
+  --sombra-filter: drop-shadow(0px 4px 1px rgba(0, 0, 0, 0.3));
+  --sombra-card: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  --sombra-btn: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+// Themes //
+html {
+  &.light {
+    /*--/ default color /--*/
+    --bg-ap: #4ddaeb;
+    --clr: #000000;
+    --clr-inv: #FFFFFF;
+    --clr-hover: hsl(288 90% 10%);
+    --clr-scroll: var(--primary);
+    --clr-bg-scroll: var(--secondary);
+    /*--/ cards /--*/
+    --clr-card: #FFFFFF;
+    --clr-card-inv: #191919;
+    /*--/ buttons /--*/
+    --clr-btn: var(--primary);
+    /*--clr-btn-pressed: #AD0FD5;
+    --clr-btn-inactive: #AD0FD5;*/
+    --clr-text-btn: #000000;
+    /*--/ badge /--*/
+    --clr-badge: var(--primary);
+    --clr-text-badge: #000000;
+    /*--/ line /--*/
+    --clr-line: hsl(59, 83%, 53%, .5);
+  }
+  &.dark {
+    /*--/ default color /--*/
+    --bg-ap: #000000;
+    --clr: #FFFFFF;
+    --clr-inv: #111011;
+    --clr-hover: hsl(288 90% 90%);
+    --clr-scroll: var(--primary);
+    --clr-bg-scroll: var(--secondary);
+    /*--/ cards /--*/
+    --clr-card: #191919;
+    --clr-card-inv: #FFFFFF;
+    /*--/ buttons /--*/
+    --clr-btn: var(--primary);
+    /*--clr-btn-pressed: #AD0FD5;
+    --clr-btn-inactive: #AD0FD5;*/
+    --clr-text-btn: #FFFFFF;
+    /*--/ badge /--*/
+    --clr-badge: var(--primary);
+    --clr-text-badge: #000000;
+    /*--/ line /--*/
+    --clr-line: hsl(59, 83%, 53%, .5);
+  }
+}
+
+
+// Sidebar //
+$drawer-items-padding:                     32px !default;
+$navigation-drawer-mini-variant-width:     96px!important;
+
+// Layout //
+$body-bg: #20232C !default;
+$content-padding:                           24px;
+$sombra-filter: drop-shadow(0px 4px 1px rgba(0, 0, 0, 0.3));
+
+// Colors //
+$primary:           #EAE823;
+$secondary:         #000000;
+$error:             #ff4081;
+$warning:           #FFC260;
+$success:           #3CD4A0;
+$info:              #9013FE;
+$label:             #6e6e6e;
+$text-grey:         #b9b9b9;
+$title-grey:        #4a4a4a;
+$clr-btn:           #EAE823;
+// $clr-btn-pressed:   #AD0FD5;
+// $clr-btn-inactive:  #AD0FD5;
+$clr-text-btn:      #000000;
+$clr-card:          hsl(210, 48%, 13%, .45);
+$clr-line:          hsl(59, 83%, 53%, .5);
+$clr-gradient:      linear-gradient(to right top,#356D74,#2A505C,#21394A,#1A293D,#172035,#161D33,#161E34,#192539,#1E3143,#244251,#2D5862,#387378,#449492,#53B9B1,#63E2D2);
+$clr-hover:         hsl(288 90% 10%);
+$card-title-color:  $label;
+
+// Typography //
+$h1-font-size:                3rem !default;      // 28px
+$h2-font-size:                2rem !default;       // 24px
+$h3-font-size:                1.64rem !default;     // 22px
+$h4-font-size:                1.5rem !default;     // 20px
+$h5-font-size:                1.285rem !default;         // 16px
+$h6-font-size:                1.142rem !default;     // 14px
+
+// Card //
+$card-shadow: 0 3px 11px 0 #111011, 0 3px 3px -2px #B2B2B21A, 0 1px 8px 0 #9A9A9A1A;
+$sombra-card: 0px 4px 4px rgba(0, 0, 0, 0.25);
+$border-card: 4vmax;
+
+// Buttons //
+$button-shadow: 0px 3px 11px 0px #E8EAFC, 0 3px 3px -2px #B2B2B21A, 0 1px 8px 0 #9A9A9A1A;
+$sombra-btn: 0px 4px 4px rgba(0, 0, 0, 0.25);
+$border-btn: 2vmax;
+
+// Hover //
+$ease: cubic-bezier(0.23, 1, 0.32, 1);
+$ease-return: cubic-bezier(0.445, 0.05, 0.55, 0.95);
+$ease-slide: cubic-bezier(0.4, 0.1, 0.7, 0.95);
+$skew-right: skewX(12deg) translateX(1px);
+$skew-left: skewX(-12deg) translateX(-1px);
+
+
+// custome classes //
+.clr_primary {background-color: var(--primary) !important}
+.clr_secondary {background-color: var(--secondary) !important}
+//
+.clr {color: var(--clr) !important}
+.clr_inv {color: var(--clr-inv) !important}
+.clr_btn {background-color: var(--clr-btn) !important}
+.clr_btn_pressed {background-color: var(--clr-btn-pressed) !important}
+.clr_btn_inactive {background-color: var(--clr-btn-inactive) !important}
+.clr_text_btn {color: var(--clr-text-btn) !important}
+.clr_card {background-color: var(--clr-card) !important}
+.clr_card-inv {background-color: var(--clr-card-inv) !important}
+.clr_svg {fill: var(--clr) !important}
+.clr_svg_inv {fill: var(--clr-inv) !important}
+.flr {filter: invert(100%) !important}
+.flr_inv {filter: invert(0%) !important}
+.clr-gradient {background: var(--clr-gradient) !important}
+.clr_card_2 {background-color: var(--clr-card-2) !important}
+
+
+// other global vars //
+

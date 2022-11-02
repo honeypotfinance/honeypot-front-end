@@ -1,0 +1,113 @@
+// @forward "base";
+// @forward "default-settings";
+// @forward "mixins";
+// @forward "personal-classes";
+// @forward "responsive";
+// @forward "variables";
+// @use "mixins" as *;
+// @use "variables" as *;
+@import "base";
+@import "default-settings";
+@import "mixins";
+@import "personal-classes";
+@import "responsive";
+@import "variables";
+
+
+
+///////////////////// global ///////////////////////
+
+//- drawer -//  --> under testing
+.v-navigation-drawer:not(.not_vuetify, .not) {
+  --w-drawer: 300px;
+  @include media(max, x-small) {--w-drawer: 100vw}
+  width: var(--w-drawer) !important;
+  background: var(--secondary) !important;
+  .v-navigation-drawer__content {
+    --h-drawer-header: 170px;
+    //
+    --padding-drawer-header: 1.5em;
+    --margin-bottom-drawer-header: .5em;
+    &--header {
+      padding: 1em;
+      padding-block: var(--padding-drawer-header);
+      margin-bottom: var(--margin-bottom-drawer-header);
+      position: relative;
+      // line
+      &::before {
+        content: "";
+        @include absolute(0,auto,0,0);
+        height: 1px;
+        width: 60%;
+        background-color: var(--clr-line);
+        border-radius: 50% / 3vmax;
+      }
+      .v-btn.btn {
+        transition: .5s $ease-return;
+        &::after, &::before {display: none !important}
+        &:active {
+          // --bg: linear-gradient(to top, hsl(0, 84%, 57%) 80%, rgba(0,0,0,.4));
+          --bs: inset 0 6px 4px 0px rgba(0, 0, 0, .3);
+        }
+      }
+    }
+
+    &--content {
+      height: calc(100% - (var(--h-drawer-header) + var(--padding-drawer-header) + var(--margin-bottom-drawer-header)) );
+      & > :is(.v-expansion-panels, .v-list .v-list-item) {
+        span, img {
+          font-weight: 400;
+          color: #FFFFFF;
+        }
+      }
+      .v-expansion-panels {
+        .conttitle {
+          max-width: 60%;
+          margin-inline: auto;
+          padding: 0 !important;
+          .icon {
+            --br: 50%;
+            --max-w: 28px;
+            aspect-ratio: 1 / 1;
+            &.active {--bg: var(--primary) !important}
+          }
+        }
+        // list //
+        & > .v-list {
+          padding: 0;
+          .v-list-item {margin-top: 18px}
+        }
+        // expansion menu //
+        .v-expansion-panel {
+          background-color: transparent !important;
+          &::after, &::before {display: none !important}
+          .v-expansion-panel-header {
+            padding: 0 clamp(1em, 1vw, 1.5em);
+          }
+          .v-expansion-panel-content__wrap {padding-inline: 0}
+          .v-list {
+            background-color: transparent !important;
+            .v-list-item {
+              background-color: transparent;
+              padding-inline: clamp(1em, 1vw, 1.5em);
+            }
+          }
+        }
+      }
+    }
+
+    &--footer {
+      padding-block: 1.5em 2em;
+      position: relative;
+      // line
+      &::before {
+        content: "";
+        @include absolute(0,0,0,auto);
+        height: 1px;
+        width: 60%;
+        background-color: var(--clr-line);
+        border-radius: 50% / 3vmax;
+      }
+    }
+  }
+}

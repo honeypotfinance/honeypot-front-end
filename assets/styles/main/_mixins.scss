@@ -1,0 +1,385 @@
+@use "sass:list";
+@use "sass:map";
+
+/*                     notes:
+  str-index($name, '-text') --> to know content value
+*/
+
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
+/* // // media query // // */ 
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
+$breakpoints: (
+  x-small: 400px,
+  small: 880px,
+  medium: 1200px,
+  large: 1440px,
+  x-large: 1800px,
+) !default;
+@mixin media($dir1, $key1, $dir2: fixed, $key2: fixed) {
+  $size1: map.get($breakpoints, $key1);
+  $size2: map.get($breakpoints, $key2);
+  
+  // if doble parameters
+  @if $dir1 and $key1 and $dir2 and $key2 {
+    // if number + number
+    @if type-of($key1) == 'number' and type-of($key2) == 'number' {
+      @media (#{$dir1}-width: $key1) and (#{$dir2}-width: $key2) {@content};
+    }
+    // if variable + variable
+    @else if type-of($key1) == 'string' and type-of($key2) == 'string' {
+      @media (#{$dir1}-width: $size1) and (#{$dir2}-width: $size2) {@content};
+    }
+    // if variable + number
+    @else if type-of($key1) == 'string' and type-of($key2) == 'number' {
+      @media (#{$dir1}-width: $size1) and (#{$dir2}-width: $key2) {@content};
+    }
+    // if number + variable
+    @else if type-of($key1) == 'number' and type-of($key2) == 'string' {
+      @media (#{$dir1}-width: $key1) and (#{$dir2}-width: $size2) {@content};
+    }
+  }
+  
+  // if single parameter
+  @if $dir1 and $key1 {
+    // if numeric
+    @if type-of($key1) == 'number' {
+      @media (#{$dir1}-width: $key1) {@content};
+    }
+    // if variable
+    @else if type-of($key1) == 'string' {
+      @media (#{$dir1}-width: $size1) {@content};
+    }
+  }
+}
+/* example
+@include media(min,small,max,1300px) {
+  display: none !important;
+}
+*/
+
+
+
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
+/* // // iteration childs // // */ 
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
+@mixin child($from, $to) {
+  @for $i from $from through $to {
+    &:nth-child(#{$i}) {
+      @content;
+    }
+  }
+}
+/* example
+@include child(1, 4) {
+  background-color: red;
+}
+*/
+
+
+
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
+/* // // unique animations // // */ 
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
+@mixin animation($values) {
+  $name: #{unique-id()};
+  animation: $name $values;
+  @keyframes #{$name} {
+    @content;
+  }
+}
+/* example
+@include animation(.5s $ease-reutrn infinite alternate 0ms running) {
+  from { background-color: yellow }
+  to { background-color: red }
+}
+*/
+
+
+
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
+/* // // color scheme // // */ 
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
+@mixin color($bg, $text:fixed) {
+  // if both parameters
+  @if $bg and $text {
+    @if type-of($bg) == 'color' {
+      background-color: $bg !important;
+    } @else if list.length($bg) > 1 {
+      background-image: linear-gradient(to top left, $bg) !important;
+    } @else {
+      background-image: $bg !important;
+    }
+    color: $text !important; & :is(span, i) {@include colorText($text);}
+  }
+  // if single parameter
+  @if $bg {
+    @if type-of($bg) == 'color' {
+      background-color: $bg !important;
+    } @else if list.length($bg) > 1 {
+      background-image: linear-gradient(to top left, $bg) !important;
+    } @else {
+      background-image: $bg !important;
+    }
+  }
+};
+/* example
+  @include color((red 10%, purple 50%), $clr-text-btn);
+*/
+
+
+
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
+/* // // text color // // */ 
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
+@mixin colorText($color) {
+  @if type-of($color) == 'color' {
+    color: $color !important; & :is(span, i) {color: $color !important}
+  } @else if list.length($color) > 1 {
+    background-image: linear-gradient(to top left, $color) !important;
+    background-clip: text !important;
+    color: transparent !important;
+    & :is(span, i) {
+      background-image: linear-gradient(to top left, $color) !important;
+      background-clip: text !important;
+      color: transparent !important;
+    }
+  } @else {
+    background-image: $color !important;
+    background-clip: text !important;
+    color: transparent !important;
+    & :is(span, i) {
+      background-image: $color !important;
+      background-clip: text !important;
+      color: transparent !important;
+    }
+  }
+}
+/* example
+  @include colorText((red, green));
+*/
+
+
+
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
+/* // // fixed position // // */ 
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
+@mixin fixed($value1, $value2:fixed, $value3:fixed, $value4:fixed) {
+  position: fixed;
+  left: $value1;
+  top: $value2;
+  right: $value3;
+  bottom: $value4;
+  margin: auto;
+}
+/* example
+  @include fixed(auto, 0, 0, 0);
+*/
+@mixin fixedCenter() {
+  position: fixed;
+  margin: auto;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+/* example
+  @include fixedCenter;
+*/
+
+
+
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
+/* // // sticky position // // */ 
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
+@mixin sticky($value1, $value2:fixed, $value3:fixed, $value4:fixed) {
+  position: sticky;
+  left: $value1;
+  top: $value2;
+  right: $value3;
+  bottom: $value4;
+  margin: auto;
+}
+/* example
+  @include sticky(auto, 0, 0, 0);
+*/
+@mixin stickyCenter() {
+  position: sticky;
+  margin: auto;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+/* example
+  @include stickyCenter;
+*/
+
+
+
+
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
+/* // // absolute position // // */ 
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
+@mixin absolute($value1, $value2:fixed, $value3:fixed, $value4:fixed) {
+  position: absolute;
+  margin: auto;
+  left: $value1;
+  top: $value2;
+  right: $value3;
+  bottom: $value4;
+}
+/* example
+  @include absolute(auto, 0, 0, 0);
+*/
+@mixin absoluteCenter() {
+  position: absolute;
+  margin: auto;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+/* example
+  @include absoluteCenter;
+*/
+
+
+
+
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
+/* // // text stroke // // */ 
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
+@mixin stroke($value) {
+  @include browser(text-stroke, $value)
+}
+/* example
+  @include stroke(1px #191919);
+*/
+
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
+/* // // prefix browser properties // // */ 
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
+@mixin browser($property, $value) {
+  @if $property == text-stroke {
+    -webkit-#{$property}: $value !important;
+    -moz-#{$property}: $value !important;
+    -ms-#{$property}: $value !important;
+    -o-#{$property}: $value !important;
+  } @else {
+    #{$property}: $value;
+    -webkit-#{$property}: $value !important;
+    -moz-#{$property}: $value !important;
+    -ms-#{$property}: $value !important;
+    -o-#{$property}: $value !important;
+  }
+}
+/* example
+  @include browser(transform, rotate(45deg));
+*/
+
+
+
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
+/* // // reduced motion // // */ 
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
+@mixin reducedMotion() {
+  @media (prefers-reduced-motion: no-preference) {
+    @content;
+  }
+}
+/* example
+  @include reducedMotion {
+    .example {animation: glitch 1s infinite linear}
+  }
+*/
+
+
+
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
+/* // // other adjusts // // */ 
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
+
+
+//- buttons -//
+@mixin btn() {
+  --bg: var(--primary);
+  --c: #000000;
+  --b: initial;
+  --p: .5em 1em;
+  --w: initial;
+  --max-w: none;
+  --min-w: none;
+  --h: initial;
+  --max-h: none;
+  --min-h: 36px;
+  --ml: none;
+  --mr: none;
+  --br: 2vmax;
+  --bs: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  --fs: 1em;
+  --fw: 300;
+  --ls: -0.005em;
+  --lh: 1;
+  --f: initial;
+  --t: initial;
+  
+  background: var(--bg) !important;
+  color: var(--c) !important;
+  box-shadow: var(--bs) !important;
+  border-radius: var(--br) !important;
+  font-size: var(--fs);
+  padding: var(--p) !important;
+  width: var(--w) !important;
+  max-width: var(--max-w) !important;
+  min-width: var(--min-w) !important;
+  height: var(--h) !important;
+  max-height: var(--max-h) !important;
+  min-height: var(--min-h) !important;
+  border: var(--b);
+  transform: var(--t);
+  filter: var(--f);
+  & :is(span, img, i) {
+    color: var(--c);
+    font-size: 1em;
+    font-weight: var(--fw);
+    text-transform: var(--tt);
+    letter-spacing: var(--ls);
+    line-height: var(--lh);
+  }
+  // margin
+  & :is(img, i) {margin-left: var(--ml);margin-right: var(--mr)}
+}
+
+
+//- cards -//
+@mixin card() {
+  --w: initial;
+  --max-w: none;
+  --min-w: none;
+  --h: initial;
+  --max-h: none;
+  --min-h: none;
+  --bg: var(--clr-card);
+  --c: var(--clr);
+  --b: initial;
+  --p: 1em;
+  --br: 1.5vmax;
+  --bs: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  --f: initial;
+  --t: initial;
+
+  width: var(--w) !important;
+  max-width: var(--max-w) !important;
+  min-width: var(--min-w) !important;
+  height: var(--h) !important;
+  max-height: var(--max-h) !important;
+  min-height: var(--min-h) !important;
+  background: var(--bg) !important;
+  color: var(--c) !important;
+  box-shadow: var(--bs) !important;
+  border-radius: var(--br) !important;
+  padding: var(--p);
+  border: var(--b) !important;
+  transform: var(--t);
+  filter: var(--f);
+}

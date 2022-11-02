@@ -1,0 +1,24 @@
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
+// // // layout // // // 
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
+#layout {
+  background: center no-repeat fixed url(~/assets/sources/images/bg.jpg);
+  @include media(max, small) {background-image: url(~/assets/sources/images/bg-mobile.jpg)};
+  background-size: cover;
+  // overflow: hidden;
+  //- responsive font size -//
+  .v-main {
+    & > * {
+      @include media(max,small) {
+        font-size: clamp(10px, 1.5vw, 12px)
+      }
+    }
+  }
+  // footer margin modifiable
+  & .with {
+    padding-block: calc(var(--h-header) + 20px) var(--h-footer) !important
+  }
+  & .without {
+    padding-block: calc(var(--h-header) + 20px) 0 !important
+  }
+}

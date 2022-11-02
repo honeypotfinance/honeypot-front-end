@@ -1,0 +1,23 @@
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
+/* // // hero // // */ 
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
+#hero {
+  position: relative;
+  h1 {
+    margin-inline: .5em;
+  }
+  .floating {
+    cursor: pointer;
+    transition: .5s $ease-return;
+    &:hover {transform: translateX(10px)}
+  }
+  #artist {
+    @include absolute(20vw,550px);
+  }
+  #fan {
+    @include absolute(62vw,362px);
+  }
+  #other {
+    @include absolute(41vw,150px);
+  }
+}
