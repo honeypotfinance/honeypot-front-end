@@ -7,5 +7,24 @@
   &-content {
     margin-top: 1em;
     gap: 2.5em;
+    .left {
+      max-width: 292px !important;
+      // * {color: #000 !important}
+    }
+    .middle {
+      --size: clamp(31.25em, 40vw,  37.5em);
+      width: var(--size) !important;
+      min-width: var(--size) !important;
+      aside {
+        --size: 15.625em;
+        width: var(--size);
+        max-width: var(--size);
+        min-width: var(--size);
+      }
+      .v-chip {--tt: uppercase !important}
+    }
+    .right {
+      max-width: 318px !important;
+    }
   }
 }

@@ -209,7 +209,7 @@ p:not(.not_typography, .not) {
   font-size: var(--fs);
   line-height: 1.1;
 }
-label:not(.v-input label.not_typography, .not) {
+label:not(.v-input .v-label, .not_typography, .not) {
   --fs: 0.8em;
   --fw: 700;
   --c: var(--accent);
@@ -447,25 +447,25 @@ img:not(.not_html, .not) {
 
 //- default input slot -//
 .v-text-field--solo:not(.not_vuetify, .not) {
-  --bg: rgba(245, 245, 245, 0.4);
-  --c: #000000;
+  --bg: transparent;
+  --c: #ffffff;
   --c-label: #FFFFFF;
   --c-place: #6e6e6e;
   --b: initial;
-  --br: 3vmax;
+  --br: 0;
   --p: 0 12px;
   --w: initial;
   --max-w: none;
   --min-w: none;
   --h: 2.75em;
-  --bs: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+  --bs: none;
   --f: none;
   --t: none;
   --o-disabled: .5;
   // normal
-  --fs: 1.2em;
-  --fw: 400;
-  --ff: var(--font2);
+  --fs: 28px;
+  --fw: 700;
+  --ff: var(--font1);
   --tt: none;
   --ls: normal;
   --lh: 1;
@@ -557,8 +557,8 @@ img:not(.not_html, .not) {
     -o-text-stroke: var(--stroke-label);
   }
   // input statements //
-  &.v-input--is-focused:not(.not_focus, .not_statement) .v-input__slot {--b: 1px solid rgba(255, 255, 255, 0.3)}
-  &.error--text:not(.not_error, .not_statement) .v-input__slot {--b: 1px solid var(--error)}
+  // &.v-input--is-focused:not(.not_focus, .not_statement) .v-input__slot {--b: 1px solid rgba(255, 255, 255, 0.3)}
+  // &.error--text:not(.not_error, .not_statement) .v-input__slot {--b: 1px solid var(--error)}
   &.v-input--is-disabled:not(.not_disabled, .not_statement) {opacity: var(--o-disabled); pointer-events: none}
 }
 
@@ -627,6 +627,10 @@ img:not(.not_html, .not) {
 //- buttons -//
 .btn {
   @include btn;
+}
+
+.btn2 {
+  @include btn2;
 }
 
 //- cards -//

@@ -1,7 +1,7 @@
 <template>
   <div>
     <MenuNavbar ref="menu"></MenuNavbar>
-    <v-app-bar id="navbar" color="transparent" fixed class="isolate">
+    <v-app-bar id="navbar" color="transparent" absolute class="isolate">
       <nuxt-link to="/">
         <img src="~/assets/sources/logos/logo.svg" alt="logo" style="--w: clamp(10em, 13vw, 13.414375em)">
       </nuxt-link>
@@ -16,13 +16,13 @@
       </aside>
 
       <aside class="right" :class="user.logged ? 'font2' : 'font1'">
-        <v-btn class="btn">
+        <v-btn class="btn2">
           <img src="~/assets/sources/tokens/honeypot.svg" alt="token" class="aspect mr-2" style="--w: 1.533125em">
           <span>${{user.balance}}</span>
         </v-btn>
         
-        <v-btn v-show="!user.logged" class="btn" @click="$store.commit('signIn')">Connect wallet</v-btn>
-        <v-btn v-show="user.logged" class="btn openMenuLogin">
+        <v-btn v-show="!user.logged" class="btn2" @click="$store.commit('signIn')">Connect wallet</v-btn>
+        <v-btn v-show="user.logged" class="btn2 openMenuLogin">
           <span>{{user.accountId}}</span>
           <v-icon>mdi-chevron-down</v-icon>
         </v-btn>

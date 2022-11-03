@@ -6,21 +6,121 @@
     </section>
 
     <section id="swap-content" class="fwrap">
-      <v-card class="card">
+      <!-- left -->
+      <v-card class="left card">
+        <ChartsSwap ref="chart"></ChartsSwap>
       </v-card>
 
-      <v-sheet color="transparent">
+
+      <!-- middle -->
+      <v-sheet color="transparent" class="middle divcol" style="gap: 12px">
+        <div class="fwrap space" style="gap: inherit">
+          <!-- card swap left -->
+          <aside class="divcol" style="gap: inherit">
+            <div class="container-options">
+              <label>From</label>
+              <div>
+                <v-chip close close-icon="mdi-chevron-down" class="btn2">
+                  <v-img :src="require('~/assets/sources/tokens/database.svg')" class="aspect mr-2" style="--w: 20px">
+                    <template #placeholder>
+                      <v-skeleton-loader type="avatar" />
+                    </template>
+                  </v-img>
+                  bear
+                </v-chip>
+                <v-btn class="btn2">
+                  <span>half</span>
+                </v-btn>
+                <v-btn class="btn2">
+                  <span>max</span>
+                </v-btn>
+              </div>
+            </div>
+
+            <v-card class="card">
+              <div class="divcol">
+                <v-text-field
+                  v-model="swapTo"
+                  solo counter
+                  placeholder="0.00"
+                  type="number"
+                  class="custome"
+                >
+                  <template #counter>
+                    <label class="font1" style="--fs: 21px">~${{swapTo / 2 || 0}} USD</label>
+                  </template>
+                </v-text-field>
+              </div>
+              <label class="font1">Balance 112.390</label>
+            </v-card>
+          </aside>
+
+          <center style="transform: translateY(calc(62px / 2))">
+            <v-btn icon style="--p: 7px">
+              <img src="~/assets/sources/icons/swap-arrow.svg" alt="switch icon" style="--w: 16px">
+            </v-btn>
+          </center>
+
+          <!-- card swap right -->
+          <aside class="divcol" style="gap: inherit">
+            <div class="container-options">
+              <label>To</label>
+              <div class="space">
+                <v-chip close close-icon="mdi-chevron-down" class="tup btn2">
+                  <v-img :src="require('~/assets/sources/tokens/database.svg')" class="aspect mr-2" style="--w: 20px">
+                    <template #placeholder>
+                      <v-skeleton-loader type="avatar" />
+                    </template>
+                  </v-img>
+                  bear
+                </v-chip>
+                <v-btn class="btn2">
+                  <img src="~/assets/sources/icons/settings.svg" alt="settings" style="--w: 18px">
+                </v-btn>
+              </div>
+            </div>
+
+            <v-card class="card">
+              <div class="divcol">
+                <v-text-field
+                  v-model="swapTo"
+                  solo counter
+                  placeholder="0.00"
+                  type="number"
+                  class="custome"
+                >
+                  <template #counter>
+                    <label class="font1" style="--fs: 21px">~${{swapTo / 2 || 0}} USD</label>
+                  </template>
+                </v-text-field>
+              </div>
+              <label class="font1">Balance 112.390</label>
+            </v-card>
+          </aside>
+        </div>
+
+        <v-btn
+          class="btn" style="--bg: linear-gradient(109.68deg, #F7931A 5.56%, #FFCD4D 85.08%); --fs: 21px"
+        >swap</v-btn>
       </v-sheet>
 
-      <v-card class="card">
-        <div class="divcol center" style="gap: 8px">
+
+      <!-- right -->
+      <v-card class="right card divcol" style="max-width: 318px !important; gap: 15px 0">
+        <div class="divcol center" style="gap: 6px">
           <h3 class="p" style="--fw: 700">Trending Coins</h3>
           <label>Drag your token to swap</label>
         </div>
         
-        <div class="grid" style="--gtc: repeat(auto-fit, minmax(min(100%, 50px), 1fr))">
+        <div
+          class="grid" style="--gtc: repeat(auto-fit, minmax(min(100%, 90px), 1fr)); gap: inherit"
+          @dragstart="dragstart($event)" @dragend="dragend($event)">
           <div v-for="(item, i) in dataTokens" :key="i" class="divcol center">
-            <v-img :src="item.img" :alt="`${item.name} token`" class="aspect" style="--w: 50px">
+            <v-img class="aspect" style="--w: 50px">
+              <template #default>
+                <img
+                  v-show="item.img" :src="item.img" :alt="`${item.name} token`" style="--w: 100%; --of: cover">
+              </template>
               <template #placeholder>
                 <v-skeleton-loader type="avatar" />
               </template>
@@ -38,25 +138,26 @@ export default {
   name: "SwapPage",
   data() {
     return {
+      swapTo: undefined,
       dataTokens: [
         {
-          img: undefined,
+          img: require('~/assets/sources/tokens/database.svg'),
           name: "Coin Name",
         },
         {
-          img: undefined,
+          img: require('~/assets/sources/tokens/database.svg'),
           name: "Coin Name",
         },
         {
-          img: undefined,
+          img: require('~/assets/sources/tokens/database.svg'),
           name: "Coin Name",
         },
         {
-          img: undefined,
+          img: require('~/assets/sources/tokens/database.svg'),
           name: "Coin Name",
         },
         {
-          img: undefined,
+          img: require('~/assets/sources/tokens/database.svg'),
           name: "Coin Name",
         },
       ],
@@ -69,6 +170,12 @@ export default {
     }
   },
   methods: {
+    dragstart(event) {
+      if (event.target?.alt) console.log(event)
+    },
+    dragend(event) {
+      if (event.target?.alt) console.log(event)
+    },
   }
 };
 </script>

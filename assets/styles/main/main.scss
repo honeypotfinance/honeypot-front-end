@@ -17,6 +17,22 @@
 
 ///////////////////// global ///////////////////////
 
+//- custome input -//
+.custome.v-input.v-text-field--solo {
+  .v-input__slot {margin-bottom: 0}
+  .v-text-field__details {flex-direction: column-reverse}
+}
+
+//- container options -//
+.container-options {
+  label {
+    --fs: 14px !important;
+    --fw: 400 !important;
+    --c: var(--clr) !important;
+  }
+  & > div {width: 100%}
+}
+
 //- drawer -//  --> under testing
 .v-navigation-drawer:not(.not_vuetify, .not) {
   --w-drawer: 300px;

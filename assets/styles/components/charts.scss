@@ -1,0 +1,13 @@
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
+// // // charts // // // 
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
+#charts {
+  [class*="tooltip"] {
+    background-color: #17191C;
+    border: none;
+    box-shadow: none;
+  }
+  .apexcharts-xaxistooltip {
+    display: none !important;
+  }
+}
