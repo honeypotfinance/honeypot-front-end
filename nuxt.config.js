@@ -43,8 +43,8 @@ export default {
   },
 
   loading: {
-    color: 'var(--primary)',
-    height: '1em',
+    color: 'hsl(225 225% 225% / .5)',
+    height: '2px',
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
