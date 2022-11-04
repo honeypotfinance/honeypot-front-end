@@ -1,5 +1,6 @@
 <template>
   <div id="swap">
+    <ModalsSwapModal ref="modal"></ModalsSwapModal>
     <section id="swap-header" class="divcol center">
       <h2>Swap</h2>
       <h3>Swap tokens instantly</h3>
@@ -8,7 +9,7 @@
     <section id="swap-content" class="fwrap center">
       <!-- left -->
       <v-card class="left card">
-        <ChartsSwap ref="chart"></ChartsSwap>
+        <ChartsSwapChart ref="chart"></ChartsSwapChart>
       </v-card>
 
 
@@ -74,7 +75,7 @@
                   </v-img>
                   bear
                 </v-chip>
-                <v-btn class="btn2">
+                <v-btn class="btn2" @click="$refs.modal.modalSwap = true">
                   <img src="~/assets/sources/icons/settings.svg" alt="settings" style="--w: 18px">
                 </v-btn>
               </div>

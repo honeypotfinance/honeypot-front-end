@@ -217,6 +217,11 @@ label:not(.v-input .v-label, .not_typography, .not) {
   font-family: var(--font2);
   font-weight: var(--fw);
   font-size: var(--fs);
+  &.plain {
+    --fs: 1em;
+    --fw: 700;
+    --c: #fff;
+  }
 }
 
 

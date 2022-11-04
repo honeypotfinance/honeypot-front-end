@@ -17,6 +17,25 @@
 
 ///////////////////// global ///////////////////////
 
+//- tooltip -//
+.v-tooltip__content {
+  line-height: 1 !important;
+  padding: 10px !important;
+  position: relative;
+  // &::before {
+  //   content: "";
+  //   position: fixed;
+  //   left: calc(var(--x-tooltip) - 10px);
+  //   top: calc(var(--y-tooltip) + 6px);
+  //   width: 0;
+  //   height: 0;
+  //   border-left: 10px solid transparent;
+  //   border-right: 10px solid transparent;
+    
+  //   border-bottom: 10px solid #574F42;
+  // }
+}
+
 //- custome input -//
 .custome.v-input.v-text-field--solo {
   .v-input__slot {margin-bottom: 0}

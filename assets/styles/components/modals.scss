@@ -1,0 +1,31 @@
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
+// // // modals // // // 
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
+.modalSwap {
+  padding: 32px 24px;
+  background: var(--clr-card);
+  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  span {font-family: var(--font1) !important}
+  label, h3 {font-family: var(--font2) !important}
+  .btn2 {
+    --fs: 14px !important;
+    --bg: #292724 !important;
+    --fw: 700 !important;
+    --w: 77px !important;
+    --max-w: 77px !important;
+    --h: 40px !important;
+    --br: 30px !important;
+    &.active {
+      --bg: var(--active) !important;
+      --c: #000 !important;
+    }
+  }
+  .v-input {
+    padding-inline: 5px 0 !important;
+    padding-right: 0 !important;
+    input, ::placeholder {text-align: center}
+  }
+}

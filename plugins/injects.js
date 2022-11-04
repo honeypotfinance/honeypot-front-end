@@ -9,6 +9,20 @@ export default ({app}, inject) => {
   inject('log', log);
 
 
+  // target-tooltip =========================================================================================================//
+  const targetTooltip = el => {
+    setTimeout(() => {
+      const target = document.querySelector(el);
+      document.documentElement.style.setProperty('--x-tooltip', `${target.getBoundingClientRect().left}px`)
+      document.documentElement.style.setProperty('--y-tooltip', `${target.getBoundingClientRect().top}px`)
+      console.log(`1- left ${target.getBoundingClientRect().left}px`)
+      console.log(`2- top ${target.getBoundingClientRect().top}px`)
+    }, 100);
+  }
+  // usage $targetTooltip(target)
+  inject('targetTooltip', targetTooltip);
+
+
   // alerts =========================================================================================================//
   const alerts = (key, {title, desc, color, centered, top, bottom, left, right} = {}) => {
     if (key === "success" || key === "cancel") {
