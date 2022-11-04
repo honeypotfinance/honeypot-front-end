@@ -46,8 +46,6 @@
       display: flex;
       gap: 1em;
       .v-btn {
-        --bg: var(--clr-card);
-        --bs: none;
         --p: clamp(.8em, 1vw, 1em);
       }
     }

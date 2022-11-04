@@ -7,24 +7,70 @@
   &-content {
     margin-top: 1em;
     gap: 2.5em;
-    .left {
-      max-width: 292px !important;
-      // * {color: #000 !important}
+    > * {
+      min-width: 220px !important;
+      height: 341px !important;
     }
+    @include media(max, 1360px) {
+      > :nth-child(1) {order: 0}
+      > :nth-child(2) {order: 2}
+      > :nth-child(3) {order: 1}
+    }
+    @include media(max, small) {
+      flex-direction: column;
+      > :nth-child(1) {order: 0}
+      > :nth-child(2) {order: 1}
+      > :nth-child(3) {order: 2}
+      > * {
+        --size-mobile: min(100%, 300px);
+        width: var(--size-mobile) !important;
+        min-width: var(--size-mobile) !important;
+        max-width: var(--size-mobile) !important;
+      }
+    }
+    .left {max-width: 292px !important}
     .middle {
-      --size: clamp(31.25em, 40vw,  37.5em);
+      --size: max-content;
       width: var(--size) !important;
-      min-width: var(--size) !important;
+      max-width: var(--size) !important;
+      > div.space {
+        @include media(max, small) {
+          flex-direction: column !important;
+          center img {--t: rotate(90deg)}
+        }
+      }
       aside {
-        --size: 15.625em;
-        width: var(--size);
-        max-width: var(--size);
-        min-width: var(--size);
+        --size: 13em;
+        @include media(max, 1360px) {--size: 288px}
+        @include media(max, small) {--size: var(--size-mobile)}
+        width: var(--size) !important;
+        max-width: var(--size) !important;
+        min-width: var(--size) !important;
+        .v-card {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          > label {
+            margin-top: 10px;
+            padding-inline: 12px;
+          }
+        }
+      }
+      > .v-btn {
+        @include media(max, small) {
+          --w: var(--size-mobile);
+          margin-inline: auto;
+        }
       }
       .v-chip {--tt: uppercase !important}
     }
     .right {
       max-width: 318px !important;
+      .grid {
+        --gtc: repeat(auto-fit, minmax(min(100%, 80px), 1fr));
+        overflow-y: auto;
+        border-radius: 0;
+      }
     }
   }
 }

@@ -1,17 +1,34 @@
 <template>
-  <div id="charts" class="fill">
+  <div class="charts fill">
+    <section class="charts-header jspace">
+      <div class="divcol font2">
+        <span>HNY/POT</span>
+        <span>$200</span>
+        <div class="acenter">
+          <v-icon color="var(--success)">mdi-trending-up</v-icon>
+          <span style="--c: var(--success)">22%</span>
+        </div>
+      </div>
+
+      <v-btn icon width="32px" height="32px" class="aspéct" title="expand chart">
+        <img src="~/assets/sources/icons/expand.svg" alt="expand chart" class="aspect" style="--w: 16px">
+      </v-btn>
+    </section>
+
     <ApexChart
       ref="chart"
       width="100%"
-      height="100%"
+      :height="height_chart"
       type="line"
       :options="chartOptions"
       :series="chartSeries"
     ></ApexChart>
 
-    <v-btn-toggle mandatory color="#60D2CA">
-      <v-btn v-for="item in dataControlsChart" :key="item" color="transparent" @click="updateData(item)">
-        <span>{{item}}</span>
+    <v-btn-toggle v-model="selection" mandatory class="charts-footer">
+      <v-btn
+        v-for="item in dataControlsChart" :key="item"
+        @click="updateData(item)">
+        {{item}}
       </v-btn>
     </v-btn-toggle>
   </div>
@@ -39,8 +56,9 @@ export default {
   name: "ChartSwapComponent",
   data() {
     return {
+      height_chart: undefined,
       dataControlsChart: [ "1d", "1w", "1y", "all" ],
-      selection: 'all',
+      selection: 3,
       // series
       chartSeries: [
         {
@@ -117,34 +135,40 @@ export default {
       },
     };
   },
+  mounted() {
+    this.heightCalculator()
+  },
   methods: {
+    heightCalculator() {
+      const container = document.querySelector(".card.left");
+      const header = container.querySelector(".charts-header");
+      const footer = container.querySelector(".charts-footer");
+      this.height_chart = `
+        ${container.getBoundingClientRect().height -
+        (header.getBoundingClientRect().height + footer.getBoundingClientRect().height + 48 + 15)}px
+      `
+    },
     updateData(timeline) {
-      this.selection = timeline
-      
       switch (timeline) {
-        case '1d':
-          this.$refs.chart.zoomX(
-            new Date('28 Jan 2013').getTime(),
-            new Date('27 Feb 2013').getTime()
-          )
+        case '1d': {
+          this.$refs.chart.zoomX(new Date('28 Jan 2017').getTime());
+          this.selection = 0
           break
-        case '1w':
-          this.$refs.chart.zoomX(
-            new Date('27 Sep 2012').getTime(),
-            new Date('27 Feb 2013').getTime()
-          )
+        }
+        case '1w': {
+          this.$refs.chart.zoomX(new Date('27 Sep 2017').getTime());
+          this.selection = 1
           break
-        case '1y':
-          this.$refs.chart.zoomX(
-            new Date('27 Feb 2012').getTime(),
-            new Date('27 Feb 2013').getTime()
-          )
+        }
+        case '1y': {
+          this.$refs.chart.zoomX(new Date('27 Feb 2017').getTime());
+          this.selection = 2
           break
-        default:
-          this.$refs.chart.zoomX(
-            new Date('23 Jan 2012').getTime(),
-            new Date('27 Feb 2013').getTime()
-          )
+        }
+        default: {
+          this.$refs.chart.resetSeries();
+          this.selection = 3
+        }
       }
     },
   }

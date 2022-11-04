@@ -1,13 +1,64 @@
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
 // // // charts // // // 
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
-#charts {
-  [class*="tooltip"] {
-    background-color: #17191C;
-    border: none;
-    box-shadow: none;
+.charts {
+  &-header {
+    & > div {
+      gap: 4px;
+      span:not(span + span, div > div > span) {
+        --fw: 700;
+        --c: #F6F6F6;
+        font-size: 16px;
+      }
+    }
+    span + span {
+      font-weight: 700;
+      font-size: 21px;
+      color: #CCCCCC;
+      letter-spacing: .1ch;
+    }
+    div > span {font-size: 18px}
   }
-  .apexcharts-xaxistooltip {
-    display: none !important;
+
+  .apexcharts-canvas {
+    [class*="tooltip"] {
+      background-color: #17191C !important;
+      border: none !important;
+      box-shadow: none !important;
+      [class*="title"] {
+        margin-bottom: 0 !important;
+        padding-bottom: 0 !important
+      }
+    }
+    .apexcharts-xaxistooltip {display: none !important}
+  }
+
+  &-footer {
+    background-color: transparent !important;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    .v-btn {
+      --w: 28px;
+      --h: 24.65px;
+      border-radius: 5px !important;
+      background-color: #17191C;
+      color: var(--accent);
+      width: var(--w) !important;
+      max-width: var(--w) !important;
+      min-width: var(--w) !important;
+      height: var(--h) !important;
+      min-height: var(--h) !important;
+      max-height: var(--h) !important;
+      border: none !important;
+      &[class*="active"] {
+        background-color: var(--success) !important;
+        color: #fff !important;
+      }
+      span {
+        font-size: 14px;
+        font-weight: 400;
+      }
+    }
   }
 }

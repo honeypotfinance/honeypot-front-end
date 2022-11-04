@@ -381,7 +381,7 @@ $breakpoints: (
   --ml: none;
   --mr: none;
   --br: 30px;
-  &:has(> * > :only-child) {--br: 10px};
+  &:has(> .v-btn__content > :only-child) {--br: 10px};
   --bs: none;
   --fs: 1em;
   --fw: 400;

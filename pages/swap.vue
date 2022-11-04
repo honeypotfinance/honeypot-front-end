@@ -5,7 +5,7 @@
       <h3>Swap tokens instantly</h3>
     </section>
 
-    <section id="swap-content" class="fwrap">
+    <section id="swap-content" class="fwrap center">
       <!-- left -->
       <v-card class="left card">
         <ChartsSwap ref="chart"></ChartsSwap>
@@ -13,8 +13,8 @@
 
 
       <!-- middle -->
-      <v-sheet color="transparent" class="middle divcol" style="gap: 12px">
-        <div class="fwrap space" style="gap: inherit">
+      <v-sheet color="transparent" class="middle divcol jspace" style="gap: 12px">
+        <div class="fnowrap space" style="gap: inherit">
           <!-- card swap left -->
           <aside class="divcol" style="gap: inherit">
             <div class="container-options">
@@ -55,7 +55,7 @@
             </v-card>
           </aside>
 
-          <center style="transform: translateY(calc(62px / 2))">
+          <center style="transform: translateY(calc(62px / 2)); margin-inline: clamp(5px, .6vw, 20px)">
             <v-btn icon style="--p: 7px">
               <img src="~/assets/sources/icons/swap-arrow.svg" alt="switch icon" style="--w: 16px">
             </v-btn>
@@ -106,14 +106,14 @@
 
 
       <!-- right -->
-      <v-card class="right card divcol" style="max-width: 318px !important; gap: 15px 0">
+      <v-card class="right card divcol" style="max-width: 318px !important; gap: 14px 0">
         <div class="divcol center" style="gap: 6px">
           <h3 class="p" style="--fw: 700">Trending Coins</h3>
           <label>Drag your token to swap</label>
         </div>
         
         <div
-          class="grid" style="--gtc: repeat(auto-fit, minmax(min(100%, 90px), 1fr)); gap: inherit"
+          class="grid" style="gap: inherit"
           @dragstart="dragstart($event)" @dragend="dragend($event)">
           <div v-for="(item, i) in dataTokens" :key="i" class="divcol center">
             <v-img class="aspect" style="--w: 50px">
