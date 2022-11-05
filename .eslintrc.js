@@ -16,5 +16,6 @@ module.exports = {
     "vue/no-v-html": "off",
     "no-new-object": "off",
     "no-extend-native": "off",
+    "one-var": "off",
   },
 }

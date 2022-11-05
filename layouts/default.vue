@@ -34,8 +34,9 @@ export default {
   },
   methods: {
     scrollX() {
-      const scrollableDesktop = document.querySelectorAll('.scrollx');
-      const scrollableMobile = document.querySelectorAll('.scrollxmobile');
+      const
+        scrollableDesktop = document.querySelectorAll('.scrollx'),
+        scrollableMobile = document.querySelectorAll('.scrollxmobile');
       if (scrollableDesktop) {
         for (const el of scrollableDesktop) {
           el.addEventListener("wheel", event => { event.preventDefault(); el.scrollLeft += event.deltaY })

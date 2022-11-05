@@ -1,15 +1,16 @@
 // import * as nearAPI from 'near-api-js'
 
-// const { connect, keyStores, WalletConnection } = nearAPI
-// const keyStore = new keyStores.BrowserLocalStorageKeyStore()
-// const config = {
-//   networkId: "testnet",
-//   keyStore, 
-//   nodeUrl: "https://rpc.testnet.near.org",
-//   walletUrl: "https://wallet.testnet.near.org",
-//   helperUrl: "https://helper.testnet.near.org",
-//   explorerUrl: "https://explorer.testnet.near.org",
-// };
+// const
+//   { connect, keyStores, WalletConnection } = nearAPI,
+//   keyStore = new keyStores.BrowserLocalStorageKeyStore(),
+//   config = {
+//     networkId: "testnet",
+//     keyStore, 
+//     nodeUrl: "https://rpc.testnet.near.org",
+//     walletUrl: "https://wallet.testnet.near.org",
+//     helperUrl: "https://helper.testnet.near.org",
+//     explorerUrl: "https://explorer.testnet.near.org",
+//   };
 // let wallet = null
 
 export const state = () => ({

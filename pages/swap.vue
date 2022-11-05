@@ -200,8 +200,9 @@ export default {
     observerTokensFrom(current, old) {
       if (current !== old) {
         // height cards
-        const page = document.querySelector("#swap");
-        const cardLeft = page.querySelector("aside#swapFrom");
+        const
+          page = document.querySelector("#swap"),
+          cardLeft = page.querySelector("aside#swapFrom");
         setTimeout(() => page.style.setProperty("--h-cards", `${cardLeft.getBoundingClientRect().height}px`), 100);
       }
     },
@@ -216,9 +217,10 @@ export default {
   methods: {
     styles() {
       // height chart calculator
-      const container = this.$refs.target_swap_chart.$el;
-      const header = container.querySelector(".charts-header");
-      const footer = container.querySelector(".charts-footer");
+      const
+        container = this.$refs.target_swap_chart.$el,
+        header = container.querySelector(".charts-header"),
+        footer = container.querySelector(".charts-footer");
       this.heightChart = `
         ${container.getBoundingClientRect().height -
         (header.getBoundingClientRect().height + footer.getBoundingClientRect().height + 48 + 15)}px
@@ -237,9 +239,10 @@ export default {
       }
     },
     dropToken(event) {
-      const data = [this.swapFrom, this.swapTo];
-      const token = this[event.path.find(e => e.className.includes("target_drag")).id];
-      const [otherToken] = data.filter(el => el.name !== token.name && el.img !== token.img)
+      const
+        data = [this.swapFrom, this.swapTo],
+        token = this[event.path.find(e => e.className.includes("target_drag")).id],
+        [otherToken] = data.filter(el => el.name !== token.name && el.img !== token.img)
 
       if (otherToken?.name === this.currentDrag?.alt?.split(" token")[0]) { this.switchTokens() }
       else {

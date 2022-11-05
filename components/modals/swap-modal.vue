@@ -184,8 +184,9 @@ export default {
     modalTokens(current) {
       if (current) {
         setTimeout(() => {
-          const container = document.querySelector(".modalTokens");
-          const header = container.querySelector(".modalTokens-header");
+          const
+            container = document.querySelector(".modalTokens"),
+            header = container.querySelector(".modalTokens-header");
 
           document.documentElement.style.setProperty("--h-modal-tokens-content", `
             ${container.getBoundingClientRect().height - header.getBoundingClientRect().height}px

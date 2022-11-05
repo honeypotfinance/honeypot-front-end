@@ -80,8 +80,9 @@ export default {
   },
   methods: {
     login() {
-      const user = this.dataLogin[0].model;
-      const clave = this.dataLogin[1].model;
+      const
+        user = this.dataLogin[0].model,
+        clave = this.dataLogin[1].model;
       if (user !== null && clave !== null) {
         localStorage.setItem('auth', true);
         this.$router.push(this.localePath('/'));

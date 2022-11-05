@@ -42,9 +42,9 @@ function generateDayWiseTimeSeries(baseval, count, yrange) {
   let i = 0;
   const series = [];
   while (i < count) {
-    const x = baseval;
-    const y =
-      Math.floor(Math.random() * (yrange.max - yrange.min + 1)) + yrange.min;
+    const
+      x = baseval,
+      y = Math.floor(Math.random() * (yrange.max - yrange.min + 1)) + yrange.min;
 
     series.push([x, y]);
     baseval += 86400000;
@@ -110,15 +110,16 @@ export default {
         },
         tooltip: {
           custom({series, seriesIndex, dataPointIndex, w}) {
-            const [dateEpoch, value] = w.globals.initialSeries[seriesIndex].data[dataPointIndex];
-            const date = new Date(dateEpoch);
-            const day = date.getDate();
-            const month = date.getMonth();
-            const hr = date.getUTCHours();
-            const m = "0" + date.getUTCMinutes();
-            const time = `${hr}:${m.substr(-2)}`;
+            const
+              [dateEpoch, value] = w.globals.initialSeries[seriesIndex].data[dataPointIndex],
+              date = new Date(dateEpoch),
+              day = date.getDate(),
+              month = date.getMonth(),
+              hr = date.getUTCHours(),
+              m = "0" + date.getUTCMinutes(),
+              time = `${hr}:${m.substr(-2)}`,
+            fullDate = `${month.toMonthName()} ${day}, ${time}`;
 
-            const fullDate = `${month.toMonthName()} ${day}, ${time}`;
             return `<span>${fullDate}</span>
             <span>Price: <b>$${value}</b></span>`;
           },

@@ -91,8 +91,9 @@ export default ({app}, inject) => {
       } else { form[keys] ??= "" }
       
       // push to form data
-      const excludeUrl = !(/\.(gif|jpg|jpeg|tiff|png)$/i).test(values)
-      const file = values?.type
+      const
+        excludeUrl = !(/\.(gif|jpg|jpeg|tiff|png)$/i).test(values),
+        file = values?.type
       if (typeof values === 'object' && !file) { formData.append(keys, JSON.stringify(values).toLowerCase()) } // if object only
       else if (file) { formData.append(keys, values) } // if file object
       else if (excludeUrl) { formData.append(keys, typeof values === 'string' ? values.toLowerCase() : values || "") } // else
