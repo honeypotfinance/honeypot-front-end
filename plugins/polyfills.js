@@ -43,4 +43,32 @@ export default () => {
     }
   }
   // string.limitString(limit) <-- example
+
+
+  // toMonthName =========================================================================================================//
+  if (!Number.prototype.toMonthName) {
+    Number.prototype.toMonthName = function(length = 'short', lang = 'en-US') {
+      const date = new Date();
+      date.setMonth(this - 1);
+
+      return date.toLocaleString(lang, { // <-- if [] empty will auto search locale
+        month: length, // <-- can be long or short
+      });
+    }
+  }
+  // toMonthName(length, lang) <-- example
+
+
+  // toDayName =========================================================================================================//
+  if (!Number.prototype.toDayName) {
+    Number.prototype.toDayName = function(length = 'long', lang = 'en-US') {
+      const date = new Date()
+      date.setDate(this - 1)
+
+      return date.toLocaleString(lang, { // <-- if [] empty will auto search locale
+        weekday: length, // <-- can be long or short
+      });
+    }
+  }
+  // toDayName(length, lang) <-- example
 }

@@ -109,6 +109,19 @@ export default {
           },
         },
         tooltip: {
+          custom({series, seriesIndex, dataPointIndex, w}) {
+            const [dateEpoch, value] = w.globals.initialSeries[seriesIndex].data[dataPointIndex];
+            const date = new Date(dateEpoch);
+            const day = date.getDate();
+            const month = date.getMonth();
+            const hr = date.getUTCHours();
+            const m = "0" + date.getUTCMinutes();
+            const time = `${hr}:${m.substr(-2)}`;
+
+            const fullDate = `${month.toMonthName()} ${day}, ${time}`;
+            return `<span>${fullDate}</span>
+            <span>Price: <b>$${value}</b></span>`;
+          },
           marker: {
             show: false,
           },

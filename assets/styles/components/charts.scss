@@ -22,9 +22,14 @@
 
   .apexcharts-canvas {
     [class*="tooltip"] {
+      padding: 12px;
+      border-radius: 5px;
       background-color: #17191C !important;
       border: none !important;
       box-shadow: none !important;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
       [class*="title"] {
         margin-bottom: 0 !important;
         padding-bottom: 0 !important
