@@ -20,4 +20,22 @@
   & .without {
     padding-block: calc(var(--h-navbar) + 60px) 0 !important
   }
+
+  #swap-floating-button {
+    --w: 161px;
+    --br: 30px 30px 15px 15px / 30px 30px 30px 30px;
+    --c: #574F42 !important;
+    --fw: 700;
+    --fs: 21px;
+    --t: rotate(-90deg);
+    position: fixed;
+    right: -45px;
+    top: 50%;
+    z-index: 10;
+    .v-btn__content {
+      display: flex;
+      flex-direction: column;
+      span:not(span + span) {font-family: 'Segoe UI', sans-serif !important}
+    }
+  }
 }
