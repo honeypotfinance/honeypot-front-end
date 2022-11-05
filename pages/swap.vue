@@ -242,7 +242,7 @@ export default {
       const
         data = [this.swapFrom, this.swapTo],
         token = this[event.path.find(e => e.className.includes("target_drag")).id],
-        [otherToken] = data.filter(el => el.name !== token.name && el.img !== token.img)
+        [otherToken] = data.filter(el => el.name !== token.name && el.img !== token.img);
 
       if (otherToken?.name === this.currentDrag?.alt?.split(" token")[0]) { this.switchTokens() }
       else {
