@@ -136,7 +136,7 @@
                 <v-skeleton-loader type="avatar" />
               </template>
             </v-img>
-            <label class="tcap">{{item.name}}</label>
+            <label class="tup">{{item.name}}</label>
           </div>
         </div>
       </v-card>
@@ -163,23 +163,23 @@ export default {
       dataTokens: [
         {
           img: require('~/assets/sources/tokens/database.svg'),
-          name: "Coin Name",
+          name: "coin name",
         },
         {
           img: require('~/assets/sources/tokens/usdc.svg'),
-          name: "USDC",
+          name: "usdc",
         },
         {
           img: require('~/assets/sources/tokens/btc.svg'),
-          name: "BTC",
+          name: "btc",
         },
         {
           img: require('~/assets/sources/tokens/database.svg'),
-          name: "Coin Name",
+          name: "coin name",
         },
         {
           img: require('~/assets/sources/tokens/database.svg'),
-          name: "Coin Name",
+          name: "coin name",
         },
       ],
       currentDrag: undefined,
@@ -192,13 +192,14 @@ export default {
     }
   },
   computed: {
-    listenerHeightCards() {
+    observerTokensFrom() {
       return this.swapFrom.name
-    }
+    },
   },
   watch: {
-    listenerHeightCards(current, old) {
+    observerTokensFrom(current, old) {
       if (current !== old) {
+        // height cards
         const page = document.querySelector("#swap");
         const cardLeft = page.querySelector("aside#swapFrom");
         setTimeout(() => page.style.setProperty("--h-cards", `${cardLeft.getBoundingClientRect().height}px`), 100);
@@ -224,8 +225,8 @@ export default {
       `
     },
     switchTokens() {
-      [this.swapFrom.img, this.swapFrom.name, this.swapTo.img, this.swapTo.name] = 
-      [this.swapTo.img, this.swapTo.name, this.swapFrom.img, this.swapFrom.name]
+      [this.swapFrom.img, this.swapFrom.name, this.swapTo.img, this.swapTo.name]
+      = [this.swapTo.img, this.swapTo.name, this.swapFrom.img, this.swapFrom.name]
     },
     dragstart(event) {
       if (event.target?.alt) this.currentDrag = event.target
@@ -236,9 +237,15 @@ export default {
       }
     },
     dropToken(event) {
-      const ref = event.path.find(e => e.className.includes("target_drag")).id;
-      this[ref].img = this.currentDrag.src
-      this[ref].name = this.currentDrag.alt.split(" token")[0]
+      const data = [this.swapFrom, this.swapTo];
+      const token = this[event.path.find(e => e.className.includes("target_drag")).id];
+      const [otherToken] = data.filter(el => el.name !== token.name && el.img !== token.img)
+
+      if (otherToken?.name === this.currentDrag?.alt?.split(" token")[0]) { this.switchTokens() }
+      else {
+        token.img = this.currentDrag.src
+        token.name = this.currentDrag.alt.split(" token")[0]
+      }
     },
   }
 };

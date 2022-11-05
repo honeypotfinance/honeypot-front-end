@@ -199,12 +199,12 @@ export default {
   },
   methods: {
     isSameToken(item) {
-      return this.handlerToken?.name === item?.name && this.handlerToken?.img === item?.img
+      return this.handlerToken?.name === item?.name
     },
     selectToken(item) {
       const data = [this.$parent.swapFrom, this.$parent.swapTo]; let same;
       for (const token of data) {
-        if (token.name === item.name && token.img === item.img) same = token
+        if (token.name === item.name) same = token
       }
       
       if (same) { this.$parent.switchTokens() }
