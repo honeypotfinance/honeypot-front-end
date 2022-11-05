@@ -50,7 +50,7 @@ export default {
         {
           name: "farm",
           active: false,
-          to: ""
+          to: "/farm"
         },
         {
           name: "pools",

@@ -71,7 +71,7 @@
           <div class="wrap" :class="{space: dataPopularTokens.length > 4}" style="gap: inherit">
             <v-chip
               v-for="(item, i) in dataPopularTokens.slice(0, 8)" :key="i" class="tup" color="#292724" style="border-radius: 10px; min-width: 82px"
-              @click="selectToken(item)"
+              :disabled="isSameToken(item)" @click="selectToken(item)"
             >
               <v-img :src="item.img" class="aspect mr-2" style="--w: 20px">
                 <template #placeholder>
@@ -86,7 +86,7 @@
         <v-sheet color="transparent" class="divcol" style="gap: 16px">
           <v-card
             v-for="(item, i) in filterDataTokens" :key="i" class="space" style="gap: 10px"
-            @click="selectToken(item)"
+            :disabled="isSameToken(item)" @click="selectToken(item)"
           >
             <div class="acenter tcap" style="gap: 10px">
               <v-img :src="item.img" :alt="`${item.name} token`" class="aspect" style="--w: 35.5px">
@@ -153,9 +153,15 @@ export default {
           value: 0,
         },
         {
-          img: "",
-          name: "otro",
-          fullname: "bear bear",
+          img: require('~/assets/sources/tokens/btc.svg'),
+          name: "btc",
+          fullname: "bitcon",
+          value: 0,
+        },
+        {
+          img: require('~/assets/sources/tokens/usdc.svg'),
+          name: "usdc",
+          fullname: "usdc coin",
           value: 0,
         },
       ],
@@ -192,15 +198,26 @@ export default {
     window.removeEventListener("resize", this.$targetTooltip)
   },
   methods: {
+    isSameToken(item) {
+      return this.handlerToken?.name === item?.name && this.handlerToken?.img === item?.img
+    },
     selectToken(item) {
-      for (const key of Object.keys(this.$parent[this.handlerToken])) {
-        if (key !== "amount") this.$parent[this.handlerToken][key] = item[key]
+      const data = [this.$parent.swapFrom, this.$parent.swapTo]; let same;
+      for (const token of data) {
+        if (token.name === item.name && token.img === item.img) same = token
+      }
+      
+      if (same) { this.$parent.switchTokens() }
+      else {
+        for (const key of Object.keys(this.handlerToken)) {
+          if (key !== "amount") this.handlerToken[key] = item[key]
+        }
       }
       this.modalTokens = false
     },
-    openModalTokens(key) {
+    openModalTokens(item) {
       this.modalTokens = true
-      this.handlerToken = key
+      this.handlerToken = item
     },
   }
 };

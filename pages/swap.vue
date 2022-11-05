@@ -23,7 +23,7 @@
             <div class="container-options">
               <label>From</label>
               <div>
-                <v-chip close close-icon="mdi-chevron-down" class="btn2" @click:close="$refs.modal.openModalTokens('swapFrom')">
+                <v-chip close close-icon="mdi-chevron-down" class="btn2" @click:close="$refs.modal.openModalTokens(swapFrom)">
                   <v-img class="aspect mr-2" style="--w: 20px">
                     <template #default>
                       <img :src="swapFrom.img" :alt="`${swapFrom.name} token`" style="--w: 100%; --of: cover">
@@ -62,7 +62,7 @@
           </aside>
 
           <center style="transform: translateY(calc(62px / 2)); margin-inline: clamp(5px, .6vw, 20px)">
-            <v-btn icon style="--p: 7px" @click="swapTokens()">
+            <v-btn icon style="--p: 7px" @click="switchTokens()">
               <img src="~/assets/sources/icons/swap-arrow.svg" alt="switch icon" style="--w: 16px">
             </v-btn>
           </center>
@@ -74,7 +74,7 @@
             <div class="container-options">
               <label>To</label>
               <div class="space">
-                <v-chip close close-icon="mdi-chevron-down" class="tup btn2" @click:close="$refs.modal.openModalTokens('swapTo')">
+                <v-chip close close-icon="mdi-chevron-down" class="tup btn2" @click:close="$refs.modal.openModalTokens(swapTo)">
                   <v-img class="aspect mr-2" style="--w: 20px">
                     <template #default>
                       <img :src="swapTo.img" :alt="`${swapTo.name} token`" style="--w: 100%; --of: cover">
@@ -156,8 +156,8 @@ export default {
         amount: undefined,
       },
       swapTo: {
-        img: require('~/assets/sources/tokens/database.svg'),
-        name: "bear",
+        img: require('~/assets/sources/tokens/btc.svg'),
+        name: "btc",
         amount: undefined,
       },
       dataTokens: [
@@ -166,12 +166,12 @@ export default {
           name: "Coin Name",
         },
         {
-          img: require('~/assets/sources/tokens/database.svg'),
-          name: "Coin Name",
+          img: require('~/assets/sources/tokens/usdc.svg'),
+          name: "USDC",
         },
         {
-          img: require('~/assets/sources/tokens/database.svg'),
-          name: "Coin Name",
+          img: require('~/assets/sources/tokens/btc.svg'),
+          name: "BTC",
         },
         {
           img: require('~/assets/sources/tokens/database.svg'),
@@ -223,7 +223,7 @@ export default {
         (header.getBoundingClientRect().height + footer.getBoundingClientRect().height + 48 + 15)}px
       `
     },
-    swapTokens() {
+    switchTokens() {
       [this.swapFrom.img, this.swapFrom.name, this.swapTo.img, this.swapTo.name] = 
       [this.swapTo.img, this.swapTo.name, this.swapFrom.img, this.swapFrom.name]
     },
