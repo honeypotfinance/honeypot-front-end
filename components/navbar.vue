@@ -9,8 +9,8 @@
       <aside class="middle tcap deletemobile">
         <a
           v-for="(item, i) in dataNavbar" :key="i"
-          :class="{active: item.active}"
-          @click="dataNavbar.forEach(e=>e.active=false); item.active = true; $router.push(localePath(item.to))">
+          :class="{active: item.to === $route.path}"
+          @click="$router.push(localePath(item.to))">
           {{item.name}}
         </a>
       </aside>
@@ -39,27 +39,22 @@ export default {
       dataNavbar: [
         {
           name: "portfolio",
-          active: false,
           to: ""
         },
         {
           name: "swap",
-          active: false,
           to: "/swap"
         },
         {
           name: "farm",
-          active: false,
           to: "/farm"
         },
         {
           name: "pools",
-          active: false,
           to: ""
         },
         {
           name: "xhpot",
-          active: false,
           to: ""
         },
       ],
@@ -78,16 +73,7 @@ export default {
   //   if (theme === "light") {this.themeButton = true}
   //   else {this.themeButton = false}
   // },
-  mounted() {
-    this.checkoutNavigation()
-  },
   methods: {
-    checkoutNavigation() {
-      setTimeout(() => {
-        const verify = el => el.to === this.$route.path
-        if (this.dataNavbar.some(verify)) this.dataNavbar.filter(verify)[0].active = true
-      }, 100);
-    },
     // changeTheme(theme) {
     //   this.$store.commit("switchTheme", theme);
     //   this.themeButton = !this.themeButton;
