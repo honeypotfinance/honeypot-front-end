@@ -193,8 +193,8 @@ export default {
   },
   methods: {
     selectToken(item) {
-      for (const [keys, ] of Object.entries(this.$parent[this.handlerToken])) {
-        if (keys !== "amount") this.$parent[this.handlerToken][keys] = item[keys]
+      for (const key of Object.keys(this.$parent[this.handlerToken])) {
+        if (key !== "amount") this.$parent[this.handlerToken][key] = item[key]
       }
       this.modalTokens = false
     },

@@ -224,9 +224,8 @@ export default {
       `
     },
     swapTokens() {
-      const saved = this.swapFrom;
-      this.swapFrom = this.swapTo
-      this.swapTo = saved
+      [this.swapFrom.img, this.swapFrom.name, this.swapTo.img, this.swapTo.name] = 
+      [this.swapTo.img, this.swapTo.name, this.swapFrom.img, this.swapFrom.name]
     },
     dragstart(event) {
       if (event.target?.alt) this.currentDrag = event.target
