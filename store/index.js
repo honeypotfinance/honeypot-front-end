@@ -49,11 +49,12 @@ export const mutations = {
     //   state.dataUser.logged = true;
     // };
   },
-  signIn(state) {
+  signIn(state, data = "0x39283....9302") {
     // wallet.requestSignIn(
     //   'contract.globaldv.testnet'
     // );
-    state.dataUser.accountId = "0x021300";
+    if (/0+x/.test(data))
+      state.dataUser.accountId = data.limitString(7) + data.substring(data.length - 4, data.length);
     state.dataUser.logged = true;
   },
   signOut(state) {
