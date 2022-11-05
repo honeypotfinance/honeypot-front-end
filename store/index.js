@@ -96,10 +96,16 @@ export const getters = {
     let filters = items;
     // search
     if (search) filters = filters.filter(data => data.name.includes(search))
-    // filter A (tier)
-    if (filterA) filters = filters.filter(data => data.tier === filterA)
 
     return filters.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
+  },
+  filters: () => ({items, search, filterA, filterB}) => {
+    // filters
+    let filters = items;
+    // search
+    if (search) filters = filters.filter(data => data.name.includes(search))
+
+    return filters
   }
 };
 

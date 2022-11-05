@@ -83,8 +83,10 @@ export default {
   },
   methods: {
     checkoutNavigation() {
-      const verify = el => el.to === this.$route.path
-      if (this.dataNavbar.some(verify)) this.dataNavbar.filter(verify)[0].active = true
+      setTimeout(() => {
+        const verify = el => el.to === this.$route.path
+        if (this.dataNavbar.some(verify)) this.dataNavbar.filter(verify)[0].active = true
+      }, 100);
     },
     // changeTheme(theme) {
     //   this.$store.commit("switchTheme", theme);

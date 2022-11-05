@@ -9,7 +9,7 @@
     gap: 2.5em;
     > * {
       min-width: 220px !important;
-      height: 341px !important;
+      min-height: 341px !important;
     }
     @include media(max, 1360px) {
       > :nth-child(1) {order: 0}
@@ -17,15 +17,16 @@
       > :nth-child(3) {order: 1}
     }
     @include media(max, small) {
+      padding-bottom: 80px;
       flex-direction: column;
       > :nth-child(1) {order: 0}
       > :nth-child(2) {order: 1}
       > :nth-child(3) {order: 2}
       > * {
-        --size-mobile: min(100%, 300px);
-        width: var(--size-mobile) !important;
-        min-width: var(--size-mobile) !important;
-        max-width: var(--size-mobile) !important;
+        --size: clamp(280px, 1vw, 300px);
+        width: var(--size) !important;
+        min-width: var(--size) !important;
+        max-width: var(--size) !important;
       }
     }
     .left {max-width: 292px !important}
@@ -42,10 +43,11 @@
       aside {
         --size: 13em;
         @include media(max, 1360px) {--size: 288px}
-        @include media(max, small) {--size: var(--size-mobile)}
         width: var(--size) !important;
         max-width: var(--size) !important;
         min-width: var(--size) !important;
+        min-height: var(--h-cards) !important;
+        justify-content: space-between;
         .v-card {
           display: flex;
           flex-direction: column;
@@ -56,12 +58,6 @@
           }
         }
       }
-      > .v-btn {
-        @include media(max, small) {
-          --w: var(--size-mobile);
-          margin-inline: auto;
-        }
-      }
       .v-chip {--tt: uppercase !important}
     }
     .right {
@@ -70,6 +66,7 @@
         --gtc: repeat(auto-fit, minmax(min(100%, 80px), 1fr));
         overflow-y: auto;
         border-radius: 0;
+        img {cursor: grab}
       }
     }
   }

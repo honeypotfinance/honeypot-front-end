@@ -8,26 +8,31 @@
 
     <section id="swap-content" class="fwrap center">
       <!-- left -->
-      <v-card class="left card">
-        <ChartsSwapChart ref="chart"></ChartsSwapChart>
+      <v-card ref="target_swap_chart" class="left card">
+        <ChartsSwapChart ref="chart" :height="heightChart"></ChartsSwapChart>
       </v-card>
 
 
       <!-- middle -->
-      <v-sheet color="transparent" class="middle divcol jspace" style="gap: 12px">
+      <v-form class="middle divcol jspace" style="gap: 12px">
         <div class="fnowrap space" style="gap: inherit">
           <!-- card swap left -->
-          <aside class="divcol" style="gap: inherit">
+          <aside
+            id="swapFrom" class="target_drag divcol" style="gap: inherit"
+            @dragover="($event) => $event.preventDefault()" @drop="dropToken($event)">
             <div class="container-options">
               <label>From</label>
               <div>
-                <v-chip close close-icon="mdi-chevron-down" class="btn2">
-                  <v-img :src="require('~/assets/sources/tokens/database.svg')" class="aspect mr-2" style="--w: 20px">
+                <v-chip close close-icon="mdi-chevron-down" class="btn2" @click:close="$refs.modal.openModalTokens('swapFrom')">
+                  <v-img class="aspect mr-2" style="--w: 20px">
+                    <template #default>
+                      <img :src="swapFrom.img" :alt="`${swapFrom.name} token`" style="--w: 100%; --of: cover">
+                    </template>
                     <template #placeholder>
                       <v-skeleton-loader type="avatar" />
                     </template>
                   </v-img>
-                  bear
+                  <span>{{swapFrom.name}}</span>
                 </v-chip>
                 <v-btn class="btn2">
                   <span>half</span>
@@ -41,14 +46,14 @@
             <v-card class="card">
               <div class="divcol">
                 <v-text-field
-                  v-model="swapTo"
+                  v-model="swapFrom.amount"
                   solo counter
                   placeholder="0.00"
                   type="number"
                   class="custome"
                 >
                   <template #counter>
-                    <label class="font1" style="--fs: 21px">~${{swapTo / 2 || 0}} USD</label>
+                    <label class="font1" style="--fs: 21px">~${{swapFrom.amount / 2 || 0}} USD</label>
                   </template>
                 </v-text-field>
               </div>
@@ -57,25 +62,30 @@
           </aside>
 
           <center style="transform: translateY(calc(62px / 2)); margin-inline: clamp(5px, .6vw, 20px)">
-            <v-btn icon style="--p: 7px">
+            <v-btn icon style="--p: 7px" @click="swapTokens()">
               <img src="~/assets/sources/icons/swap-arrow.svg" alt="switch icon" style="--w: 16px">
             </v-btn>
           </center>
 
           <!-- card swap right -->
-          <aside class="divcol" style="gap: inherit">
+          <aside
+            id="swapTo" class="target_drag divcol" style="gap: inherit"
+            @dragover="($event) => $event.preventDefault()" @drop="dropToken($event)">
             <div class="container-options">
               <label>To</label>
               <div class="space">
-                <v-chip close close-icon="mdi-chevron-down" class="tup btn2">
-                  <v-img :src="require('~/assets/sources/tokens/database.svg')" class="aspect mr-2" style="--w: 20px">
+                <v-chip close close-icon="mdi-chevron-down" class="tup btn2" @click:close="$refs.modal.openModalTokens('swapTo')">
+                  <v-img class="aspect mr-2" style="--w: 20px">
+                    <template #default>
+                      <img :src="swapTo.img" :alt="`${swapTo.name} token`" style="--w: 100%; --of: cover">
+                    </template>
                     <template #placeholder>
                       <v-skeleton-loader type="avatar" />
                     </template>
                   </v-img>
-                  bear
+                  <span>{{swapTo.name}}</span>
                 </v-chip>
-                <v-btn class="btn2" @click="$refs.modal.modalSwap = true">
+                <v-btn class="btn2" @click.stop="$refs.modal.modalSettings = true">
                   <img src="~/assets/sources/icons/settings.svg" alt="settings" style="--w: 18px">
                 </v-btn>
               </div>
@@ -84,14 +94,14 @@
             <v-card class="card">
               <div class="divcol">
                 <v-text-field
-                  v-model="swapTo"
+                  v-model="swapTo.amount"
                   solo counter
                   placeholder="0.00"
                   type="number"
                   class="custome"
                 >
                   <template #counter>
-                    <label class="font1" style="--fs: 21px">~${{swapTo / 2 || 0}} USD</label>
+                    <label class="font1" style="--fs: 21px">~${{swapTo.amount / 2 || 0}} USD</label>
                   </template>
                 </v-text-field>
               </div>
@@ -103,7 +113,7 @@
         <v-btn
           class="btn" style="--bg: linear-gradient(109.68deg, #F7931A 5.56%, #FFCD4D 85.08%); --fs: 21px"
         >swap</v-btn>
-      </v-sheet>
+      </v-form>
 
 
       <!-- right -->
@@ -139,7 +149,17 @@ export default {
   name: "SwapPage",
   data() {
     return {
-      swapTo: undefined,
+      heightChart: undefined,
+      swapFrom: {
+        img: require('~/assets/sources/tokens/database.svg'),
+        name: "bear",
+        amount: undefined,
+      },
+      swapTo: {
+        img: require('~/assets/sources/tokens/database.svg'),
+        name: "bear",
+        amount: undefined,
+      },
       dataTokens: [
         {
           img: require('~/assets/sources/tokens/database.svg'),
@@ -162,6 +182,7 @@ export default {
           name: "Coin Name",
         },
       ],
+      currentDrag: undefined,
     }
   },
   head() {
@@ -170,12 +191,55 @@ export default {
       title,
     }
   },
+  computed: {
+    listenerHeightCards() {
+      return this.swapFrom.name
+    }
+  },
+  watch: {
+    listenerHeightCards(current, old) {
+      if (current !== old) {
+        const page = document.querySelector("#swap");
+        const cardLeft = page.querySelector("aside#swapFrom");
+        setTimeout(() => page.style.setProperty("--h-cards", `${cardLeft.getBoundingClientRect().height}px`), 100);
+      }
+    },
+  },
+  mounted() {
+    this.styles()
+    window.addEventListener("resize", this.styles)
+  },
+  beforeDestroy() {
+    window.removeEventListener("resize", this.styles)
+  },
   methods: {
+    styles() {
+      // height chart calculator
+      const container = this.$refs.target_swap_chart.$el;
+      const header = container.querySelector(".charts-header");
+      const footer = container.querySelector(".charts-footer");
+      this.heightChart = `
+        ${container.getBoundingClientRect().height -
+        (header.getBoundingClientRect().height + footer.getBoundingClientRect().height + 48 + 15)}px
+      `
+    },
+    swapTokens() {
+      const saved = this.swapFrom;
+      this.swapFrom = this.swapTo
+      this.swapTo = saved
+    },
     dragstart(event) {
-      if (event.target?.alt) console.log(event)
+      if (event.target?.alt) this.currentDrag = event.target
     },
     dragend(event) {
-      if (event.target?.alt) console.log(event)
+      if (event.target?.alt) {
+        // console.log(event)
+      }
+    },
+    dropToken(event) {
+      const ref = event.path.find(e => e.className.includes("target_drag")).id;
+      this[ref].img = this.currentDrag.src
+      this[ref].name = this.currentDrag.alt.split(" token")[0]
     },
   }
 };

@@ -10,7 +10,9 @@
         </div>
       </div>
 
-      <v-btn icon width="32px" height="32px" class="aspéct" title="expand chart">
+      <v-btn
+        icon width="32px" height="32px" class="aspect" title="expand chart" style="top: -10px"
+        @click="$parent.$parent.$refs.modal.modalChart = true">
         <img src="~/assets/sources/icons/expand.svg" alt="expand chart" class="aspect" style="--w: 16px">
       </v-btn>
     </section>
@@ -18,7 +20,7 @@
     <ApexChart
       ref="chart"
       width="100%"
-      :height="height_chart"
+      :height="height"
       type="line"
       :options="chartOptions"
       :series="chartSeries"
@@ -54,9 +56,14 @@ function generateDayWiseTimeSeries(baseval, count, yrange) {
 
 export default {
   name: "ChartSwapComponent",
+  props: {
+    height: {
+      type: String,
+      default: undefined
+    }
+  },
   data() {
     return {
-      height_chart: undefined,
       dataControlsChart: [ "1d", "1w", "1y", "all" ],
       selection: 3,
       // series
@@ -135,19 +142,7 @@ export default {
       },
     };
   },
-  mounted() {
-    this.heightCalculator()
-  },
   methods: {
-    heightCalculator() {
-      const container = document.querySelector(".card.left");
-      const header = container.querySelector(".charts-header");
-      const footer = container.querySelector(".charts-footer");
-      this.height_chart = `
-        ${container.getBoundingClientRect().height -
-        (header.getBoundingClientRect().height + footer.getBoundingClientRect().height + 48 + 15)}px
-      `
-    },
     updateData(timeline) {
       switch (timeline) {
         case '1d': {

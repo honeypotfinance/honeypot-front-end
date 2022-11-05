@@ -1,7 +1,7 @@
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
 // // // modals // // // 
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
-.modalSwap {
+.modalSettings {
   padding: 32px 24px;
   background: var(--clr-card);
   border-radius: 24px;
@@ -27,5 +27,84 @@
     padding-inline: 5px 0 !important;
     padding-right: 0 !important;
     input, ::placeholder {text-align: center}
+  }
+}
+
+.modalChart {
+  padding: 30px;
+  background: #1A1917;
+  border-radius: 50.9589px;
+  min-height: 579.23px;
+  box-shadow: 30px -30px 100px 0 hsl(33 93% 54% / .5), -30px 30px 100px 0 hsl(281 46% 51% / .5) !important;
+  // &::before {
+  //   content: "";
+  //   position: fixed;
+  //   width: 200px;
+  //   height: 200px;
+  //   background: linear-gradient(118.19deg, #F7931A -25.09%, #FFCD4D 80.23%);
+  //   filter: blur(100px);
+  //   z-index: -9922;
+  // }
+  // &::after {}
+  .v-btn.aspect {display: none !important}
+  
+  .charts {
+    &-header {
+      & > div span:not(span + span, div > div > span) {font-size: 26px !important}
+      span + span {font-size: 31px !important}
+      div > :is(span, i) {font-size: 28px !important}
+    }
+
+  .apexcharts-canvas [class*="tooltip"] {font-size: 18px !important}
+
+    &-footer {
+      .v-btn {
+        --w: 38px;
+        --h: 34.65px;
+        span {font-size: 24px !important}
+      }
+    }
+  }
+}
+
+.modalTokens {
+  padding: 30px;
+  background: #1A1917;
+  border-radius: 50.9589px;
+  min-height: 579.23px;
+  box-shadow: 30px -30px 100px 0 hsl(33 93% 54% / .5), -30px 30px 100px 0 hsl(211 68% 47% / .5) !important;
+  h3, input, label:not(.plain) {font-family: var(--font2) !important}
+  label.plain {font-family: var(--font1) !important}
+  &-content {
+    overflow-y: auto;
+    // height: 500px;
+    height: var(--h-modal-tokens-content);
+    > aside.divcol {
+      --spacing: 12px;
+      position: relative;
+      padding-bottom: var(--spacing);
+      margin-bottom: var(--spacing);
+      &:after {
+        content: "";
+        @include absolute(0,auto,0,0);
+        width: 100%;
+        height: 1px;
+        background-color: var(--clr-line);
+      }
+    }
+    .v-sheet {
+      .v-card {
+        background-color: transparent !important;
+        padding: 8px;
+        border-radius: 10px;
+        span:not(span + span) {font-family: var(--font2) !important}
+        span:not(span + span), label {font-size: 16px !important}
+        span + span {font-size: 12px !important}
+        &:hover {
+          background-color: #292724 !important;
+          // box-shadow: 0 0 0 8px #292724 !important;
+        }
+      }
+    }
   }
 }

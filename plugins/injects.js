@@ -10,16 +10,17 @@ export default ({app}, inject) => {
 
 
   // target-tooltip =========================================================================================================//
-  const targetTooltip = el => {
+  const targetTooltip = (el, isResizeY = 0, isResizeX = 0) => {
     setTimeout(() => {
       const target = document.querySelector(el);
-      document.documentElement.style.setProperty('--x-tooltip', `${target.getBoundingClientRect().left}px`)
-      document.documentElement.style.setProperty('--y-tooltip', `${target.getBoundingClientRect().top}px`)
-      console.log(`1- left ${target.getBoundingClientRect().left}px`)
-      console.log(`2- top ${target.getBoundingClientRect().top}px`)
+      document.documentElement.style.setProperty('--x-tooltip', `${target.getBoundingClientRect().left + isResizeX}px`)
+      document.documentElement.style.setProperty('--y-tooltip', `${target.getBoundingClientRect().top + isResizeY}px`)
     }, 100);
   }
-  // usage $targetTooltip(target)
+  /* usage:
+    $targetTooltip(target) <-- if mounted
+    $targetTooltip(target, y, x) <-- if resize
+  */
   inject('targetTooltip', targetTooltip);
 
 

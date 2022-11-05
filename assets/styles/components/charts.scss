@@ -42,8 +42,7 @@
       --w: 28px;
       --h: 24.65px;
       border-radius: 5px !important;
-      background-color: #17191C;
-      color: var(--accent);
+      background-color: #17191C !important;
       width: var(--w) !important;
       max-width: var(--w) !important;
       min-width: var(--w) !important;
@@ -51,13 +50,14 @@
       min-height: var(--h) !important;
       max-height: var(--h) !important;
       border: none !important;
+      span {
+        color: #3A3C43 !important;
+        font-size: 16px;
+        font-weight: 400;
+      }
       &[class*="active"] {
         background-color: var(--success) !important;
-        color: #fff !important;
-      }
-      span {
-        font-size: 14px;
-        font-weight: 400;
+        span {color: #fff !important}
       }
     }
   }
