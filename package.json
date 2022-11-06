@@ -15,10 +15,13 @@
   "dependencies": {
     "@nuxtjs/axios": "^5.13.6",
     "@nuxtjs/i18n": "^7.3.0",
+    "@walletconnect/web3-provider": "^1.8.0",
     "core-js": "^3.19.3",
+    "ethers": "^5.7.2",
     "html2canvas": "^1.4.1",
     "near-api-js": "^1.0.0",
     "nuxt": "^2.15.8",
+    "nuxt-web3": "^0.0.8",
     "parallax-js": "^3.1.0",
     "vue": "^2.6.14",
     "vue-advanced-chat": "^2.0.1",
@@ -30,6 +33,7 @@
     "vue2-gmap-custom-marker": "^6.1.0",
     "vue2-google-maps": "^0.10.7",
     "vuetify": "^2.6.1",
+    "web3modal": "^1.9.9",
     "webpack": "^4.46.0"
   },
   "devDependencies": {

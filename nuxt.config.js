@@ -59,13 +59,13 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    '~/plugins/injects.js',
+    '~/plugins/polyfills.js',
+    '~/plugins/directives.js',
     '~/plugins/axios.js',
     '~/plugins/apexchart.js',
     '~/plugins/google-maps.js',
     '~/plugins/vue-debounce.js',
-    '~/plugins/injects.js',
-    '~/plugins/polyfills.js',
-    '~/plugins/directives.js',
   ],
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
@@ -81,7 +81,21 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     '@nuxtjs/i18n',
+    "nuxt-web3",
   ],
+
+  // we3-nuxt: https://www.npmjs.com/package/nuxt-web3
+  publicRuntimeConfig: {
+    web3: {
+      provider: process.env.WEB3_PROVIDER_URL
+    }
+  },
+
+  privateRuntimeConfig: {
+    web3: {
+      provider: process.env.PROVIDER_URL
+    }
+  },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {

@@ -1,17 +1,4 @@
-// import * as nearAPI from 'near-api-js'
-
-// const
-//   { connect, keyStores, WalletConnection } = nearAPI,
-//   keyStore = new keyStores.BrowserLocalStorageKeyStore(),
-//   config = {
-//     networkId: "testnet",
-//     keyStore, 
-//     nodeUrl: "https://rpc.testnet.near.org",
-//     walletUrl: "https://wallet.testnet.near.org",
-//     helperUrl: "https://helper.testnet.near.org",
-//     explorerUrl: "https://explorer.testnet.near.org",
-//   };
-// let wallet = null
+import web3nuxt from '~/plugins/web3-nuxt'
 
 export const state = () => ({
   theme: "light",
@@ -51,6 +38,13 @@ export const mutations = {
     // };
   },
   signIn(state, data = "0x39283....9302") {
+    try {
+      web3nuxt()
+    // catch error web3-nuxt
+    } catch (error) {
+      this.$alert("cancel", {desc: error.message})
+      console.error(error);
+    }
     // wallet.requestSignIn(
     //   'contract.globaldv.testnet'
     // );
@@ -66,30 +60,8 @@ export const mutations = {
 };
 
 export const actions = {
-  getData({commit}) {
-    try {
-      // // connect to NEAR
-      // const near = await connect(config);
-      // // create wallet connection
-      // wallet = new WalletConnection(near);
-      // // get data user
-      // commit("setData", wallet.getAccountId()); /*  -->   if use only smart contract */
-      // /*           if use smart contract + backend            */
-      // // this.$axios.post(`${this.$axios.defaults.baseURL}api/v1/get-perfil-data/`, { "wallet": wallet.getAccountId() })
-      // // .then(fetch => {
-      // //   // set data profile
-      // //   fetch.data[0] ? commit("setData", fetch.data[0]) : commit("setData", wallet.getAccountId());
-      // // // catch error django
-      // // }).catch(error => {
-      // //   this.$alert("cancel", {desc: error.message})
-      // //   console.error(error);
-      // // })
-    // catch error near
-    } catch (error) {
-      this.$alert("cancel", {desc: error.message})
-      console.error(error);
-    }
-  },
+  // getData({commit}) {
+  // },
 };
 
 export const getters = {
