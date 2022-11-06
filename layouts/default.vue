@@ -3,7 +3,7 @@
     <Alerts ref="alerts"></Alerts>
     <Navbar ref="navbar" />
     <v-main :class="wrapperSpace?'with':'without'" class="parent">
-      <v-btn v-show="$route.path !== '/swap'" id="swap-floating-button" class="btn">
+      <v-btn v-show="$route.path !== '/swap'" id="swap-floating-button" class="btn" @mousedown="dragFloatingBtn($event)">
         <v-icon>mdi-chevron-up</v-icon>
         <span>Swap</span>
       </v-btn>
@@ -22,17 +22,11 @@ export default {
       wrapperSpace: false,
     }
   },
-  watch: {
-    $route() {
-      this.dragFloatingBtn();
-    }
-  },
   created() {
     // get data profile
     this.$store.dispatch("getData");
   },
   mounted() {
-    this.dragFloatingBtn();
     this.scrollX();
     // this.footerHeightListener();
     
@@ -68,9 +62,15 @@ export default {
         );
       }, 400);
     },
-    dragFloatingBtn() {
-      const target = document.getElementById ("swap-floating-button");
+    dragFloatingBtn(event) {
+      const target = event.currentTarget;
       let offset = [0,0], isDown = false;
+      
+      isDown = true;
+      offset = [
+        target.offsetTop - typeEvent(event).clientY
+      ];
+
       function typeEvent(event) {
         if (event.type.includes('mouse')) {
           return event
@@ -78,36 +78,28 @@ export default {
           return event.touches[0]
         }
       }
-
-      const mousedown = (e) => {
-        if (this.$route.path !== '/swap') {
-          isDown = true;
-          offset = [
-            target.offsetTop - typeEvent(e).clientY
-          ];
-        }
+      
+      const onMove = (e) => {
+        const
+          position = typeEvent(e).clientY + offset[0],
+          range = 100;
+        if (e.type.includes('mouse')) e.preventDefault();
+        if (isDown && position > range && position < window.innerHeight - (range + 80)) target.style.top  = `${position}px`;
       }
-      const mousemove = (e) => {
-        if (this.$route.path !== '/swap') {
-          const
-            position = typeEvent(e).clientY + offset[0],
-            range = 100;
-          if (e.type.includes('mouse')) e.preventDefault();
-          if (isDown && position > range && position < window.innerHeight - (range + 80)) target.style.top  = `${position}px`;
-        }
+      const removeHandlers = () => {
+        window.onmouseup = null
+        window.onmousemove = null
+        window.ontouchend = null
+        window.ontouchmove = null
+        isDown = false
       }
-      const mouseup = () => { 
-        if (this.$route.path !== '/swap') { isDown = false }
-      }
-
+      
       // desktop
-      target.addEventListener('mousedown', function(e) { mousedown(e) }, true);
-      document.addEventListener('mouseup', function() { mouseup() }, true);
-      document.addEventListener('mousemove', function(e) { mousemove(e) }, true);
+      window.onmouseup = () => removeHandlers()
+      window.onmousemove = e => onMove(e)
       // mobile
-      target.addEventListener('touchstart', function(e) { mousedown(e) }, true);
-      document.addEventListener('touchend', function() { mouseup() }, true);
-      document.addEventListener('touchmove', function(e) { mousemove(e) }, true);
+      window.ontouchend = () => removeHandlers()
+      window.ontouchmove = e => onMove(e)
     }
   },
 }
