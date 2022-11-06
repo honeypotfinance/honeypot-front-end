@@ -4,6 +4,7 @@
 #swap {
   @include parent;
   padding-inline: var(--margin-global);
+
   &-content {
     margin-top: 1em;
     gap: 2.5em;
@@ -29,7 +30,9 @@
         max-width: var(--size) !important;
       }
     }
+
     .left {max-width: 292px !important}
+
     .middle {
       --size: max-content;
       width: var(--size) !important;
@@ -40,7 +43,7 @@
           center img {--t: rotate(90deg)}
         }
       }
-      aside {
+      aside.target_drag {
         --size: 13em;
         @include media(max, 1360px) {--size: 288px}
         width: var(--size) !important;
@@ -48,6 +51,7 @@
         min-width: var(--size) !important;
         min-height: var(--h-cards) !important;
         justify-content: space-between;
+        position: relative;
         .v-card {
           display: flex;
           flex-direction: column;
@@ -59,7 +63,23 @@
         }
       }
       .v-chip {--tt: uppercase !important}
+      
+      &.focus {
+        .target_drag::after {
+          content:  "";
+          position: absolute;
+          inset: -20px;
+          border-radius: 60px;
+          box-shadow: inset 0 0 50px 1px hsl(0 0% 100% / .2);
+          z-index: 10;
+          @include animation(2s $ease-return infinite alternate) {
+            from {transform: scale(1.02)}
+            to {transform: scale(1)}
+          }
+        }
+      }
     }
+
     .right {
       max-width: 318px !important;
       .grid {

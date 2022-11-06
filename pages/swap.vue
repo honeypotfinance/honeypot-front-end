@@ -166,8 +166,8 @@ export default {
       },
       dataTokens: [
         {
-          img: require('~/assets/sources/tokens/database.svg'),
-          name: "coin name",
+          img: require('~/assets/sources/tokens/honeypot.svg'),
+          name: "honeypot",
         },
         {
           img: require('~/assets/sources/tokens/usdc.svg'),
@@ -235,11 +235,16 @@ export default {
       = [this.swapTo.img, this.swapTo.name, this.swapFrom.img, this.swapFrom.name]
     },
     dragstart(event) {
-      if (event.target?.alt) this.currentDrag = event.target
+      if (event.target?.alt) {
+        document.querySelector(".v-form.middle").classList.add("focus");
+        this.currentDrag = event.target
+        console.log("added")
+      }
     },
     dragend(event) {
       if (event.target?.alt) {
-        // console.log(event)
+        document.querySelector(".v-form.middle").classList.remove("focus");
+        console.log("removed")
       }
     },
     dropToken(event) {

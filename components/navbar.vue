@@ -17,7 +17,7 @@
 
       <aside class="right" :class="user.logged ? 'font2' : 'font1'">
         <v-btn class="btn2">
-          <img src="~/assets/sources/tokens/honeypot.svg" alt="token" class="aspect mr-2" style="--w: 1.533125em">
+          <img src="~/assets/sources/logos/honeypot.svg" alt="token" class="aspect mr-2" style="--w: 1.533125em">
           <span>${{user.balance}}</span>
         </v-btn>
         

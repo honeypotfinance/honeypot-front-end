@@ -56,7 +56,7 @@
       <section class="modalTokens-header">
         <div class="wrapper-header">
           <h3 style="--fw: 700">Select a token</h3>
-          <v-btn icon class="showmobile" style="top: -10px" @click="modalTokens = false">
+          <v-btn icon style="top: -10px" @click="modalTokens = false">
             <v-icon>mdi-close</v-icon>
           </v-btn>
         </div>
@@ -134,29 +134,9 @@ export default {
       searchToken: undefined,
       dataPopularTokens: [
         {
-          img: require('~/assets/sources/tokens/database.svg'),
-          name: "bear",
-          fullname: "bear bear",
-          value: 0,
-        },
-        {
-          img: require('~/assets/sources/tokens/database.svg'),
-          name: "bear",
-          fullname: "bear bear",
-          value: 0,
-        },
-        {
-          img: require('~/assets/sources/tokens/database.svg'),
-          name: "bear",
-          fullname: "bear bear",
-          value: 0,
-        },
-      ],
-      dataTokens: [
-        {
-          img: require('~/assets/sources/tokens/database.svg'),
-          name: "bear",
-          fullname: "bear bear",
+          img: require('~/assets/sources/tokens/honeypot.svg'),
+          name: "honeypot",
+          fullname: "honeypot",
           value: 0,
         },
         {
@@ -169,6 +149,104 @@ export default {
           img: require('~/assets/sources/tokens/usdc.svg'),
           name: "usdc",
           fullname: "usdc coin",
+          value: 0,
+        },
+      ],
+      dataTokens: [
+        {
+          img: require('~/assets/sources/tokens/honeypot.svg'),
+          name: "honeypot",
+          fullname: "honeypot",
+          value: 0,
+        },
+        {
+          img: require('~/assets/sources/tokens/btc.svg'),
+          name: "btc",
+          fullname: "bitcon",
+          value: 0,
+        },
+        {
+          img: require('~/assets/sources/tokens/usdc.svg'),
+          name: "usdc",
+          fullname: "usdc coin",
+          value: 0,
+        },
+        {
+          img: require('~/assets/sources/tokens/database.svg'),
+          name: "bear",
+          fullname: "bear bear",
+          value: 0,
+        },
+        {
+          img: require('~/assets/sources/tokens/honeypot.svg'),
+          name: "honeypot",
+          fullname: "honeypot",
+          value: 0,
+        },
+        {
+          img: require('~/assets/sources/tokens/btc.svg'),
+          name: "btc",
+          fullname: "bitcon",
+          value: 0,
+        },
+        {
+          img: require('~/assets/sources/tokens/usdc.svg'),
+          name: "usdc",
+          fullname: "usdc coin",
+          value: 0,
+        },
+        {
+          img: require('~/assets/sources/tokens/database.svg'),
+          name: "bear",
+          fullname: "bear bear",
+          value: 0,
+        },
+        {
+          img: require('~/assets/sources/tokens/honeypot.svg'),
+          name: "honeypot",
+          fullname: "honeypot",
+          value: 0,
+        },
+        {
+          img: require('~/assets/sources/tokens/btc.svg'),
+          name: "btc",
+          fullname: "bitcon",
+          value: 0,
+        },
+        {
+          img: require('~/assets/sources/tokens/usdc.svg'),
+          name: "usdc",
+          fullname: "usdc coin",
+          value: 0,
+        },
+        {
+          img: require('~/assets/sources/tokens/database.svg'),
+          name: "bear",
+          fullname: "bear bear",
+          value: 0,
+        },
+        {
+          img: require('~/assets/sources/tokens/honeypot.svg'),
+          name: "honeypot",
+          fullname: "honeypot",
+          value: 0,
+        },
+        {
+          img: require('~/assets/sources/tokens/btc.svg'),
+          name: "btc",
+          fullname: "bitcon",
+          value: 0,
+        },
+        {
+          img: require('~/assets/sources/tokens/usdc.svg'),
+          name: "usdc",
+          fullname: "usdc coin",
+          value: 0,
+        },
+        {
+          img: require('~/assets/sources/tokens/database.svg'),
+          name: "bear",
+          fullname: "bear bear",
           value: 0,
         },
       ],
