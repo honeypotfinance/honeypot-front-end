@@ -1,6 +1,9 @@
 <template>
   <div id="farm">
     <section id="farm-header" class="divcol center">
+      <h1 class="tcap font1 acenter" style="gap: 10px">my portfolio
+        <v-icon color="var(--accent)" size="1em">mdi-eye-off-outline</v-icon>
+      </h1>
     </section>
 
     <section id="farm-content" class="fwrap center">

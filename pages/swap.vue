@@ -2,8 +2,8 @@
   <div id="swap">
     <ModalsSwapModal ref="modal"></ModalsSwapModal>
     <section id="swap-header" class="divcol center">
-      <h2>Swap</h2>
-      <h3>Swap tokens instantly</h3>
+      <h1>Swap</h1>
+      <h2>Swap tokens instantly</h2>
     </section>
 
     <section id="swap-content" class="fwrap center">
@@ -23,7 +23,9 @@
             <div class="container-options">
               <label>From</label>
               <div>
-                <v-chip close close-icon="mdi-chevron-down" class="btn2" @click:close="$refs.modal.openModalTokens(swapFrom)">
+                <v-chip
+                  close close-icon="mdi-chevron-down" class="btn2" @click="$refs.modal.openModalTokens(swapFrom)"
+                  @click:close="$refs.modal.openModalTokens(swapFrom)">
                   <v-img class="aspect mr-2" style="--w: 20px">
                     <template #default>
                       <img :src="swapFrom.img" :alt="`${swapFrom.name} token`" style="--w: 100%; --of: cover">
@@ -74,7 +76,9 @@
             <div class="container-options">
               <label>To</label>
               <div class="space">
-                <v-chip close close-icon="mdi-chevron-down" class="tup btn2" @click:close="$refs.modal.openModalTokens(swapTo)">
+                <v-chip
+                  close close-icon="mdi-chevron-down" class="tup btn2" @click="$refs.modal.openModalTokens(swapTo)"
+                  @click:close="$refs.modal.openModalTokens(swapTo)">
                   <v-img class="aspect mr-2" style="--w: 20px">
                     <template #default>
                       <img :src="swapTo.img" :alt="`${swapTo.name} token`" style="--w: 100%; --of: cover">

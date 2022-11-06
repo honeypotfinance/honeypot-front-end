@@ -4,6 +4,9 @@
 #farm {
   @include parent;
   padding-inline: var(--margin-global);
+  &-header {
+    h1 {--fs: clamp(1.8em, 2vw + 1em, 2.2em)}
+  }
   &-content {
   }
 }

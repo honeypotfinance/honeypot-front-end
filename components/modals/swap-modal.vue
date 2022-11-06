@@ -20,17 +20,17 @@
           </v-tooltip>
         </label>
         
-        <div class="space wrap">
+        <div class="space wrap" style="gap: 10px 0">
           <v-btn
             v-for="item in dataSlippage" :key="item" plain class="btn2"
             :class="{active: item === slippageSelection}" @click="slippageSelection = item"
           >{{item}}%</v-btn>
         </div>
       </div>
-      
+
       <div class="divcol" style="gap: 5px">
         <label class="plain">Transaction Deadline</label>
-
+        
         <div class="acenter" style="gap: inherit">
           <v-text-field
             v-model="deadlineSelection"
@@ -54,19 +54,22 @@
     <!-- modal token -->
     <v-dialog v-model="modalTokens" width="447px" content-class="modalTokens">
       <section class="modalTokens-header">
-        <h3 style="--fw: 700">Select a token</h3>
-
+        <div class="wrapper-header">
+          <h3 style="--fw: 700">Select a token</h3>
+          <v-btn icon class="showmobile" style="top: -10px" @click="modalTokens = false">
+            <v-icon>mdi-close</v-icon>
+          </v-btn>
+        </div>
+        
         <v-text-field
           v-model="searchToken"
           prepend-icon="mdi-magnify"
           placeholder="search name or paste address"
           hide-details solo
-          style="--fs: 18px;  --fw: 400; --p: 0 12px 0 0; --c-place: var(--accent)"
+          style="--fs: 18px;  --fw: 400; --p: 0 12px 0 0; --c-place: var(--accent); --tt: lowercase"
         ></v-text-field>
-      </section>
-
-      <section class="modalTokens-content divcol">
-        <aside class="divcol" style="gap: 10px">
+        
+        <aside class="container-popular" style="gap: 10px">
           <label class="plain tup" style="--fw: 600">popular</label>
           <div class="wrap" :class="{space: dataPopularTokens.length > 4}" style="gap: inherit">
             <v-chip
@@ -82,29 +85,33 @@
             </v-chip>
           </div>
         </aside>
+      </section>
 
-        <v-sheet color="transparent" class="divcol" style="gap: 16px">
-          <v-card
-            v-for="(item, i) in filterDataTokens" :key="i" class="space" style="gap: 10px"
-            :disabled="isSameToken(item)" @click="selectToken(item)"
-          >
+      <v-virtual-scroll
+        :items="filterDataTokens"
+        height="400"
+        item-height="60"
+        class="modalTokens-content"
+      >
+        <template #default="{ item }">
+          <v-card class="space" style="gap: 10px" :disabled="isSameToken(item)" @click="selectToken(item)">
             <div class="acenter tcap" style="gap: 10px">
               <v-img :src="item.img" :alt="`${item.name} token`" class="aspect" style="--w: 35.5px">
                 <template #placeholder>
                   <v-skeleton-loader type="avatar" />
                 </template>
               </v-img>
-
+              
               <div class="divcol" style="gap: inherit">
-                <span>{{item.name}}</span>
+                <span class="tup">{{item.name}}</span>
                 <span>{{item.fullname}}</span>
               </div>
             </div>
-
+            
             <label>{{item.value}}</label>
           </v-card>
-        </v-sheet>
-      </section>
+        </template>
+      </v-virtual-scroll>
     </v-dialog>
   </div>
 </template>
@@ -179,19 +186,6 @@ export default {
       if (current) {
         this.$targetTooltip('.modalSettings img[alt="info"]')
         window.addEventListener("resize", () => this.$targetTooltip('.modalSettings img[alt="info"]', 13))
-      }
-    },
-    modalTokens(current) {
-      if (current) {
-        setTimeout(() => {
-          const
-            container = document.querySelector(".modalTokens"),
-            header = container.querySelector(".modalTokens-header");
-
-          document.documentElement.style.setProperty("--h-modal-tokens-content", `
-            ${container.getBoundingClientRect().height - header.getBoundingClientRect().height}px
-          `)
-        }, 100);
       }
     },
   },

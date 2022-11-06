@@ -173,16 +173,6 @@ a:not(.not_typography, .not) {text-decoration: none}
 button:not(.not_typography, .not) {&::first-letter, & ::first-letter {text-transform: uppercase}}
 :is(p, a, span, h1, h2, h3, h4, h5, h6):not(.not_typography, .not) {line-height: 1}
 h1:not(.not_typography, .not) {
-  --fs: clamp(3em, 4vw, 4em);
-  --fw: 400;
-
-  font-family: var(--font2);
-  font-weight: var(--fw);
-  font-size: var(--fs);
-  letter-spacing: 0.625em;
-  text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-}
-h2:not(.not_typography, .not) {
   --fs: clamp(1.8em, 2vw + 1em, 2em);
   --fw: 700;
 
@@ -191,8 +181,17 @@ h2:not(.not_typography, .not) {
   font-size: var(--fs);
   letter-spacing: 0.03em;
 }
-h3:not(.not_typography, .not) {
+h2:not(.not_typography, .not) {
   --fs: clamp(1.1em, 1.3125vw + 1em, 1.3125em);
+  --fw: 400;
+
+  font-family: var(--font1);
+  font-weight: var(--fw);
+  font-size: var(--fs);
+  letter-spacing: 0.03em;
+}
+h3:not(.not_typography, .not) {
+  --fs: clamp(1em, 1.3125vw + 1em, 1.2em);
   --fw: 400;
 
   font-family: var(--font1);

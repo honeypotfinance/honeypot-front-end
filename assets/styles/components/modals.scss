@@ -74,11 +74,16 @@
   box-shadow: 30px -30px 100px 0 hsl(33 93% 54% / .5), -30px 30px 100px 0 hsl(211 68% 47% / .5) !important;
   h3, input, label:not(.plain) {font-family: var(--font2) !important}
   label.plain {font-family: var(--font1) !important}
-  &-content {
-    overflow-y: auto;
-    // height: 500px;
-    height: var(--h-modal-tokens-content);
-    > aside.divcol {
+
+  &-header {
+    .wrapper-header {
+      display: contents;
+      @include media(max, small) {
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+    .container-popular {
       --spacing: 12px;
       position: relative;
       padding-bottom: var(--spacing);
@@ -91,18 +96,21 @@
         background-color: var(--clr-line);
       }
     }
-    .v-sheet {
-      .v-card {
-        background-color: transparent !important;
-        padding: 8px;
-        border-radius: 10px;
-        span:not(span + span) {font-family: var(--font2) !important}
-        span:not(span + span), label {font-size: 16px !important}
-        span + span {font-size: 12px !important}
-        &:hover {
-          background-color: #292724 !important;
-          // box-shadow: 0 0 0 8px #292724 !important;
-        }
+  }
+
+  &-content {
+    // overflow-y: auto;
+    // height: 450px;
+    .v-card {
+      background-color: transparent !important;
+      padding: 8px;
+      border-radius: 10px;
+      span:not(span + span) {font-family: var(--font2) !important}
+      span:not(span + span), label {font-size: 16px !important}
+      span + span {font-size: 12px !important}
+      &:hover {
+        background-color: #292724 !important;
+        // box-shadow: 0 0 0 8px #292724 !important;
       }
     }
   }
