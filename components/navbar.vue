@@ -2,7 +2,7 @@
   <div>
     <MenuNavbar ref="menu"></MenuNavbar>
     <v-app-bar id="navbar" color="transparent" absolute class="isolate">
-      <nuxt-link to="/">
+      <nuxt-link to="/swap">
         <img src="~/assets/sources/logos/logo.svg" alt="logo" style="--w: clamp(10em, 13vw, 13.414375em)">
       </nuxt-link>
 

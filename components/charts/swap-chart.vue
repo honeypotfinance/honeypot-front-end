@@ -12,8 +12,9 @@
 
       <v-btn
         icon width="32px" height="32px" class="aspect" title="expand chart" style="top: -10px"
-        @click="$parent.$parent.$refs.modal.modalChart = true">
-        <img src="~/assets/sources/icons/expand.svg" alt="expand chart" class="aspect" style="--w: 16px">
+        @click="$emit('model')">
+        <img v-if="!closable" src="~/assets/sources/icons/expand.svg" alt="expand chart" class="aspect" style="--w: 16px">
+        <v-icon v-else>mdi-close</v-icon>
       </v-btn>
     </section>
 
@@ -60,7 +61,11 @@ export default {
     height: {
       type: String,
       default: undefined
-    }
+    },
+    closable: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {

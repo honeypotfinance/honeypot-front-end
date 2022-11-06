@@ -47,7 +47,7 @@
 
     <!-- modal chart -->
     <v-dialog v-model="modalChart" width="496px" content-class="modalChart">
-      <ChartsSwapChart ref="chart" height="400px"></ChartsSwapChart>
+      <ChartsSwapChart ref="chart" height="400px" closable @model="modalChart = false"></ChartsSwapChart>
     </v-dialog>
 
 

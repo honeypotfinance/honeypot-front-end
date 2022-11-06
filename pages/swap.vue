@@ -9,7 +9,7 @@
     <section id="swap-content" class="fwrap center">
       <!-- left -->
       <v-card ref="target_swap_chart" class="left card">
-        <ChartsSwapChart ref="chart" :height="heightChart"></ChartsSwapChart>
+        <ChartsSwapChart ref="chart" :height="heightChart" @model="$refs.modal.modalChart = true"></ChartsSwapChart>
       </v-card>
 
 

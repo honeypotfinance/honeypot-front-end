@@ -645,10 +645,10 @@ img:not(.not_html, .not) {
 
 //- close -//
 .close {
-  --distance: 0;
-  --top: var(--distance);
-  --right: var(--distance);
+  --d: 0;
+  --t: var(--distance);
+  --r: var(--distance);
   position: absolute !important;
-  top: var(--top);
-  right: var(--right);
+  top: var(--top) !important;
+  right: var(--right) !important;
 }
