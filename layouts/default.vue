@@ -3,10 +3,13 @@
     <Alerts ref="alerts"></Alerts>
     <Navbar ref="navbar" />
     <v-main :class="wrapperSpace?'with':'without'" class="parent">
-      <v-btn v-show="$route.path !== '/swap'" id="swap-floating-button" class="btn" @mousedown="dragFloatingBtn($event)">
+      <v-btn
+        v-show="$route.path !== '/swap'" id="swap-floating-button" class="btn"
+        @mousedown="dragFloatingBtn($event)" @touchstart="dragFloatingBtn($event)">
         <v-icon>mdi-chevron-up</v-icon>
         <span>Swap</span>
       </v-btn>
+
       <nuxt-child />
     </v-main>
     <!-- <Footer ref="footer"></Footer> -->
@@ -70,7 +73,7 @@ export default {
       offset = [
         target.offsetTop - typeEvent(event).clientY
       ];
-
+      
       function typeEvent(event) {
         if (event.type.includes('mouse')) {
           return event
