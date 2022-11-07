@@ -39,9 +39,9 @@ export const mutations = {
     try {
       // console.log("make login")
     // catch error
-    } catch (error) {
-      this.$alert("cancel", {desc: error.message})
-      console.error(error);
+    } catch (err) {
+      this.$alert("cancel", {desc: err.message})
+      console.error(err);
     }
     // wallet.requestSignIn(
     //   'contract.globaldv.testnet'

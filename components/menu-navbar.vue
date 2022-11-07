@@ -150,10 +150,6 @@ export default {
       ],
     };
   },
-  // created() {
-  //   const theme = localStorage.getItem("theme");
-  //   this.overlayMethod(theme);
-  // },
   methods: {
     ActiveClass(key, item) {
       // mejorar hace falta
