@@ -27,7 +27,7 @@ export default {
   },
   created() {
     // get data profile
-    this.$store.dispatch("getData");
+    // this.$store.dispatch("getData");
   },
   mounted() {
     this.scrollX();
