@@ -1,5 +1,3 @@
-import web3nuxt from '~/plugins/web3-nuxt'
-
 export const state = () => ({
   theme: "light",
   overlay: { opacity: 0.2, color: "black" },
@@ -39,8 +37,8 @@ export const mutations = {
   },
   signIn(state, data = "0x39283....9302") {
     try {
-      web3nuxt()
-    // catch error web3-nuxt
+      // console.log("make login")
+    // catch error
     } catch (error) {
       this.$alert("cancel", {desc: error.message})
       console.error(error);

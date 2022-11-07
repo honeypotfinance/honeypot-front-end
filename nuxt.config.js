@@ -81,7 +81,6 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     '@nuxtjs/i18n',
-    "nuxt-web3",
   ],
 
   // we3-nuxt: https://www.npmjs.com/package/nuxt-web3

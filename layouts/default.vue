@@ -25,10 +25,10 @@ export default {
       wrapperSpace: false,
     }
   },
-  // created() {
-  //   // get data profile
-  //   this.$store.dispatch("getData");
-  // },
+  created() {
+    // get data profile
+    this.$store.dispatch("getData");
+  },
   mounted() {
     this.scrollX();
     // this.footerHeightListener();
