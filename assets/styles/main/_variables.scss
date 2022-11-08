@@ -2,6 +2,7 @@
 @import '~vuetify/src/styles/styles.sass';
 @import "mixins";
 
+//========== Variables ==========//
 :root {
   /* // // color // // */
   --primary: #FFCD4D;
@@ -16,6 +17,47 @@
   --stroke: var(--stroke-size) var(--stroke-color);
   --stroke-size: none;
   --stroke-color: none;
+  /* // // themes // // */
+  &.light {
+    // default color
+    --bg-ap: #4ddaeb;
+    --clr: #000000;
+    --clr-hover: hsl(288 90% 10%);
+    --clr-scroll: var(--primary);
+    --clr-bg-scroll: var(--secondary);
+    // cards
+    --clr-card: #FFFFFF;
+    // buttons
+    --clr-btn: var(--primary);
+    /*--clr-btn-pressed: #AD0FD5;
+    --clr-btn-inactive: #AD0FD5;*/
+    --clr-text-btn: #000000;
+    // badge
+    --clr-badge: var(--primary);
+    --clr-text-badge: #000000;
+    // line
+    --clr-line: hsl(59, 83%, 53%, .5);
+  }
+  &.dark {
+    // default color
+    --bg-ap: #161513;
+    --clr: #FFFFFF;
+    --clr-hover: hsl(288 90% 90%);
+    --clr-scroll: #574F42;
+    --clr-bg-scroll: #292724;
+    // cards
+    --clr-card: var(--secondary);
+    // buttons
+    --clr-btn: var(--primary);
+    /*--clr-btn-pressed: #AD0FD5;
+    --clr-btn-inactive: #AD0FD5;*/
+    --clr-text-btn: #1F1C14;
+    // badge
+    --clr-badge: var(--primary);
+    --clr-text-badge: #1F1C14;
+    // line
+    --clr-line: #292724;
+  }
   /* // // fonts // // */
   --font1: 'DM Sans', sans-serif;
   --font2: 'Segoe', sans-serif;
@@ -32,51 +74,6 @@
   --sombra-card: 0px 4px 4px rgba(0, 0, 0, 0.25);
   --sombra-btn: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
-
-//========== Themes ==========//
-html {
-  &.light {
-    /*--/ default color /--*/
-    --bg-ap: #4ddaeb;
-    --clr: #000000;
-    --clr-hover: hsl(288 90% 10%);
-    --clr-scroll: var(--primary);
-    --clr-bg-scroll: var(--secondary);
-    /*--/ cards /--*/
-    --clr-card: #FFFFFF;
-    /*--/ buttons /--*/
-    --clr-btn: var(--primary);
-    /*--clr-btn-pressed: #AD0FD5;
-    --clr-btn-inactive: #AD0FD5;*/
-    --clr-text-btn: #000000;
-    /*--/ badge /--*/
-    --clr-badge: var(--primary);
-    --clr-text-badge: #000000;
-    /*--/ line /--*/
-    --clr-line: hsl(59, 83%, 53%, .5);
-  }
-  &.dark {
-    /*--/ default color /--*/
-    --bg-ap: #161513;
-    --clr: #FFFFFF;
-    --clr-hover: hsl(288 90% 90%);
-    --clr-scroll: #574F42;
-    --clr-bg-scroll: #292724;
-    /*--/ cards /--*/
-    --clr-card: var(--secondary);
-    /*--/ buttons /--*/
-    --clr-btn: var(--primary);
-    /*--clr-btn-pressed: #AD0FD5;
-    --clr-btn-inactive: #AD0FD5;*/
-    --clr-text-btn: #1F1C14;
-    /*--/ badge /--*/
-    --clr-badge: var(--primary);
-    --clr-text-badge: #1F1C14;
-    /*--/ line /--*/
-    --clr-line: #292724;
-  }
-}
-
 
 //========== Sidebar ==========//
 $drawer-items-padding:                     32px !default;

@@ -21,8 +21,8 @@
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
 /* // // delete-config-default-vuetify // // */ 
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
-:is(.theme--light,.theme--dark) {box-shadow: none}
-:is(.v-list,.v-sheet,.v-dialog,.v-menu__content) {box-shadow: none !important}
+:is(.theme--light, .theme--dark) {box-shadow: none}
+:is(.v-list, .v-sheet, .v-dialog, .v-menu__content) {box-shadow: none !important}
 /* card */
 div.v-card:is([class*="div"], [class*="space"], [class*="center"], [class*="start"], [class*="end"], [class*="wrap"]):not([class^="t"])
 {display: flex}
@@ -77,7 +77,8 @@ div.v-card::before {background: transparent !important}
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
 /* // // defautl color // // */ 
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
-:is(span, p, a, h1, h2, h3, h4, h5, h6, .v-list-item__title, button, label, ul, img, button i, div i,.v-input input,th,td):not(.not_clr, .not) {
+:is(span, p, a, h1, h2, h3, h4, h5, h6, button, label, ul, img, button i, div i, input, textarea, th, td, .v-list-item__title,
+.v-input .v-input__slot *, .v-data-footer__select, .v-data-footer__pagination, .v-data-footer__icons::before):not(.not_clr, .not) {
   color: var(--c);
   -webkit-text-stroke: var(--stroke) var(--c);
   -moz-text-stroke: var(--stroke) var(--c);
@@ -167,55 +168,48 @@ body {background: var(--bg-ap)}
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
 /* // // typography // // */ 
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
-* {font-weight: var(--fw)}
+:is(span, p, a, h1, h2, h3, h4, h5, h6, button, label, ul, img, button i, div i, input, textarea, th, td, .v-list-item__title,
+.v-input .v-input__slot *, .v-data-footer__select, .v-data-footer__pagination, .v-data-footer__icons::before):not(.not_typography, .not) {
+  font-weight: var(--fw);
+}
 img:not(.not_typography, .not) {font-family: var(--font2)}
 a:not(.not_typography, .not) {text-decoration: none}
 button:not(.not_typography, .not) {&::first-letter, & ::first-letter {text-transform: uppercase}}
 :is(p, a, span, h1, h2, h3, h4, h5, h6):not(.not_typography, .not) {line-height: 1}
 h1:not(.not_typography, .not) {
-  --fs: clamp(1.8em, 2vw + 1em, 2em);
   --fw: 700;
 
   font-family: var(--font2);
-  font-weight: var(--fw);
-  font-size: var(--fs);
+  font-size: var(--fs, clamp(1.8em, 2vw + 1em, 2em));
   letter-spacing: 0.03em;
 }
 h2:not(.not_typography, .not) {
-  --fs: clamp(1.1em, 1.3125vw + 1em, 1.3125em);
   --fw: 400;
 
   font-family: var(--font1);
-  font-weight: var(--fw);
-  font-size: var(--fs);
+  font-size: var(--fs, clamp(1.1em, 1.3125vw + 1em, 1.3125em));
   letter-spacing: 0.03em;
 }
 h3:not(.not_typography, .not) {
-  --fs: clamp(1em, 1.3125vw + 1em, 1.2em);
   --fw: 400;
 
   font-family: var(--font1);
-  font-weight: var(--fw);
-  font-size: var(--fs);
+  font-size: var(--fs, clamp(1em, 1.3125vw + 1em, 1.2em));
   letter-spacing: 0.03em;
 }
 p:not(.not_typography, .not) {
-  --fs: 1.05em;
   --fw: 400;
   
   font-family: var(--font1);
-  font-weight: var(--fw);
-  font-size: var(--fs);
+  font-size: var(--fs, 1.05em);
   line-height: 1.1;
 }
 label:not(.v-input .v-label, .not_typography, .not) {
-  --fs: 0.8em;
   --fw: 700;
   --c: var(--accent);
   
   font-family: var(--font2);
-  font-weight: var(--fw);
-  font-size: var(--fs);
+  font-size: var(--fs, 0.8em);
   &.plain {
     --fs: 1em;
     --fw: 700;
@@ -334,7 +328,6 @@ img:not(.not_html, .not) {
   --p: 1em;
   --g: 1em;
   --tt: none;
-  --fs: 1em;
   // tab
   --p-tab: .2em;
   --br-tab: .4vmax;
@@ -363,7 +356,7 @@ img:not(.not_html, .not) {
         overflow: var(--overflow);
         text-transform: var(--tt);
         color: var(--c);
-        font-size: var(--fs);
+        font-size: var(--fs, 1em);
         & > * {
           font-size: 1em;
           color: var(--c);
@@ -423,7 +416,6 @@ img:not(.not_html, .not) {
 // normal class
 .v-btn.v-size--default:not(.not_vuetify, .not, .v-btn--icon) {
   --c: var(--clr);
-  --fs: 1em;
   --lh: 1;
   --ls: normal;
   --tt: none;
@@ -433,7 +425,7 @@ img:not(.not_html, .not) {
   --mr: none;
 
   color: var(--c);
-  font-size: var(--fs);
+  font-size: var(--fs, 1em);
   max-height: 2.25em;
   transform: var(--t);
   filter: var(--f);
@@ -448,8 +440,15 @@ img:not(.not_html, .not) {
   }
 }
 
+//- default inputs -//
 
-//- default input slot -//
+//- input textarea
+.v-input:not(.not_vuetify, .not) {
+  --h-input: 85px;
+  textarea {height: var(--h-input)}
+}
+
+//- input slot
 .v-text-field--solo:not(.not_vuetify, .not) {
   --bg: transparent;
   --c: #ffffff;
@@ -474,9 +473,9 @@ img:not(.not_html, .not) {
   --ls: normal;
   --lh: 1;
   // icon
-  --fs-icon: var(--fs);
+  --fs-icon: var(--fs, 1.2em);
   // label
-  --fs-label: calc(var(--fs) - .15em);
+  --fs-label: calc(var(--fs, 1.2em) - .15em);
   --fw-label: var(--fw);
   --ff-label: var(--ff);
   --tt-label: var(--tt);
@@ -486,7 +485,7 @@ img:not(.not_html, .not) {
   --stroke-size-label: var(--stroke-size);
   --stroke-color-label: var(--stroke-color);
   // placeholder
-  --fs-place: var(--fs);
+  --fs-place: 1em;
   --fw-place: var(--fw);
   --ff-place: var(--ff);
   --tt-place: var(--tt);
@@ -521,7 +520,7 @@ img:not(.not_html, .not) {
   // text //
   & :is(input[type], button[type], textarea, .v-select__selection) {
     color: var(--c);
-    font-size: var(--fs);
+    font-size: var(--fs, 1.2em);
     font-weight: var(--fw);
     font-family: var(--ff);
     text-transform: var(--tt);
@@ -572,7 +571,6 @@ img:not(.not_html, .not) {
   --bg: var(--clr-badge);
   --c: var(--clr-inv);
   --b: initial;
-  --fs: 0.75em;
   --fw: 400;
   --size: 20px;
   --t: initial;
@@ -585,7 +583,7 @@ img:not(.not_html, .not) {
     color: var(--c) !important;
     border: var(--b) !important;
     border-radius: 50%;
-    font-size: var(--fs);
+    font-size: var(--fs, 0.75em);
     font-weight: var(--fw);
     transform: var(--t);
     -webkit-text-stroke: var(--stroke) var(--c);
