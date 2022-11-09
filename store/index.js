@@ -30,7 +30,7 @@ export const mutations = {
   },
   setData(state, data) {
     // if (window.$nuxt.$wallet.isSignedIn() && typeof data === 'string') {
-    //   state.dataUser.avatar = require('~/assets/sources/images/avatar.png');
+    //   state.dataUser.avatar = require('~/assets/sources/avatars/avatar.png');
     //   state.dataUser.accountId = data;
     // };
   },
