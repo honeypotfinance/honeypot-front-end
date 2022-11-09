@@ -180,21 +180,21 @@ h1:not(.not_typography, .not) {
   --fw: 700;
 
   font-family: var(--font2);
-  font-size: var(--fs, clamp(1.8em, 2vw + 1em, 2em));
+  font-size: var(--fs, clamp(1.8em, calc(2vw + 1em), 2em));
   letter-spacing: 0.03em;
 }
 h2:not(.not_typography, .not) {
   --fw: 400;
 
   font-family: var(--font1);
-  font-size: var(--fs, clamp(1.1em, 1.3125vw + 1em, 1.3125em));
+  font-size: var(--fs, clamp(1.1em, calc(1.3125vw + 1em), 1.3125em));
   letter-spacing: 0.03em;
 }
 h3:not(.not_typography, .not) {
   --fw: 400;
 
   font-family: var(--font1);
-  font-size: var(--fs, clamp(1em, 1.3125vw + 1em, 1.2em));
+  font-size: var(--fs, clamp(1em, calc(1.3125vw + 1em), 1.2em));
   letter-spacing: 0.03em;
 }
 p:not(.not_typography, .not) {
