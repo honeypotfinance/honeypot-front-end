@@ -15,14 +15,14 @@
         </a>
       </aside>
 
-      <aside class="right" :class="user.logged ? 'font2' : 'font1'">
+      <aside class="right" :class="isLogged ? 'font2' : 'font1'">
         <v-btn class="btn2">
           <img src="~/assets/sources/logos/honeypot.svg" alt="token" class="aspect mr-2" style="--w: 1.533125em">
           <span>${{user.balance}}</span>
         </v-btn>
         
-        <v-btn v-show="!user.logged" class="btn2" @click="$store.commit('signIn')">Connect wallet</v-btn>
-        <v-btn v-show="user.logged" class="btn2 openMenuLogin">
+        <v-btn v-show="!isLogged" class="btn2" @click="$store.commit('signIn')">Connect wallet</v-btn>
+        <v-btn v-show="isLogged" class="btn2 openMenuLogin">
           <span>{{user.accountId}}</span>
           <v-icon>mdi-chevron-down</v-icon>
         </v-btn>

@@ -238,13 +238,11 @@ export default {
       if (event.target?.alt) {
         document.querySelector(".v-form.middle").classList.add("focus");
         this.currentDrag = event.target
-        console.log("added")
       }
     },
     dragend(event) {
       if (event.target?.alt) {
         document.querySelector(".v-form.middle").classList.remove("focus");
-        console.log("removed")
       }
     },
     dropToken(event) {

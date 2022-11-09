@@ -1,6 +1,7 @@
 export const state = () => ({
   theme: "light",
   overlay: { opacity: 0.2, color: "black" },
+  isLogged: undefined, // temporary
   dataUser: {
     banner: undefined,
     avatar: undefined,
@@ -11,7 +12,6 @@ export const state = () => ({
     instagram: undefined,
     twitter: undefined,
     telegram: undefined,
-    logged: false,
     tier: 2,
     balance: 0,
     dataSocial: [],
@@ -29,31 +29,32 @@ export const mutations = {
     else { state.overlay.opacity = 0.5; state.overlay.color = "black" }
   },
   setData(state, data) {
-    // if (wallet.isSignedIn() && typeof data === 'string') {
+    // if (window.$nuxt.$wallet.isSignedIn() && typeof data === 'string') {
     //   state.dataUser.avatar = require('~/assets/sources/images/avatar.png');
     //   state.dataUser.accountId = data;
-    //   state.dataUser.logged = true;
     // };
   },
   signIn(state, data = "0x39283....9302") {
     try {
-      // console.log("make login")
+      // make login <-----------------------------------------
+      if (/0+x/.test(data))
+        state.dataUser.accountId = data.limitString(7) + data.substring(data.length - 4, data.length);
+      state.isLogged = true  // temporary
+      // make login <-----------------------------------------
     // catch error
     } catch (err) {
       this.$alert("cancel", {desc: err.message})
       console.error(err);
     }
-    // wallet.requestSignIn(
+    // window.$nuxt.$wallet.requestSignIn(   <---- near version
     //   'contract.globaldv.testnet'
     // );
-    if (/0+x/.test(data))
-      state.dataUser.accountId = data.limitString(7) + data.substring(data.length - 4, data.length);
-    state.dataUser.logged = true;
   },
   signOut(state) {
-    // wallet.signOut();
-    state.dataUser.logged = false;
+    // window.$nuxt.$wallet.signOut();
+    // setTimeout(() => this.$router.go(0), 100);
     this.$router.push(this.localePath('/'));
+    state.isLogged = false  // temporary
   },
 };
 
