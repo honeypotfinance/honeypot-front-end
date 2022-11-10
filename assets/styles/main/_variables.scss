@@ -14,9 +14,6 @@
   --success: #00A478;
   // --clr-gradient: linear-gradient(to right top,#356D74,#2A505C,#21394A,#1A293D,#172035,#161D33,#161E34,#192539,#1E3143,#244251,#2D5862,#387378,#449492,#53B9B1,#63E2D2);
   --c: var(--clr);
-  --stroke: var(--stroke-size) var(--stroke-color);
-  --stroke-size: none;
-  --stroke-color: none;
   /* // // themes // // */
   &.light {
     // default color
@@ -123,6 +120,42 @@ $button-shadow: 0px 3px 11px 0px #E8EAFC, 0 3px 3px -2px #B2B2B21A, 0 1px 8px 0 
 $sombra-btn: 0px 4px 4px rgba(0, 0, 0, 0.25);
 $border-btn: 2vmax;
 
+//========== boxes ==========//
+$clip-path: polygon(
+  0% var(--c-size),
+  var(--c-size) var(--c-size),
+  var(--c-size) 0%,
+  calc(100% - var(--c-size)) 0%,
+  calc(100% - var(--c-size)) var(--c-size),
+  100% var(--c-size),
+  100% calc(100% - var(--c-size)),
+  calc(100% - var(--c-size)) calc(100% - var(--c-size)),
+  calc(100% - var(--c-size)) 100%,
+  var(--c-size) 100%,
+  var(--c-size) calc(100% - var(--c-size)),
+  0% calc(100% - var(--c-size))
+);
+$clip-path-top: polygon(
+  0% var(--c-size),
+  var(--c-size) var(--c-size),
+  var(--c-size) 0%,
+  calc(100% - var(--c-size)) 0%,
+  calc(100% - var(--c-size)) var(--c-size),
+  100% var(--c-size),
+  100% 100%,
+  0% 100%
+);
+$clip-path-bottom: polygon(
+  0% 0%,
+  100% 0%,
+  100% calc(100% - var(--c-size)),
+  calc(100% - var(--c-size)) calc(100% - var(--c-size)),
+  calc(100% - var(--c-size)) 100%,
+  var(--c-size) 100%,
+  var(--c-size) calc(100% - var(--c-size)),
+  0% calc(100% - var(--c-size))
+);
+
 //========== Hover ==========//
 $ease: cubic-bezier(0.23, 1, 0.32, 1);
 $ease-return: cubic-bezier(0.445, 0.05, 0.55, 0.95);
@@ -162,6 +195,36 @@ $skew-left: skewX(-12deg) translateX(-1px);
   max-width: var(--subparent) !important;
   width: 100%;
   margin-inline: auto;
+}
+
+//- pixel border -//
+@mixin pixelBorder() {
+  --c-size: 4.5px;
+  
+  padding: var(--c-size);
+  position: relative;
+  isolation: isolate;
+  clip-path: $clip-path;
+  
+  &::before, &::after {
+    content: "" !important;
+    position: absolute !important;
+    opacity: 1 !important;
+    z-index: -1 !important;
+    clip-path: $clip-path;
+    inset: 0;
+  }
+  
+  // border
+  &::before {
+    background-color: var(--accent) !important;
+  }
+  
+  // body
+  &::after {
+    inset: var(--c-size);
+    background-color: var(--bg);
+  }
 }
 
 //- buttons -//
