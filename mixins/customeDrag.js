@@ -1,7 +1,10 @@
 export default {
   methods: {
     customeDrag(event) {
-      const target = event.currentTarget.parentNode;
+      // select target
+      const target = event.currentTarget.className.includes("custome-window v-sheet")
+        ? event.currentTarget : event.currentTarget.parentNode;
+      // set initial state
       let offset = [0,0], isDown = false;
 
       isDown = true;
