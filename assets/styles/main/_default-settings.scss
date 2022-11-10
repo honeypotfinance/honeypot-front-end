@@ -417,7 +417,6 @@ img:not(.not_html, .not) {
   --c: var(--clr);
   --lh: 1;
   --ls: normal;
-  --tt: none;
   --t: none;
   --f: none;
   --ml: none;
@@ -429,7 +428,7 @@ img:not(.not_html, .not) {
   transform: var(--t);
   filter: var(--f);
   & :is(span, img, i) {
-    text-transform: var(--tt);
+    text-transform: var(--tt, initial);
     letter-spacing: var(--ls);
     line-height: var(--lh);
     color: var(--c);

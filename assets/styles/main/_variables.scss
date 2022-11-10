@@ -270,7 +270,7 @@ $skew-left: skewX(-12deg) translateX(-1px);
     color: var(--c);
     font-size: 1em;
     font-weight: var(--fw);
-    text-transform: var(--tt);
+    text-transform: var(--tt, initial);
     letter-spacing: var(--ls);
     line-height: var(--lh);
   }
@@ -298,7 +298,7 @@ $skew-left: skewX(-12deg) translateX(-1px);
   --fw: 400;
   --ls: normal;
   --lh: 1;
-  --tt: capitalize !important;
+  --tt: capitalize;
   --f: initial;
   --t: initial;
   
@@ -321,7 +321,7 @@ $skew-left: skewX(-12deg) translateX(-1px);
     color: var(--c);
     font-size: 1em;
     font-weight: var(--fw);
-    text-transform: var(--tt);
+    text-transform: var(--tt, initial);
     letter-spacing: var(--ls);
     line-height: var(--lh);
   }
