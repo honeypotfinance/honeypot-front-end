@@ -321,7 +321,7 @@ img:not(.not_html, .not) {
   --c: var(--clr);
   --c-active: var(--clr-btn-pressed);
   --b: .8px solid rgba(#707070, .1);
-  --br: .4vmax;
+  --br: 5px;
   --w: max-content;
   --h: 3em;
   --p: 1em;
@@ -329,7 +329,7 @@ img:not(.not_html, .not) {
   --tt: none;
   // tab
   --p-tab: .2em;
-  --br-tab: .4vmax;
+  --br-tab: 5px;
   --overflow: hidden;
   --t: none;
   --f: none;
@@ -479,9 +479,7 @@ img:not(.not_html, .not) {
   --tt-label: var(--tt);
   --ls-label: var(--ls);
   --lh-label: var(--lh);
-  --stroke-label: var(--stroke-size-label) var(--stroke-color-label);
-  --stroke-size-label: var(--stroke-size);
-  --stroke-color-label: var(--stroke-color);
+  --stroke-label: var(--stroke, initial);
   // placeholder
   --fs-place: 1em;
   --fw-place: var(--fw);
@@ -489,9 +487,7 @@ img:not(.not_html, .not) {
   --tt-place: var(--tt);
   --ls-place: var(--ls);
   --lh-place: var(--lh);
-  --stroke-place: var(--stroke-size-place) var(--stroke-color-place);
-  --stroke-size-place: var(--stroke-size);
-  --stroke-color-place: var(--stroke-color);
+  --stroke-place: var(--stroke, initial);
 
   width: var(--w);
   max-width: var(--max-w);
