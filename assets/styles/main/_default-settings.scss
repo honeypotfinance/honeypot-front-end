@@ -99,10 +99,10 @@ body {background: var(--bg-ap)}
   .v-input__slot::before {border-color: var(--clr-inv); opacity: .4}
 }
 /* // // elements-active // // */ 
-:is(.primary--text, button[type].primary--text) {
+:is(.primary--text, button[type].primary--text):not(.not_clr, .not) {
   color: var(--active) !important;
-  & :is(span, i) {color: var(--active) !important}
-  & .v-input__slot::after {
+  :is(span, i) {color: var(--active) !important}
+  .v-input__slot::after {
     background: var(--active) !important;
     border-color: var(--active) !important;
   }
