@@ -133,6 +133,7 @@
   grid-auto-rows: var(--gar);
   * {grid-column: var(--gc);grid-row: var(--gr)}
   & > *:not(.not_grid) {max-width: var(--max-w-child) !important;&:only-child {max-width: var(--max-w-only) !important}}
+  &[class="gridauto"] {--gtc: repeat(auto-fit, minmax(min(100%, var(--gs, 200px)), 1fr))}
 }
 .divrow {
   display: flex;
@@ -447,6 +448,7 @@
     place-items: var(--pi) !important;
     * {grid-column: var(--gc) !important;grid-row: var(--gr) !important}
     & > *:not(.not_grid) {max-width: var(--max-w-child) !important;&:only-child {max-width: var(--max-w-only) !important}}
+    &[class="gridauto"] {--gtc: repeat(auto-fit, minmax(min(100%, var(--gs, 200px)), 1fr))}
   }
   .divrowmobile {
     display: flex !important;
