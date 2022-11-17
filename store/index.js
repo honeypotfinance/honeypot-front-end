@@ -68,7 +68,7 @@ export const actions = {
 };
 
 export const getters = {
-  pagination: () => ({items, currentPage, itemsPerPage, search, filterA, filterB}) => {
+  pagination: () => ({items, currentPage, itemsPerPage, search, filterA, filterB, filterC}) => {
     // filters
     let filters = items;
     // search
@@ -76,9 +76,17 @@ export const getters = {
 
     return filters.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
   },
-  filters: () => ({items, search, filterA, filterB}) => {
+  filters: () => ({items, search, filterA, filterB, filterC}) => {
     // filters
     let filters = items;
+    // filter A
+    if (filterA === 'my farms') filters = filters.filter(data => data.mine)
+    // // filter B
+    // if (filterB === 'featured') filters = filters.filter(data => data.featured)
+    // else if (filterB === 'stablecoin')  filters = filters.filter(data => data.stablecoin)
+    // // filter C
+    // if (filterC === 'tvl') filters = filters.filter(data => data.tvl)
+    // else if (filterC === 'apr')  filters = filters.filter(data => data.apr)
     // search
     if (search) filters = filters.filter(data => `${data.tokenA}-${data.tokenB}`.includes(search))
 

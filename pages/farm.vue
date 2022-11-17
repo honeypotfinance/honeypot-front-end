@@ -28,14 +28,14 @@
     <section id="farm-controls" class="divcol" style="gap: 15px; margin-block: 30px 20px">
       <aside class="space" style="gap: inherit">
         <div class="acenter wrap" style="gap: inherit">
-          <v-tabs v-model="filters.farms_model" hide-slider>
-            <v-tab v-for="item in dataFilterFarms" :key="item" class="tcap">
+          <v-tabs hide-slider>
+            <v-tab v-for="item in dataFilterFarms" :key="item" class="tcap" @change="filters.farms = item">
               {{item}}
             </v-tab>
           </v-tabs>
           
-          <v-tabs v-model="filters.filter_model" hide-slider>
-            <v-tab v-for="item in dataFilter" :key="item" class="tcap">
+          <v-tabs hide-slider>
+            <v-tab v-for="item in dataFilter" :key="item" class="tcap" @change="filters.filter = item">
               {{item}}
             </v-tab>
           </v-tabs>
@@ -62,8 +62,8 @@
         
         <div class="center alignr" style="gap: 10px">
           <label class="plain">Sort by</label>
-          <v-tabs v-model="filters.sort" hide-slider style="--bg-active: transparent">
-            <v-tab v-for="item in dataSort" :key="item" class="tup">
+          <v-tabs hide-slider style="--bg-active: transparent">
+            <v-tab v-for="item in dataSort" :key="item" class="tup" @change="filters.sort = item">
               {{item}}
             </v-tab>
           </v-tabs>
@@ -73,7 +73,7 @@
 
     <section id="farm-content" class="gridauto">
       <!-- not logged -->
-      <div v-show="!isLogged" class="divcol center tcenter align font1 nopevents maxsize_w">
+      <div v-if="!isLogged" class="divcol center tcenter align font1 nopevents maxsize_w">
         <img src="~/assets/sources/icons/wallet-empty.png" alt="empty icon" style="--w: 13.4375em">
         <span class="h9_em bold mt-5 mb-2">You haven't connected your wallet.</span>
         <span class="h11_em">Connect to view eligible farms.</span>
@@ -84,17 +84,28 @@
         </v-btn>
       </div>
 
-      <!-- empty -->
-      <div v-show="filterDataFarms.length < 1 && isLogged" class="divcol center tcenter align font1 nopevents">
-        <img src="~/assets/sources/icons/empty.png" alt="empty icon" style="--w: 13.4375em">
-        <span class="h9_em bold mt-5 mb-2">No results found</span>
-        <span class="h11_em">Try searching something else</span>
-      </div>
+      <template v-else>
+        <!-- empty -->
+        <div v-if="filterDataFarms.length < 1" class="divcol center tcenter align font1 nopevents">
+          <template v-if="filters.farms === 'my farms'">
+            <img src="~/assets/sources/icons/my-farms-empty.png" alt="empty icon" style="--w: 13.4375em">
+            <span class="h9_em bold mt-5 mb-2">You dont have any farms</span>
+            <span class="h11_em">See which pools are available to swap</span>
+            <v-btn class="btn mt-3 pevents font2" style="--w: 10.3125em; --h: 3.25em; --stroke: .4px">
+              Create LP
+            </v-btn>
+          </template>
+          
+          <template v-else>
+            <img src="~/assets/sources/icons/empty.png" alt="empty icon" style="--w: 13.4375em">
+            <span class="h9_em bold mt-5 mb-2">No results found</span>
+            <span class="h11_em">Try searching something else</span>
+          </template>
+        </div>
 
-      <!-- filled -->
-      <template v-if="!filterDataFarms.length < 1 && isLogged">
+        <!-- filled -->
         <v-card
-          v-for="(item, i) in filterDataFarms" :key="i"
+          v-for="(item, i) in filterDataFarms" v-else :key="i"
           class="card divcol"
           style=" --w: 100%; gap: 20px">
           <aside class="divcol align" style="gap: 10px">
@@ -152,10 +163,10 @@ export default {
       dataFilterFarms: ["all farms", "my farms"],
       dataSort: ["tvl", "apr"],
       filters: {
-        farms_model: 0,
-        filter_model: 0,
+        farms: undefined,
+        filter: undefined,
         search: undefined,
-        sort: 0,
+        sort: undefined,
       },
       
       dataFarms: [
@@ -194,7 +205,10 @@ export default {
   },
   computed: {
     filterDataFarms() {
-      return this.$store.getters.filters({items: this.dataFarms, search: this.filters.search})
+      return this.$store.getters.filters({
+        items: this.dataFarms, search: this.filters.search, filterA: this.filters.farms,
+        filterB: this.filters.filter, filterC: this.filters.sort
+      })
     }
   },
   methods: {
