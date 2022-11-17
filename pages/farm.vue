@@ -151,14 +151,6 @@ export default {
           tvl: 1.2,
           claim: 29.7,
         },
-        {
-          tokenA: "btc",
-          tokenB: "usdc",
-          apr: 32,
-          vol: 20,
-          tvl: 1.2,
-          claim: 29.7,
-        },
       ],
     }
   },

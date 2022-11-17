@@ -32,7 +32,7 @@
   }
 
   &-controls {
-    *:not(label.plain) {font-family: 'Inter', sans-serif}
+    :not(label.plain) {font-family: 'Inter', sans-serif}
     .v-btn {
       --b: 1px solid var(--clr-line)
     }
@@ -43,8 +43,13 @@
     --pi: center;
     // --fb: 23.25em;
     gap: 30px;
+    &:has(> :only-child, > :first-child:nth-last-child(2)) {
+      display: flex;
+      align-items: center;
+      > * {max-width: 23.25em !important}
+    }
     
-    *:not(.v-btn span) {font-family: var(--font2)}
+    :not(.v-btn span) {font-family: var(--font2)}
     h3 {
       --fs: 21px;
       --fw: bold;
