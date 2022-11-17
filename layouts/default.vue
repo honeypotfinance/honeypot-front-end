@@ -22,7 +22,7 @@ export default {
   // middleware: ['authenticated'],
   data() {
     return {
-      wrapperSpace: false,
+      wrapperSpace: true,
     }
   },
   created() {
@@ -57,14 +57,14 @@ export default {
         }
       }
     },
-    footerHeightListener() {
-      setTimeout(() => {
-        const footer = document.querySelector('#footer');
-        document.documentElement.style.setProperty(
-          '--h-footer', `${footer.getBoundingClientRect().height}px`
-        );
-      }, 400);
-    },
+    // footerHeightListener() {
+    //   setTimeout(() => {
+    //     const footer = document.querySelector('#footer');
+    //     document.documentElement.style.setProperty(
+    //       '--h-footer', `${footer.getBoundingClientRect().height}px`
+    //     );
+    //   }, 400);
+    // },
     dragFloatingBtn(event) {
       const target = event.currentTarget;
       let offset = [0,0], isDown = false;
