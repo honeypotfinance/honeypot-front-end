@@ -85,7 +85,7 @@ div.v-card::before {background: transparent !important}
 }
 
 body {background: var(--bg-ap)}
-* {caret-color: var(--primary)}
+* {caret-color: var(--caret, var(--primary)) !important}
 ::selection {
   background-color: #ff4081;
   color: var(--bg-ap);

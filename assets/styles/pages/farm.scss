@@ -40,13 +40,18 @@
 
   &-content {
     --gs: clamp(20em, 20vw, 23.25em);
-    --pi: center;
+    --pi: start center;
     gap: 30px;
+    min-height: 25em;
     &:has(> :only-child, > :first-child:nth-last-child(2)) {
       display: flex;
       align-items: center;
       > * {max-width: 23.25em !important}
     }
+    // &:empty {
+    //   background: center no-repeat url(../../sources/icons/empty.png);
+    //   background-size: 12em;
+    // }
     
     :not(.v-btn span) {font-family: var(--font2)}
     h3 {

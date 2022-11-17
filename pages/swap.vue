@@ -149,8 +149,11 @@
 </template>
 
 <script>
+import computeds from '~/mixins/computeds'
+
 export default {
   name: "SwapPage",
+  mixins: [computeds],
   data() {
     return {
       heightChart: undefined,

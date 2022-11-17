@@ -41,8 +41,14 @@
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
 /* // // desktop // // */ 
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
-.font1 {font-family:var(--font1) !important}
-.font2 {font-family:var(--font2) !important}
+.font1 {
+  font-family:var(--font1) !important;
+  * {font-family:var(--font1) !important}
+}
+.font2 {
+  font-family:var(--font2) !important;
+  * {font-family:var(--font2) !important}
+}
 .h1 {font-size: var(--step-8) !important}
 .h2 {font-size: var(--step-7) !important}
 .h3 {font-size: var(--step-6) !important}
@@ -362,6 +368,8 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+.pevents {pointer-events: all}
+.nopevents {pointer-events: none}
 
 
 
@@ -372,8 +380,14 @@
 @include media(min, 881px) {.showmobile {display: none !important}}
 @include media(max, small) {
   .deletemobile {display: none !important}
-  .font1mobile {font-family:var(--font1) !important}
-  .font2mobile {font-family:var(--font2) !important}
+  .font1mobile {
+    font-family:var(--font1) !important;
+    * {font-family:var(--font1) !important}
+  }
+  .font2mobile {
+    font-family:var(--font2) !important;
+    * {font-family:var(--font2) !important}
+  }
   .h1mobile {font-size: var(--step-8) !important}
   .h2mobile {font-size: var(--step-7) !important}
   .h3mobile {font-size: var(--step-6) !important}
@@ -689,6 +703,8 @@
     -webkit-box-orient: vertical !important;
     overflow: hidden !important;
   }
+  .peventsmobile {pointer-events: all !important}
+  .nopeventsmobile {pointer-events: none !important}
 }
 
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /

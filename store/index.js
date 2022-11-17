@@ -59,6 +59,10 @@ export const mutations = {
 };
 
 export const actions = {
+  modalConnect() {
+    const layout = this.$router.app.$children.find(data=>data.$el === document.getElementById("layout"));
+    layout.$refs.connect.modalConnect = true
+  },
   // getData({commit}) {
   // },
 };
@@ -76,7 +80,7 @@ export const getters = {
     // filters
     let filters = items;
     // search
-    if (search) filters = filters.filter(data => data.name.includes(search))
+    if (search) filters = filters.filter(data => `${data.tokenA}-${data.tokenB}`.includes(search))
 
     return filters
   }

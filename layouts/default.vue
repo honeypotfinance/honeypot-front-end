@@ -1,7 +1,9 @@
 <template>
   <v-app id="layout" class="relative">
     <Alerts ref="alerts"></Alerts>
+    <ModalsConnect ref="connect"></ModalsConnect>
     <Navbar ref="navbar" />
+    
     <v-main :class="wrapperSpace?'with':'without'" class="parent">
       <v-btn
         v-show="$route.path !== '/swap'" id="swap-floating-button" class="btn"
