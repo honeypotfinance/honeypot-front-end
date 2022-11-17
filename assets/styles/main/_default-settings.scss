@@ -317,19 +317,20 @@ img:not(.not_html, .not) {
 
 //- defaut tabs -//
 .v-tabs:not(.not_vuetify, .not) {
-  --bg: var(--primary);
+  --bg: var(--secondary);
   --c: var(--clr);
-  --c-active: var(--clr-btn-pressed);
-  --b: .8px solid rgba(#707070, .1);
-  --br: 5px;
+  --bg-active: hsl(43, 100%, 65%, .13);
+  --c-active: #FFD566;
+  --b: 1px solid var(--clr-line);
+  --br: 10px;
   --w: max-content;
-  --h: 3em;
-  --p: 1em;
+  --h: max-content;
+  --p: 5px;
   --g: 1em;
   --tt: none;
   // tab
-  --p-tab: .2em;
-  --br-tab: 5px;
+  --p-tab: calc(var(--p) * 2);
+  --br-tab: var(--br);
   --overflow: hidden;
   --t: none;
   --f: none;
@@ -355,17 +356,22 @@ img:not(.not_html, .not) {
         overflow: var(--overflow);
         text-transform: var(--tt);
         color: var(--c);
-        font-size: var(--fs, 1em);
+        font-size: var(--fs, 14px);
         & > * {
           font-size: 1em;
           color: var(--c);
         }
         &--active {
-          color: var(--c-active);
-          & > * {color: var(--c-active)}
+          background: var(--bg-active) !important;
+          color: var(--c-active) !important;
+          * {color: var(--c-active) !important}
         }
       }
     }
+  }
+  
+  .v-tabs-slider {
+    background-color: var(--c-active) !important;
   }
 }
 
@@ -434,7 +440,7 @@ img:not(.not_html, .not) {
     color: var(--c);
   }
   .v-btn__content {
-    & :is(img, i) {margin-left: var(--ml);margin-right: var(--mr)}
+    display: flex;
   }
 }
 
@@ -473,7 +479,7 @@ img:not(.not_html, .not) {
   // icon
   --fs-icon: var(--fs, 1.2em);
   // label
-  --fs-label: calc(var(--fs, 1.2em) - .15em);
+  --fs-label: 1em;
   --fw-label: var(--fw);
   --ff-label: var(--ff);
   --tt-label: var(--tt);
@@ -552,6 +558,8 @@ img:not(.not_html, .not) {
     -moz-text-stroke: var(--stroke-label);
     -ms-text-stroke: var(--stroke-label);
     -o-text-stroke: var(--stroke-label);
+    display: grid;
+    place-content: center;
   }
   // input statements //
   // &.v-input--is-focused:not(.not_focus, .not_statement) .v-input__slot {--b: 1px solid rgba(255, 255, 255, 0.3)}

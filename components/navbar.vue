@@ -1,6 +1,8 @@
 <template>
   <div>
     <MenuNavbar ref="menu"></MenuNavbar>
+    <ModalsConnect ref="connect"></ModalsConnect>
+    
     <v-app-bar id="navbar" color="transparent" absolute class="isolate">
       <nuxt-link to="/swap">
         <img src="~/assets/sources/logos/logo.svg" alt="logo" style="--w: clamp(10em, 13vw, 13.414375em)">
@@ -17,11 +19,11 @@
 
       <aside class="right" :class="isLogged ? 'font2' : 'font1'">
         <v-btn class="btn2">
-          <img src="~/assets/sources/logos/honeypot.svg" alt="token" class="aspect mr-2" style="--w: 1.533125em">
+          <img src="~/assets/sources/logos/honeypot.svg" alt="token" class="aspect" style="--w: 1.533125em">
           <span>${{user.balance}}</span>
         </v-btn>
         
-        <v-btn v-show="!isLogged" class="btn2" @click="$store.commit('signIn')">Connect wallet</v-btn>
+        <v-btn v-show="!isLogged" class="btn2" @click="$refs.connect.modalConnect = true">Connect wallet</v-btn>
         <v-btn v-show="isLogged" class="btn2 openMenuLogin">
           <span>{{user.accountId}}</span>
           <v-icon>mdi-chevron-down</v-icon>

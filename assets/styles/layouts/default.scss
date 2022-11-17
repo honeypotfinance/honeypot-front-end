@@ -22,14 +22,16 @@
   }
 
   #swap-floating-button {
-    --w: 161px;
+    --w: 10.0625em;
     --br: 30px 30px 15px 15px / 30px 30px 30px 30px;
     --c: #574F42 !important;
     --fw: 700;
-    --fs: 21px;
+    --fs: clamp(1.15em, calc(1.3vw + .5em), 1.3125em);
     --t: rotate(-90deg);
+    --g: 0;
+    --p: clamp(.5em, calc(1vw + .75em), .75em);
     position: fixed;
-    right: -45px;
+    right: -3.4em;
     top: 20%;
     z-index: 10;
     .v-btn__content {

@@ -96,4 +96,4 @@ export default {
 }
 </script>
 
-<style src="~/assets/styles/layouts/login.scss" lang="scss" />
+<style src="~/assets/styles/pages/login.scss" lang="scss" />

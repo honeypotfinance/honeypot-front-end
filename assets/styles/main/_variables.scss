@@ -33,7 +33,7 @@
     --clr-badge: var(--primary);
     --clr-text-badge: #000000;
     // line
-    --clr-line: hsl(59, 83%, 53%, .5);
+    --clr-line: #2D291D;
   }
   &.dark {
     // default color
@@ -82,8 +82,8 @@ $content-padding:                           24px;
 $sombra-filter: drop-shadow(0px 4px 1px rgba(0, 0, 0, 0.3));
 
 //========== Colors ==========//
-$primary:           #EAE823;
-$secondary:         #000000;
+$primary:           #FFCD4D;
+$secondary:         #1A1917;
 $accent:            #574F42;
 $error:             #ff4081;
 $warning:           #FFC260;
@@ -92,7 +92,7 @@ $info:              #9013FE;
 $label:             #6e6e6e;
 $text-grey:         #b9b9b9;
 $title-grey:        #4a4a4a;
-$clr-btn:           #EAE823;
+$clr-btn:           #FFCD4D;
 // $clr-btn-pressed:   #AD0FD5;
 // $clr-btn-inactive:  #AD0FD5;
 $clr-text-btn:      #000000;
@@ -239,8 +239,7 @@ $skew-left: skewX(-12deg) translateX(-1px);
   --h: initial;
   --max-h: none;
   --min-h: 36px;
-  --ml: none;
-  --mr: none;
+  --g: 5px;
   --br: 30px;
   --bs: none;
   --fs: 1em;
@@ -275,7 +274,10 @@ $skew-left: skewX(-12deg) translateX(-1px);
     line-height: var(--lh);
   }
   // margin
-  & :is(img, i) {margin-left: var(--ml);margin-right: var(--mr)}
+  &, > .v-btn__content {
+    display: flex;
+    gap: var(--g);
+  }
 }
 
 @mixin btn2() {
@@ -289,8 +291,7 @@ $skew-left: skewX(-12deg) translateX(-1px);
   --h: initial;
   --max-h: none;
   --min-h: 33px;
-  --ml: none;
-  --mr: none;
+  --g: 5px;
   --br: 30px;
   &:has(> .v-btn__content > :only-child) {--br: 10px};
   --bs: none;
@@ -326,7 +327,10 @@ $skew-left: skewX(-12deg) translateX(-1px);
     line-height: var(--lh);
   }
   // margin
-  & :is(img, i) {margin-left: var(--ml);margin-right: var(--mr)}
+  &, > .v-btn__content {
+    display: flex;
+    gap: var(--g);
+  }
 }
 
 //- cards -//
