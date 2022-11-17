@@ -135,7 +135,7 @@ export default {
       dataPopularTokens: [
         {
           img: require('~/assets/sources/tokens/honeypot.svg'),
-          name: "honeypot",
+          name: "hny",
           fullname: "honeypot",
           value: 0,
         },
@@ -155,7 +155,7 @@ export default {
       dataTokens: [
         {
           img: require('~/assets/sources/tokens/honeypot.svg'),
-          name: "honeypot",
+          name: "hny",
           fullname: "honeypot",
           value: 0,
         },
@@ -179,7 +179,7 @@ export default {
         },
         {
           img: require('~/assets/sources/tokens/honeypot.svg'),
-          name: "honeypot",
+          name: "hny",
           fullname: "honeypot",
           value: 0,
         },
@@ -203,7 +203,7 @@ export default {
         },
         {
           img: require('~/assets/sources/tokens/honeypot.svg'),
-          name: "honeypot",
+          name: "hny",
           fullname: "honeypot",
           value: 0,
         },
@@ -227,7 +227,7 @@ export default {
         },
         {
           img: require('~/assets/sources/tokens/honeypot.svg'),
-          name: "honeypot",
+          name: "hny",
           fullname: "honeypot",
           value: 0,
         },
