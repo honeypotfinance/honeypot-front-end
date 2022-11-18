@@ -162,7 +162,7 @@ export default {
 
   // Router property -  https://nuxtjs.org/docs/2.x/features/file-system-routing#the-router-property
   router: {
-    base: '/honeypot-dex/',
+    base: '/',
     // middleware: ['route-validator'],
   },
 
@@ -173,7 +173,7 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    publicPath: '/honeypot-dex/',
+    publicPath: '/',
     plugins: [
       new webpack.ProvidePlugin({
         // global modules

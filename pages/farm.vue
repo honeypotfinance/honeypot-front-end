@@ -2,10 +2,12 @@
   <div id="farm">
     <section id="farm-header" class="divcol" style="gap: 10px">
       <h1 class="tcap font1 acenter" style="gap: inherit">my portfolio
-        <v-icon color="var(--accent)" size="1em">mdi-eye-off-outline</v-icon>
+        <v-btn icon @click="hideProfits = !hideProfits">
+          <v-icon size="2.3em" color="var(--accent)">mdi-eye{{hideProfits ? "" : "-off"}}-outline</v-icon>
+        </v-btn>
       </h1>
 
-      <v-card class="container-profits card grid">
+      <v-card class="container-profits card grid" :class="{hide: hideProfits}">
         <div class="divcol">
           <label>deposits</label>
           <span>${{profits.deposit.toString().split(".").join(",")}}</span>
@@ -153,6 +155,7 @@ export default {
   mixins: [computeds],
   data() {
     return {
+      hideProfits: false,
       profits: {
         deposit: 20.009,
         rewards: 283,

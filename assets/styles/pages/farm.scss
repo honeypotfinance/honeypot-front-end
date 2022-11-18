@@ -18,6 +18,9 @@
         --gtc: repeat(2, 1fr);
       }
       @include media(max, 300px) {--gtc: 1fr}
+      &.hide {
+        filter: blur(10px)
+      }
       
       * {font-family: var(--font1) !important}
       label {
