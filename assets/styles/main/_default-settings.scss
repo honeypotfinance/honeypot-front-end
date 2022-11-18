@@ -645,9 +645,9 @@ img:not(.not_html, .not) {
 //- close -//
 .close {
   --d: 0;
-  --t: var(--distance);
-  --r: var(--distance);
+  --t: var(--d);
+  --r: var(--d);
   position: absolute !important;
-  top: var(--top) !important;
-  right: var(--right) !important;
+  top: var(--t) !important;
+  right: var(--r) !important;
 }

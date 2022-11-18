@@ -38,9 +38,16 @@
       width: var(--size) !important;
       max-width: var(--size) !important;
       > div.space {
+        center {
+          transform: translateY(calc(62px / 2));
+          margin-inline: clamp(5px, .6vw, 20px);
+        }
         @include media(max, small) {
           flex-direction: column !important;
-          center img {--t: rotate(90deg)}
+          center {
+            transform: translateY(calc(62px / 3));
+            img {--t: rotate(90deg)}
+          }
         }
       }
       aside.target_drag {

@@ -1,12 +1,13 @@
 <template>
   <v-app id="layout" class="relative">
-    <Alerts ref="alerts"></Alerts>
-    <ModalsConnect ref="connect"></ModalsConnect>
+    <Alerts ref="alerts" />
+    <ModalsConnect ref="connect" />
     <Navbar ref="navbar" />
+    <ModalsSwapModal ref="swap" />
     
     <v-main :class="wrapperSpace?'with':'without'" class="parent">
       <v-btn
-        v-show="$route.path !== '/swap'" id="swap-floating-button" class="btn"
+        v-show="$route.path !== '/swap'" id="swap-floating-button" class="btn" @click="$refs.swap.modalSwap = true"
         @mousedown="dragFloatingBtn($event)" @touchstart="dragFloatingBtn($event)">
         <v-icon>mdi-chevron-up</v-icon>
         <span>Swap</span>

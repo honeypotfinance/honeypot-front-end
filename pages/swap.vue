@@ -1,6 +1,8 @@
 <template>
   <div id="swap">
-    <ModalsSwapModal ref="modal"></ModalsSwapModal>
+    <ModalsSwap ref="modal"></ModalsSwap>
+    <ModalsTokens ref="tokens" :from="swapFrom" :to="swapTo"></ModalsTokens>
+    
     <section id="swap-header" class="divcol center">
       <h1>Swap</h1>
       <h2>Swap tokens instantly</h2>
@@ -24,8 +26,8 @@
               <label>From</label>
               <div>
                 <v-chip
-                  close close-icon="mdi-chevron-down" class="btn2" @click="$refs.modal.openModalTokens(swapFrom)"
-                  @click:close="$refs.modal.openModalTokens(swapFrom)">
+                  close close-icon="mdi-chevron-down" class="btn2" @click="$refs.tokens.openModalTokens(swapFrom)"
+                  @click:close="$refs.tokens.openModalTokens(swapFrom)">
                   <v-img class="aspect mr-2" style="--w: 20px">
                     <template #default>
                       <img :src="swapFrom.img" :alt="`${swapFrom.name} token`" style="--w: 100%; --of: cover">
@@ -63,7 +65,7 @@
             </v-card>
           </aside>
 
-          <center style="transform: translateY(calc(62px / 2)); margin-inline: clamp(5px, .6vw, 20px)">
+          <center>
             <v-btn icon style="--p: 7px" @click="switchTokens()">
               <img src="~/assets/sources/icons/swap-arrow.svg" alt="switch icon" style="--w: 16px">
             </v-btn>
@@ -77,8 +79,8 @@
               <label>To</label>
               <div class="space">
                 <v-chip
-                  close close-icon="mdi-chevron-down" class="tup btn2" @click="$refs.modal.openModalTokens(swapTo)"
-                  @click:close="$refs.modal.openModalTokens(swapTo)">
+                  close close-icon="mdi-chevron-down" class="tup btn2" @click="$refs.tokens.openModalTokens(swapTo)"
+                  @click:close="$refs.tokens.openModalTokens(swapTo)">
                   <v-img class="aspect mr-2" style="--w: 20px">
                     <template #default>
                       <img :src="swapTo.img" :alt="`${swapTo.name} token`" style="--w: 100%; --of: cover">
