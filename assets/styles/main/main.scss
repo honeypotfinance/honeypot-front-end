@@ -17,6 +17,36 @@
 
 ///////////////////// global ///////////////////////
 
+//- dual tokens -//
+.dual-tokens.v-sheet {
+  --h-sheet: 50.86px;
+  width: max-content !important;
+  height: var(--h-sheet) !important;
+  aspect-ratio: 2 / 1;
+  position: relative;
+  & > img {
+    --w: calc(var(--h-sheet) + 6px);
+    --of: cover;
+    --p: calc(var(--h-sheet) / 4.5);
+    --br: 50%;
+    --b: 1px solid var(--clr-line);
+    --bg: var(--clr-card);
+    
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    &:first-of-type {
+      left: 0;
+      z-index: 1;
+    }
+    &:last-of-type {
+      right: 0;
+      z-index: 0;
+    }
+  }
+}
+
 //- tooltip -//
 .v-tooltip__content {
   line-height: 1 !important;

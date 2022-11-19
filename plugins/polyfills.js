@@ -71,4 +71,21 @@ export default () => {
     }
   }
   // toDayName(length, lang) <-- example
+
+
+  // formatter =========================================================================================================//
+  if (!Number.prototype.formatter) {
+    Number.prototype.formatter = function() {
+      if (Math.abs(this) > 999999999) {
+        return Math.sign(this)*((Math.abs(this)/1000000000).toFixed(1)) + 'B'
+      } else if (Math.abs(this) > 999999) {
+        return Math.sign(this)*((Math.abs(this)/1000000).toFixed(1)) + 'M'
+      } else if (Math.abs(this) > 999) {
+        return Math.sign(this)*((Math.abs(this)/1000).toFixed(1)) + 'k'
+      } else {
+        return Math.sign(this)*Math.abs(this)
+      }
+    }
+  }
+  // formatter(number) <-- example
 }

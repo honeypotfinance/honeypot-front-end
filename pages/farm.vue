@@ -30,21 +30,21 @@
     <section id="farm-controls" class="divcol" style="gap: 15px; margin-block: 30px 20px">
       <aside class="space" style="gap: inherit">
         <div class="acenter wrap" style="gap: inherit">
-          <v-tabs hide-slider>
+          <v-tabs v-model="tabsFarms_model" hide-slider>
             <v-tab v-for="item in dataFilterFarms" :key="item" class="tcap" @change="filters.farms = item">
               {{item}}
             </v-tab>
           </v-tabs>
           
-          <v-tabs hide-slider>
+          <v-tabs v-model="tabsFilter_model" hide-slider>
             <v-tab v-for="item in dataFilter" :key="item" class="tcap" @change="filters.filter = item">
               {{item}}
             </v-tab>
           </v-tabs>
         </div>
         
-        <v-btn class="btn2">
-          <img src="~/assets/sources/icons/options.svg" alt="options">
+        <v-btn class="btn2" @click="changeLayoutCells()">
+          <img :src="require(`~/assets/sources/icons/cells-${layoutCells ? '2' : '1'}.svg`)" alt="layout cells type">
         </v-btn>
       </aside>
       
@@ -73,77 +73,137 @@
       </aside>
     </section>
 
-    <section id="farm-content" class="gridauto">
-      <!-- not logged -->
-      <div v-if="!isLogged" class="divcol center tcenter align font1 nopevents maxsize_w">
-        <img src="~/assets/sources/icons/wallet-empty.png" alt="empty icon" style="--w: 13.4375em">
-        <span class="h9_em bold mt-5 mb-2">You haven't connected your wallet.</span>
-        <span class="h11_em">Connect to view eligible farms.</span>
-        <v-btn
-          class="btn mt-3 pevents font2" style="--w: 10.3125em; --h: 3.25em; --stroke: .4px"
-          @click="$store.dispatch('modalConnect')">
-          Connect Wallet
-        </v-btn>
+    <!-- if not logged -->
+    <div v-if="!isLogged" class="divcol center tcenter align font1 nopevents maxsize_w">
+      <img src="~/assets/sources/icons/wallet-empty.png" alt="empty icon" style="--w: 13.4375em">
+      <span class="h9_em bold mt-5 mb-2">You haven't connected your wallet.</span>
+      <span class="h11_em">Connect to view eligible farms.</span>
+      <v-btn
+        class="btn mt-3 pevents font2" style="--w: 10.3125em; --h: 3.25em; --stroke: .4px"
+        @click="$store.dispatch('modalConnect')">
+        Connect Wallet
+      </v-btn>
+    </div>
+
+    <template v-else>
+      <!-- if empty -->
+      <div v-if="filterDataFarms.length < 1" class="divcol center tcenter align font1 nopevents">
+        <template v-if="filters.farms === 'my farms'">
+          <img src="~/assets/sources/icons/my-farms-empty.png" alt="empty icon" style="--w: 13.4375em">
+          <span class="h9_em bold mt-5 mb-2">You dont have any farms</span>
+          <span class="h11_em">See which pools are available to swap</span>
+          <v-btn class="btn mt-3 pevents font2" style="--w: 10.3125em; --h: 3.25em; --stroke: .4px">
+            Create LP
+          </v-btn>
+        </template>
+        
+        <template v-else>
+          <img src="~/assets/sources/icons/empty.png" alt="empty icon" style="--w: 13.4375em">
+          <span class="h9_em bold mt-5 mb-2">No results found</span>
+          <span class="h11_em">Try searching something else</span>
+        </template>
       </div>
 
+      <!-- content filled -->
       <template v-else>
-        <!-- empty -->
-        <div v-if="filterDataFarms.length < 1" class="divcol center tcenter align font1 nopevents">
-          <template v-if="filters.farms === 'my farms'">
-            <img src="~/assets/sources/icons/my-farms-empty.png" alt="empty icon" style="--w: 13.4375em">
-            <span class="h9_em bold mt-5 mb-2">You dont have any farms</span>
-            <span class="h11_em">See which pools are available to swap</span>
-            <v-btn class="btn mt-3 pevents font2" style="--w: 10.3125em; --h: 3.25em; --stroke: .4px">
-              Create LP
-            </v-btn>
-          </template>
-          
-          <template v-else>
-            <img src="~/assets/sources/icons/empty.png" alt="empty icon" style="--w: 13.4375em">
-            <span class="h9_em bold mt-5 mb-2">No results found</span>
-            <span class="h11_em">Try searching something else</span>
-          </template>
-        </div>
+        <!-- if layoutcells -->
+        <section v-if="layoutCells" id="farm-content" class="gridauto">
+          <v-card
+            v-for="(item, i) in filterDataFarms" :key="i"
+            class="card divcol"
+            style=" --w: 100%; gap: 20px">
+            <aside class="divcol align" style="gap: 10px">
+              <v-sheet class="dual-tokens" color="transparent" height="56px">
+                <img :src="require(`~/assets/sources/tokens/${item.tokenA}.svg`)" :alt="`${item.tokenA} token`" class="aspect">
+                <img :src="require(`~/assets/sources/tokens/${item.tokenB}.svg`)" :alt="`${item.tokenB} token`" class="aspect">
+              </v-sheet>
+              
+              <h3 class="p tup">{{item.tokenA}}-{{item.tokenB}}</h3>
+            </aside>
+            
+            <aside class="space wrap">
+              <div class="divcol center" style="gap: 5px">
+                <h3 class="p">{{`${item.apr}%`}}</h3>
+                <label>APR</label>
+              </div>
+              
+              <div class="divcol center" style="gap: 5px">
+                <h3 class="p">{{`${item.vol.formatter()}`}}</h3>
+                <label>24h Vol.</label>
+              </div>
+              
+              <div class="divcol center" style="gap: 5px">
+                <h3 class="p">{{`$${item.tvl.formatter()}`}}</h3>
+                <label>TVL</label>
+              </div>
+            </aside>
+            
+            <aside class="fwrap space" style="gap: 10px; --max-w-child: 110px">
+              <v-btn class="btn">Deposit</v-btn>
+              <v-btn class="btn">Withdraw</v-btn>
+              <v-btn class="btn">Claim {{item.claim}}</v-btn>
+            </aside>
+          </v-card>
+        </section>
 
-        <!-- filled -->
-        <v-card
-          v-for="(item, i) in filterDataFarms" v-else :key="i"
-          class="card divcol"
-          style=" --w: 100%; gap: 20px">
-          <aside class="divcol align" style="gap: 10px">
-            <v-sheet color="transparent" width="var(--w-sheet)" height="56px" class="relative" style="--w-sheet: 100px">
-              <img :src="require(`~/assets/sources/tokens/${item.tokenA}.svg`)" :alt="`${item.tokenA} token`" class="aspect">
-              <img :src="require(`~/assets/sources/tokens/${item.tokenB}.svg`)" :alt="`${item.tokenB} token`" class="aspect">
-            </v-sheet>
-            
-            <h3 class="p tup">{{item.tokenA}}-{{item.tokenB}}</h3>
-          </aside>
+
+
+        <v-data-table
+          v-else
+          id="farm-table"
+          :headers="tableHeaders"
+          :items="dataFarms"
+          hide-default-footer
+          mobile-breakpoint="-1"
+        >
+          <template #[`item.name`]="{ item }">
+            <div class="acenter font2" style="gap: 10px">
+              <v-sheet class="dual-tokens" color="transparent" style="--h-sheet: 40px">
+                <img :src="require(`~/assets/sources/tokens/${item.tokenA}.svg`)" :alt="`${item.tokenA} token`" class="aspect">
+                <img :src="require(`~/assets/sources/tokens/${item.tokenB}.svg`)" :alt="`${item.tokenB} token`" class="aspect">
+              </v-sheet>
+              
+              <span class="bold tup">{{item.name}}</span>
+            </div>
+          </template>
           
-          <aside class="space wrap">
-            <div class="divcol center" style="gap: 5px">
-              <h3 class="p">{{item.apr + "%"}}</h3>
-              <label>APR</label>
-            </div>
-            
-            <div class="divcol center" style="gap: 5px">
-              <h3 class="p">{{item.vol + "K"}}</h3>
-              <label>24h Vol.</label>
-            </div>
-            
-            <div class="divcol center" style="gap: 5px">
-              <h3 class="p">{{"$" + item.tvl + "M"}}</h3>
-              <label>TVL</label>
-            </div>
-          </aside>
+          <template #[`item.staked`]="{ item }">
+            {{item.staked ? `$${item.staked.toLocaleString()}` : ""}}
+          </template>
           
-          <aside class="fwrap space" style="gap: 10px; --max-w-child: 110px">
-            <v-btn class="btn">Deposit</v-btn>
-            <v-btn class="btn">Withdraw</v-btn>
-            <v-btn class="btn">Claim {{item.claim}}</v-btn>
-          </aside>
-        </v-card>
+          <template #[`item.wallet`]="{ item }">
+            {{item.wallet ? `$${item.wallet.toLocaleString()}` : ""}}
+          </template>
+          
+          <template #[`item.apr`]="{ item }">
+            {{item.apr ? `${item.apr.toLocaleString()}%` : ""}}
+          </template>
+          
+          <template #[`item.tvl`]="{ item }">
+            {{item.tvl ? `$${item.tvl.formatter()}` : ""}}
+          </template>
+          
+          <template #[`item.actions`]>
+            <div class="end" style="gap: 10px">
+              <v-btn icon style="--bg: #292724">
+                <v-icon size="1.2em">mdi-plus</v-icon>
+              </v-btn>
+              
+              <v-btn icon style="--bg: #292724">
+                <v-icon size="1.2em">mdi-minus</v-icon>
+              </v-btn>
+              
+              <v-btn
+                class="btn" style="--fs: 1.3125em; --stroke: .4px; --br: 10px"
+              >
+                <img src="~/assets/sources/icons/download.svg" alt="claim icon" style="--w: .7em">
+                claim
+              </v-btn>
+            </div>
+          </template>
+        </v-data-table>
       </template>
-    </section>
+    </template>
   </div>
 </template>
 
@@ -162,40 +222,60 @@ export default {
         apy_monthly: 30,
         apy_daily: 20,
       },
-      dataFilter: ["featured", "stablecoin"],
       dataFilterFarms: ["all farms", "my farms"],
+      dataFilter: ["featured", "stablecoin"],
       dataSort: ["tvl", "apr"],
+      layoutCells: true,
       filters: {
         farms: undefined,
         filter: undefined,
         search: undefined,
         sort: undefined,
       },
+      tabsFarms_model: 0,
+      tabsFilter_model: 0,
       
+      tableHeaders: [
+        { value: "name", text: "Name",  sortable: false },
+        { value: "staked", text: "Staked", align: "center", sortable: false },
+        { value: "wallet", text: "Wallet", align: "center", sortable: false },
+        { value: "apr", text: "APR", align: "center", sortable: false },
+        { value: "tvl", text: "TVL", align: "center", sortable: false },
+        { value: "actions", align: "center", sortable: false },
+      ],
       dataFarms: [
         {
+          name: `btc-usdc`,
           tokenA: "btc",
           tokenB: "usdc",
           apr: 32,
-          vol: 20,
-          tvl: 1.2,
+          vol: 20000,
+          tvl: 12000000,
           claim: 29.7,
+          staked: 1000,
+          wallet: 10000,
         },
         {
+          name: `btc-usdc`,
           tokenA: "btc",
           tokenB: "usdc",
           apr: 32,
-          vol: 20,
-          tvl: 1.2,
+          vol: 20000,
+          tvl: 12000000,
           claim: 29.7,
+          staked: 1000,
+          wallet: 10000,
         },
         {
+          name: `btc-usdc`,
           tokenA: "btc",
           tokenB: "usdc",
           apr: 32,
-          vol: 20,
-          tvl: 1.2,
+          vol: 20000,
+          tvl: 12000000,
           claim: 29.7,
+          staked: 1000,
+          wallet: 10000,
         },
       ],
     }
@@ -215,6 +295,25 @@ export default {
     }
   },
   methods: {
+    changeLayoutCells() {
+      if (this.layoutCells) {
+        this.dataFilterFarms = ["view all", "farms", "my farms"]
+        this.filters.farms = this.dataFilterFarms[0]
+        this.dataFilter.push("bluechip")
+        this.filters.filter = this.dataFilter[0]
+        this.layoutCells = false
+      } else {
+        this.dataFilterFarms = ["all farms", "my farms"]
+        this.filters.farms = this.dataFilterFarms[0]
+        this.dataFilter.pop()
+        this.filters.filter = this.dataFilter[0]
+        this.layoutCells = true
+      }
+      setTimeout(() => {
+        this.tabsFarms_model = 1
+        this.tabsFilter_model = 0
+      }, 100);
+    },
   }
 };
 </script>
