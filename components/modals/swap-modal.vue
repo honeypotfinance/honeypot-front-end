@@ -16,7 +16,7 @@
             class="divcol" style="gap: inherit">
             <div class="container-options">
               <label>From</label>
-              <div>
+              <div class="space">
                 <v-chip
                   close close-icon="mdi-chevron-down" class="btn2" @click="$refs.tokens.openModalTokens(swapFrom)"
                   @click:close="$refs.tokens.openModalTokens(swapFrom)">

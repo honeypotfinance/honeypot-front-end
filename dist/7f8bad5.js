@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[7],{715:function(o,e,n){"use strict";n.r(e),e.default={pageNotFound:"La página no existe",otherError:"Ha ocurrido un error",buttonTitle:"Página de inicio",success:"ÉXITO!",textSuccess:"Tus cambios han sido guardados satisfactoriamente",cancel:"ERROR!",textCancel:"Algo extraño ha ocurrido, intentalo denuevo"}}}]);
