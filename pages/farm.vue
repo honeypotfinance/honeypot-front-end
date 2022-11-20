@@ -163,7 +163,7 @@
                 <img :src="require(`~/assets/sources/tokens/${item.tokenB}.svg`)" :alt="`${item.tokenB} token`" class="aspect">
               </v-sheet>
               
-              <span class="bold tup">{{item.name}}</span>
+              <span class="bold tup">{{`${item.tokenA}-${item.tokenB}`}}</span>
             </div>
           </template>
           
@@ -227,10 +227,10 @@ export default {
       dataSort: ["tvl", "apr"],
       layoutCells: true,
       filters: {
-        farms: undefined,
-        filter: undefined,
+        farms: "all farms",
+        filter: "featured",
         search: undefined,
-        sort: undefined,
+        sort: "tvl",
       },
       tabsFarms_model: 0,
       tabsFilter_model: 0,
@@ -245,10 +245,19 @@ export default {
       ],
       dataFarms: [
         {
-          name: `btc-usdc`,
           tokenA: "btc",
           tokenB: "usdc",
           apr: 32,
+          vol: 20000,
+          tvl: 32000000,
+          claim: 29.7,
+          staked: 1000,
+          wallet: 10000,
+        },
+        {
+          tokenA: "btc",
+          tokenB: "usdc",
+          apr: 50,
           vol: 20000,
           tvl: 12000000,
           claim: 29.7,
@@ -256,23 +265,11 @@ export default {
           wallet: 10000,
         },
         {
-          name: `btc-usdc`,
           tokenA: "btc",
           tokenB: "usdc",
-          apr: 32,
+          apr: 12,
           vol: 20000,
-          tvl: 12000000,
-          claim: 29.7,
-          staked: 1000,
-          wallet: 10000,
-        },
-        {
-          name: `btc-usdc`,
-          tokenA: "btc",
-          tokenB: "usdc",
-          apr: 32,
-          vol: 20000,
-          tvl: 12000000,
+          tvl: 22000000,
           claim: 29.7,
           staked: 1000,
           wallet: 10000,
@@ -288,10 +285,20 @@ export default {
   },
   computed: {
     filterDataFarms() {
-      return this.$store.getters.filters({
-        items: this.dataFarms, search: this.filters.search, filterA: this.filters.farms,
-        filterB: this.filters.filter, filterC: this.filters.sort
-      })
+      // filters
+      let filters = this.dataFarms;
+      // filter A
+      if (this.filters.farms === 'my farms') filters = filters.filter(data => data.mine)
+      // // filter B
+      // if (this.filters.filter === 'featured') filters = filters.filter(data => data.featured)
+      // else if (this.filters.filter === 'stablecoin')  filters = filters.filter(data => data.stablecoin)
+      // filter C
+      if (this.filters.sort === 'tvl') filters.sort((a, b) => b.tvl - a.tvl)
+      else if (this.filters.sort === 'apr') filters.sort((a, b) => b.apr - a.apr)
+      // search
+      if (this.filters.search) filters = filters.filter(data => `${data.tokenA}-${data.tokenB}`.includes(this.filters.search))
+
+      return filters
     }
   },
   methods: {
