@@ -17,6 +17,56 @@
 
 ///////////////////// global ///////////////////////
 
+//- custome tables -//
+.v-data-table.custome-table {
+  background-color: transparent !important;
+  table {border-spacing: 0 20px !important}
+
+  thead {
+    transform: translateY(20px) !important;
+    tr {
+      th {
+        border-bottom: none !important;
+        span {
+          font-size: 1.1em !important;
+          font-weight: bold !important;
+          color: var(--accent) !important;
+        }
+      }
+    }
+  }
+
+  tbody {
+    tr {
+      background-color: var(--secondary) !important;
+      td {
+        padding: 20px !important;
+        border-bottom: none !important;
+        &:not(:has(span)), span:not(.v-btn *) {font-size: 1.3125em !important}
+        &:first-of-type {border-radius: 30px 0 0 30px !important}
+        &:last-of-type {border-radius: 0 30px 30px 0 !important}
+      }
+    }
+  }
+
+  .v-btn {
+    &--icon {
+      --size: 40px;
+      width: var(--size) !important;
+      height: var(--size) !important;
+    }
+  }
+}
+
+//- controls -//
+.controls {
+  :not(label.plain) {font-family: 'Inter', sans-serif}
+  .v-btn {
+    --b: 1px solid var(--clr-line)
+  }
+  & + * {min-height: 25em}
+}
+
 //- dual tokens -//
 .dual-tokens.v-sheet {
   --h-sheet: 50.86px;

@@ -55,7 +55,7 @@ export default {
         },
         {
           name: "pools",
-          to: ""
+          to: "/pools"
         },
         {
           name: "xhpot",

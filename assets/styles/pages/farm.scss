@@ -34,14 +34,6 @@
     }
   }
 
-  &-controls {
-    :not(label.plain) {font-family: 'Inter', sans-serif}
-    .v-btn {
-      --b: 1px solid var(--clr-line)
-    }
-    & + * {min-height: 25em}
-  }
-
   &-content {
     --gs: clamp(20em, 20vw, 23.25em);
     --pi: start center;
@@ -69,46 +61,6 @@
       &:not(:first-of-type) {
         --bg: hsl(43, 100%, 65%, .5) !important;
         --c: #FFD566 !important;
-      }
-    }
-  }
-
-  &-table {
-    background-color: transparent;
-    table {border-spacing: 0 20px}
-
-    thead {
-      transform: translateY(20px);
-      tr {
-        th {
-          border-bottom: none;
-          span {
-            font-size: 1.1em;
-            font-weight: bold;
-            color: var(--accent);
-          }
-        }
-      }
-    }
-
-    tbody {
-      tr {
-        background-color: var(--secondary);
-        td {
-          padding: 20px;
-          border-bottom: none;
-          &:not(:has(span)), span:not(.v-btn *) {font-size: 1.3125em}
-          &:first-of-type {border-radius: 30px 0 0 30px}
-          &:last-of-type {border-radius: 0 30px 30px 0}
-        }
-      }
-    }
-
-    .v-btn {
-      &--icon {
-        --size: 40px;
-        width: var(--size);
-        height: var(--size);
       }
     }
   }

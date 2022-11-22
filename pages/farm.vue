@@ -27,7 +27,7 @@
       </v-card>
     </section>
 
-    <section id="farm-controls" class="divcol" style="gap: 15px; margin-block: 30px 20px">
+    <section class="controls divcol" style="gap: 15px; margin-block: 30px 20px">
       <aside class="space" style="gap: inherit">
         <div class="acenter wrap" style="gap: inherit">
           <v-tabs v-model="tabsFarms_model" hide-slider>
@@ -52,6 +52,7 @@
         <v-text-field
           v-model="filters.search"
           label="Search"
+          class="font3"
           style="--b: 1px solid #2D291D; --br: 10px; --max-w: 262px; --h: 46px; --fs: 14px; --c-label: var(--accent); --caret: var(--accent)"
           hide-details solo
           clearable
@@ -150,11 +151,11 @@
 
         <v-data-table
           v-else
-          id="farm-table"
           :headers="tableHeaders"
           :items="dataFarms"
           hide-default-footer
           mobile-breakpoint="-1"
+          class="custome-table"
         >
           <template #[`item.name`]="{ item }">
             <div class="acenter font2" style="gap: 10px">

@@ -49,6 +49,14 @@
   font-family:var(--font2) !important;
   * {font-family:var(--font2) !important}
 }
+.font3 {
+  font-family:var(--font3) !important;
+  * {font-family:var(--font3) !important}
+}
+.font4 {
+  font-family:var(--font4) !important;
+  * {font-family:var(--font4) !important}
+}
 .h1 {font-size: var(--step-8) !important}
 .h2 {font-size: var(--step-7) !important}
 .h3 {font-size: var(--step-6) !important}
@@ -387,6 +395,14 @@
   .font2mobile {
     font-family:var(--font2) !important;
     * {font-family:var(--font2) !important}
+  }
+  .font3mobile {
+    font-family:var(--font3) !important;
+    * {font-family:var(--font3) !important}
+  }
+  .font4mobile {
+    font-family:var(--font4) !important;
+    * {font-family:var(--font4) !important}
   }
   .h1mobile {font-size: var(--step-8) !important}
   .h2mobile {font-size: var(--step-7) !important}
