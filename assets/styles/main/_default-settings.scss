@@ -76,7 +76,7 @@ div.v-card::before {background: transparent !important}
 /* // // defautl color // // */ 
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
 :is(span, p, a, h1, h2, h3, h4, h5, h6, button, label, ul, img, button i, div i, input, textarea, th, td, .v-list-item__title,
-.v-input .v-input__slot *, .v-data-footer__select, .v-data-footer__pagination, .v-data-footer__icons::before):not(.not_clr, .not) {
+.v-tab, .v-input .v-input__slot *, .v-data-footer__select, .v-data-footer__pagination, .v-data-footer__icons::before):not(.not_clr, .not) {
   color: var(--c);
   -webkit-text-stroke: var(--stroke, initial);
   -moz-text-stroke: var(--stroke, initial);
@@ -167,7 +167,7 @@ body {background: var(--bg-ap)}
 /* // // typography // // */ 
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
 :is(span, p, a, h1, h2, h3, h4, h5, h6, button, label, ul, img, button i, div i, input, textarea, th, td, .v-list-item__title,
-.v-input .v-input__slot *, .v-data-footer__select, .v-data-footer__pagination, .v-data-footer__icons::before):not(.not_typography, .not) {
+.v-tab, .v-input .v-input__slot *, .v-data-footer__select, .v-data-footer__pagination, .v-data-footer__icons::before):not(.not_typography, .not) {
   font-weight: var(--fw);
 }
 * {font-family: var(--font1)}
@@ -214,6 +214,9 @@ label:not(.v-input .v-label, .not_typography, .not) {
     --fw: 700;
     --c: #fff;
   }
+}
+.hspan {
+  font-size: var(--fs, 16px);
 }
 
 
@@ -329,6 +332,8 @@ img:not(.not_html, .not) {
   --g: 1em;
   --tt: none;
   // tab
+  --w-tab: initial;
+  --h-tab: 100%;
   --p-tab: calc(var(--p) * 2);
   --br-tab: var(--br);
   --overflow: hidden;
@@ -352,6 +357,8 @@ img:not(.not_html, .not) {
       .v-tab {
         padding: var(--p-tab);
         min-width: max-content;
+        width: var(--w-tab);
+        height: var(--h-tab);
         border-radius: var(--br-tab);
         overflow: var(--overflow);
         text-transform: var(--tt);
@@ -479,7 +486,7 @@ img:not(.not_html, .not) {
   // icon
   --fs-icon: var(--fs, 1.2em);
   // label
-  --fs-label: 1em;
+  --fs-label: var(--fs);
   --fw-label: var(--fw);
   --ff-label: var(--ff);
   --tt-label: var(--tt);
@@ -602,7 +609,7 @@ img:not(.not_html, .not) {
 .v-select-list {
   font-family: var(--font2) !important;
   background: var(--secondary) !important;
-  border-radius: 0 $border-btn $border-btn $border-btn !important;
+  border-radius: $border-btn !important;
   overflow: hidden;
   :is(.v-list-item__title, span) {
     color: #ffffff !important;

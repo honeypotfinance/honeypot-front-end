@@ -18,14 +18,14 @@
       </v-btn>
     </section>
 
-    <ApexChart
+    <VueApexCharts
       ref="chart"
       width="100%"
       :height="height"
       type="line"
       :options="chartOptions"
       :series="chartSeries"
-    ></ApexChart>
+    ></VueApexCharts>
 
     <v-btn-toggle v-model="selection" mandatory class="charts-footer">
       <v-btn

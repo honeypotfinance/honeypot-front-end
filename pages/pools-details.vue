@@ -1,10 +1,123 @@
 <template>
-  <div id="pools-details">
-    <section id="pools-header" class="divcol" style="gap: 10px">
-      <h1 class="tcap font1 acenter" style="gap: inherit">pools details under build</h1>
+  <div id="pools-details" class="divcol" style="gap: 30px">
+    <section id="pools-details-header" class="divcol" style="gap: 10px">
+      <label class="maxsize_w hover_arrowback pointer" style="--fs: 21px" @click="$router.go(-1)">
+        <v-icon size="1.5em">mdi-chevron-left</v-icon>
+        Back
+      </label>
 
-      <v-card class="card space">
-        <!-- content -->
+      <v-card class="card space gap2">
+        <span class="acenter tup" style="gap: 5px">
+          <img src="~/assets/sources/tokens/usdc.svg" alt="token" style="--w: 1.72em; --of: cover">
+          usdc /
+          <img src="~/assets/sources/tokens/btc.svg" alt="token" style="--w: 1.72em; --of: cover">
+          btc
+        </span>
+
+        <img
+          src="~/assets/sources/miscellaneous/locked-pools-test-img.jpg" alt="test image"
+          style="--h: 123px; --ar: 1.75 / 1; border-radius: 0 !important"
+        >
+      </v-card>
+    </section>
+
+
+    <section id="pools-details-content" class="fwrap">
+      <v-card id="container-chart" class="card">
+        <ChartsPoolsChart ref="chart"></ChartsPoolsChart>
+
+        <aside class="gridauto" style="gap: 30px; --gs: 190px; align-items: start">
+          <v-card class="card divcol center" style="--bg: #292724; --br: 20px; gap: 10px; --fw: 700">
+            <label style="--fs: 14px">TVL</label>
+            <span class="hspan" style="--fs: 23.25px">
+              $1.2M
+            </span>
+          </v-card>
+          
+          <v-card class="card divcol center" style="--bg: #292724; --br: 20px; gap: 10px; --fw: 700">
+            <label style="--fs: 14px">Pool APR</label>
+            <span class="hspan" style="--fs: 23.25px">
+              32%
+            </span>
+          </v-card>
+          
+          <v-card class="card divcol center" style="--bg: #292724; --br: 20px; gap: 10px; --fw: 700">
+            <label style="--fs: 14px">HPOT APR</label>
+            <span class="hspan" style="--fs: 23.25px">
+              2%
+            </span>
+          </v-card>
+          
+          <v-card class="card divcol center" style="--bg: #292724; --br: 20px; gap: 10px; --fw: 700">
+            <label style="--fs: 14px">Total Staked</label>
+            <span class="hspan" style="--fs: 23.25px">
+              $38,000
+            </span>
+          </v-card>
+          
+          <v-card class="card divcol center" style="--bg: #292724; --br: 20px; gap: 10px; --fw: 700">
+            <label style="--fs: 14px">Your Share</label>
+            <span class="hspan" style="--fs: 23.25px">
+              &#60;0.93%
+            </span>
+          </v-card>
+          
+          <v-card class="card divcol" style="--bg: #292724; --br: 20px; gap: 10px; --fw: 700">
+            <label style="--fs: 14px">Claimable Rewards</label>
+            <span class="hspan" style="--fs: 23.25px">
+              183.32 HPOT
+            </span>
+            <label style="--fs: 14px">~$389.58 USD</label>
+            
+            <v-btn class="btn mt-5" style="--w: 100%">Harvest</v-btn>
+          </v-card>
+        </aside>
+      </v-card>
+      
+      
+      <v-card id="container-pool-options" class="card divcol" style="gap: 20px">
+        <aside class="space wrap_inv" style="gap: 10px">
+          <div class="center" style="gap: inherit">
+            <v-sheet class="dual-tokens" color="transparent" style="--h-sheet: 30px">
+              <img :src="require(`~/assets/sources/tokens/btc.svg`)" :alt="`btc token`" class="aspect">
+              <img :src="require(`~/assets/sources/tokens/usdc.svg`)" :alt="`usdc token`" class="aspect">
+            </v-sheet>
+            
+            <span class="hspan" style="--fs: 28px; --fw: 700">BTC-USD</span>
+          </div>
+          
+          <v-tabs class="alignr" hide-slider style="--h: 54px; --bg-active: hsl(43 100% 65% / .15); --w-tab: 82px; --g: 5px; --fw: 500; --c: var(--accent)">
+            <v-tab v-for="item in dataPoolOptions" :key="item" class="tcap font3">
+              {{item}}
+            </v-tab>
+          </v-tabs>
+        </aside>
+
+        <v-sheet class="card space font1 mt-12" style="--bg: #292724; --br: 10px; --p: 10px 20px; gap: inherit">
+          <div class="divcol">
+            <v-text-field
+              type="number"
+              label="0.0"
+              hide-details solo
+              style="--fs: 28px; --p: 0"
+            ></v-text-field>
+            <label>LP Balance 112.390</label>
+          </div>
+          
+          <v-btn
+            class="btn font3" style="--bg: #1A1917; --b: 1px solid #2D291D; --br: 10px; --w: 82px; --min-h: 40px; --fs: 14px"
+          >
+            <span style="--c: #FFF8E6">Max</span>
+          </v-btn>
+        </v-sheet>
+
+        <v-btn class="btn" style="--w: 100%; --fs: 21px">
+          Deposit
+        </v-btn>
+
+        <a class="hspan align" style="--c: var(--accent); --fs: 13px">
+          <span class="tdeco">Get LP Tokens</span><v-icon size="1.5em">mdi-arrow-right-thin</v-icon>
+        </a>
       </v-card>
     </section>
   </div>
@@ -18,6 +131,8 @@ export default {
   mixins: [computeds],
   data() {
     return {
+      dataPoolOptions: ["deposit", "withdraw"],
+      filterPoolOptions: "deposit",
     }
   },
   head() {

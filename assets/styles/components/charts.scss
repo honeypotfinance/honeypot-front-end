@@ -21,6 +21,8 @@
   }
 
   .apexcharts-canvas {
+    width: 100% !important;
+    > svg {width: 100% !important}
     [class*="tooltip"] {
       padding: 12px;
       border-radius: 5px;
@@ -68,3 +70,8 @@
     }
   }
 }
+
+// #pools-chart {
+//   .apexcharts-canvas {
+//   }
+// }

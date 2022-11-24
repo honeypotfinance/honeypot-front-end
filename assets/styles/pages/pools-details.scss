@@ -7,23 +7,51 @@
 
   &-header {
     --padding-left: 40px;
-    h1 {
-      padding-left: var(--padding-left);
-      --fs: clamp(1.8em, 2vw + 1em, 2.5em);
-    }
-    
     .v-card.card {
       --p: 10px var(--padding-left);
       --br: 20px;
-      label {
-        --fs: 1.3125em;
-        --fw: 300;
-        font-family: var(--font4);
-        text-transform: capitalize;
-      }
+      @include media(max, 600px) {flex-direction: column}
       span {
-        font-size: 2.6025em;
+        font-size: 1.75em;
         --fw: 700;
+      }
+    }
+  }
+
+  &-content {
+    gap: 30px;
+    
+    .controls {
+      .v-input.v-select {
+        input {display: none}
+        .v-select__selection {min-width: max-content}
+      }
+    }
+    
+    #container-chart {
+      aside.gridauto {
+        --spacing: 30px;
+        position: relative;
+        margin-top: var(--spacing);
+        padding-top: var(--spacing);
+        &::before {
+          content: "";
+          @include absolute(0,0,0);
+          background-color: var(--accent);
+          width: 100%;
+          height: 1px;
+        }
+      }
+    }
+
+    #container-pool-options {
+      max-height: max-content !important;
+      height: max-content !important;
+      .dual-tokens {
+        img {
+          --b: none;
+          --p: 0;
+        }
       }
     }
   }

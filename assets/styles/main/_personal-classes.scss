@@ -378,6 +378,8 @@
 }
 .pevents {pointer-events: all}
 .nopevents {pointer-events: none}
+.tdeco {text-decoration: underline !important}
+.notdeco {text-decoration: none !important}
 
 
 
@@ -721,6 +723,8 @@
   }
   .peventsmobile {pointer-events: all !important}
   .nopeventsmobile {pointer-events: none !important}
+  .tdecomobile {text-decoration: underline !important}
+  .notdecomobile {text-decoration: none !important}
 }
 
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
@@ -792,6 +796,10 @@
 /* // // custome clasess // // */ 
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
 /* hover */
+.hover_arrowback:hover :is(i, img){
+  transition: .2s $ease-return;
+  transform: translateX(-2px);
+}
 .hover_line {
   position: relative;
   &::before {

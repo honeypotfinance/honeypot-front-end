@@ -3,7 +3,7 @@
     <section id="pools-header" class="divcol" style="gap: 10px">
       <h1 class="tcap font1 acenter" style="gap: inherit">pools</h1>
 
-      <v-card class="card space">
+      <v-card class="card space gap2">
         <div class="divcol" style="gap: 10px">
           <label>Total Value Locked 
             <img src="~/assets/sources/icons/info.svg" alt="info icon" style="--w: .813125em">
@@ -18,8 +18,9 @@
       </v-card>
     </section>
 
-    <section class="controls divcol" style="gap: 15px; margin-block: 30px 20px">
-      <v-tabs v-model="tabsPools_model" hide-slider>
+
+    <section class="controls divcol" style="gap: 15px; margin-top: 30px">
+      <v-tabs hide-slider>
         <v-tab v-for="item in dataFilterPools" :key="item" class="tcap" @change="filters.pools = item">
           {{item}}
         </v-tab>
@@ -40,7 +41,10 @@
           </template>
         </v-text-field>
         
-        <v-btn class="btn" style="--fs: .875em;--b: 1px solid #2D291D; --br: 10px; --g: .625em; --h: 46px">
+        <v-btn
+          class="btn" style="--fs: .875em;--b: 1px solid #2D291D; --br: 10px; --g: .625em; --h: 46px"
+          @click="$router.push(localePath('/pools-create'))"
+        >
           <v-icon size="1.5em">mdi-plus</v-icon>
           Create Pool
         </v-btn>
@@ -99,7 +103,6 @@ export default {
         pools: "all farms",
         search: undefined,
       },
-      tabsPools_model: 0,
 
       tableHeaders: [
         { value: "name", text: "Name",  sortable: false },
@@ -107,7 +110,6 @@ export default {
         { value: "volume", text: "Volume (24th)", align: "start", sortable: false },
         { value: "fees", text: "Fees (24th)", align: "start", sortable: false },
         { value: "apr", text: "APR", align: "start", sortable: false },
-        
       ],
       dataPools: [
         {
@@ -157,7 +159,7 @@ export default {
   methods: {
     goTo(item) {
       console.log(item)
-      this.$router.push(`/pools-details`)
+      this.$router.push(this.localePath(`/pools-details`))
     }
   }
 };
