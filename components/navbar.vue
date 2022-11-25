@@ -59,7 +59,7 @@ export default {
         },
         {
           name: "xhpot",
-          to: ""
+          to: "/staking"
         },
       ],
     };

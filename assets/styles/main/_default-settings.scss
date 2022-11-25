@@ -449,6 +449,11 @@ img:not(.not_html, .not) {
   .v-btn__content {
     display: flex;
   }
+  
+  &.v-btn--disabled {
+    opacity: .5;
+    background-color: var(--bg, var(--primary)) !important;
+  }
 }
 
 //- default inputs -//
