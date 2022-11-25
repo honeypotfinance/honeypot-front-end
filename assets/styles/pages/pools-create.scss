@@ -19,6 +19,29 @@
   }
 
   &-content {
-    gap: 30px;
+    gap: 50px;
+    // @include media(max, 1250px) {
+    //   flex-direction: column;
+    //   align-items: center;
+    // }
+    .container-liquidity {
+      .container-options {
+        .v-chip, .v-btn {
+          --bg: #292724;
+          --br: 30px;
+        }
+      }
+      
+      > div.space {
+        center {
+          transform: translateY(calc(62px / 2));
+        }
+      }
+      
+      aside:has(.v-card) .v-card.card {
+        max-width: 183px !important;
+        width: 183px !important;
+      }
+    }
   }
 }

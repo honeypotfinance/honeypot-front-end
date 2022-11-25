@@ -64,4 +64,9 @@
       }
     }
   }
+
+  .v-data-table.custome-table tbody tr:has(.nopevents) {
+    background-color: transparent !important;
+    td {padding: 40px !important}
+  }
 }

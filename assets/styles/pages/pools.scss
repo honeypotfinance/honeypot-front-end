@@ -29,8 +29,12 @@
     }
   }
 
-  .v-data-table.custome-table tbody tr {
+  .v-data-table.custome-table tbody tr:not(:has(.nopevents)) {
     cursor: pointer;
     &:hover {background-color: rgba($secondary, .35) !important}
+  }
+  .v-data-table.custome-table tbody tr:has(.nopevents) {
+    background-color: transparent !important;
+    td {padding: 40px !important}
   }
 }

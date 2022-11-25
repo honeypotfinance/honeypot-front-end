@@ -85,125 +85,143 @@
         Connect Wallet
       </v-btn>
     </div>
+    
+    <!-- if empty -->
+    <div v-else-if="filterDataFarms.length < 1 && layoutCells" class="divcol center tcenter align font1 nopevents">
+      <template v-if="filters.farms === 'my farms'">
+        <img src="~/assets/sources/icons/my-farms-empty.png" alt="empty icon" style="--w: 13.4375em">
+        <span class="h9_em bold mt-5 mb-2">You dont have any farms</span>
+        <span class="h11_em">See which pools are available to swap</span>
+        <v-btn class="btn mt-3 pevents font2" style="--w: 10.3125em; --h: 3.25em; --stroke: .4px">
+          Create LP
+        </v-btn>
+      </template>
+      
+      <template v-else>
+        <img src="~/assets/sources/icons/empty.png" alt="empty icon" style="--w: 13.4375em">
+        <span class="h9_em bold mt-5 mb-2">No results found</span>
+        <span class="h11_em">Try searching something else</span>
+      </template>
+    </div>
 
+    <!-- content filled -->
     <template v-else>
-      <!-- if empty -->
-      <div v-if="filterDataFarms.length < 1" class="divcol center tcenter align font1 nopevents">
-        <template v-if="filters.farms === 'my farms'">
-          <img src="~/assets/sources/icons/my-farms-empty.png" alt="empty icon" style="--w: 13.4375em">
-          <span class="h9_em bold mt-5 mb-2">You dont have any farms</span>
-          <span class="h11_em">See which pools are available to swap</span>
-          <v-btn class="btn mt-3 pevents font2" style="--w: 10.3125em; --h: 3.25em; --stroke: .4px">
-            Create LP
-          </v-btn>
+      <!-- layoutcell 1 -->
+      <section v-if="layoutCells" id="farm-content" class="gridauto">
+        <v-card
+          v-for="(item, i) in filterDataFarms" :key="i"
+          class="card divcol"
+          style=" --w: 100%; gap: 20px">
+          <aside class="divcol align" style="gap: 10px">
+            <v-sheet class="dual-tokens" color="transparent">
+              <img :src="require(`~/assets/sources/tokens/${item.tokenA}.svg`)" :alt="`${item.tokenA} token`" class="aspect">
+              <img :src="require(`~/assets/sources/tokens/${item.tokenB}.svg`)" :alt="`${item.tokenB} token`" class="aspect">
+            </v-sheet>
+            
+            <h3 class="p tup">{{item.tokenA}}-{{item.tokenB}}</h3>
+          </aside>
+          
+          <aside class="space wrap">
+            <div class="divcol center" style="gap: 5px">
+              <h3 class="p">{{`${item.apr}%`}}</h3>
+              <label>APR</label>
+            </div>
+            
+            <div class="divcol center" style="gap: 5px">
+              <h3 class="p">{{`${item.vol.formatter()}`}}</h3>
+              <label>24h Vol.</label>
+            </div>
+            
+            <div class="divcol center" style="gap: 5px">
+              <h3 class="p">{{`$${item.tvl.formatter()}`}}</h3>
+              <label>TVL</label>
+            </div>
+          </aside>
+          
+          <aside class="fwrap space" style="gap: 10px; --max-w-child: 110px">
+            <v-btn class="btn">Deposit</v-btn>
+            <v-btn class="btn">Withdraw</v-btn>
+            <v-btn class="btn">Claim {{item.claim}}</v-btn>
+          </aside>
+        </v-card>
+      </section>
+
+
+
+      <!-- layoutcell 2 -->
+      <v-data-table
+        v-else
+        :headers="tableHeaders"
+        :items="filterDataFarms"
+        hide-default-footer
+        mobile-breakpoint="-1"
+        class="custome-table"
+      >
+        <template #[`item.name`]="{ item }">
+          <div class="acenter font2" style="gap: 10px">
+            <v-sheet class="dual-tokens" color="transparent" style="--h-sheet: 40px">
+              <img :src="require(`~/assets/sources/tokens/${item.tokenA}.svg`)" :alt="`${item.tokenA} token`" class="aspect">
+              <img :src="require(`~/assets/sources/tokens/${item.tokenB}.svg`)" :alt="`${item.tokenB} token`" class="aspect">
+            </v-sheet>
+            
+            <span class="bold tup">{{`${item.tokenA}-${item.tokenB}`}}</span>
+          </div>
         </template>
         
-        <template v-else>
-          <img src="~/assets/sources/icons/empty.png" alt="empty icon" style="--w: 13.4375em">
-          <span class="h9_em bold mt-5 mb-2">No results found</span>
-          <span class="h11_em">Try searching something else</span>
+        <template #[`item.staked`]="{ item }">
+          {{item.staked ? `$${item.staked.toLocaleString()}` : ""}}
         </template>
-      </div>
-
-      <!-- content filled -->
-      <template v-else>
-        <!-- if layoutcells -->
-        <section v-if="layoutCells" id="farm-content" class="gridauto">
-          <v-card
-            v-for="(item, i) in filterDataFarms" :key="i"
-            class="card divcol"
-            style=" --w: 100%; gap: 20px">
-            <aside class="divcol align" style="gap: 10px">
-              <v-sheet class="dual-tokens" color="transparent">
-                <img :src="require(`~/assets/sources/tokens/${item.tokenA}.svg`)" :alt="`${item.tokenA} token`" class="aspect">
-                <img :src="require(`~/assets/sources/tokens/${item.tokenB}.svg`)" :alt="`${item.tokenB} token`" class="aspect">
-              </v-sheet>
-              
-              <h3 class="p tup">{{item.tokenA}}-{{item.tokenB}}</h3>
-            </aside>
+        
+        <template #[`item.wallet`]="{ item }">
+          {{item.wallet ? `$${item.wallet.toLocaleString()}` : ""}}
+        </template>
+        
+        <template #[`item.apr`]="{ item }">
+          {{item.apr ? `${item.apr.toLocaleString()}%` : ""}}
+        </template>
+        
+        <template #[`item.tvl`]="{ item }">
+          {{item.tvl ? `$${item.tvl.formatter()}` : ""}}
+        </template>
+        
+        <template #[`item.actions`]>
+          <div class="end" style="gap: 10px">
+            <v-btn icon style="--bg: #292724">
+              <v-icon size="1.2em">mdi-plus</v-icon>
+            </v-btn>
             
-            <aside class="space wrap">
-              <div class="divcol center" style="gap: 5px">
-                <h3 class="p">{{`${item.apr}%`}}</h3>
-                <label>APR</label>
-              </div>
-              
-              <div class="divcol center" style="gap: 5px">
-                <h3 class="p">{{`${item.vol.formatter()}`}}</h3>
-                <label>24h Vol.</label>
-              </div>
-              
-              <div class="divcol center" style="gap: 5px">
-                <h3 class="p">{{`$${item.tvl.formatter()}`}}</h3>
-                <label>TVL</label>
-              </div>
-            </aside>
+            <v-btn icon style="--bg: #292724">
+              <v-icon size="1.2em">mdi-minus</v-icon>
+            </v-btn>
             
-            <aside class="fwrap space" style="gap: 10px; --max-w-child: 110px">
-              <v-btn class="btn">Deposit</v-btn>
-              <v-btn class="btn">Withdraw</v-btn>
-              <v-btn class="btn">Claim {{item.claim}}</v-btn>
-            </aside>
-          </v-card>
-        </section>
-
-
-
-        <v-data-table
-          v-else
-          :headers="tableHeaders"
-          :items="dataFarms"
-          hide-default-footer
-          mobile-breakpoint="-1"
-          class="custome-table"
-        >
-          <template #[`item.name`]="{ item }">
-            <div class="acenter font2" style="gap: 10px">
-              <v-sheet class="dual-tokens" color="transparent" style="--h-sheet: 40px">
-                <img :src="require(`~/assets/sources/tokens/${item.tokenA}.svg`)" :alt="`${item.tokenA} token`" class="aspect">
-                <img :src="require(`~/assets/sources/tokens/${item.tokenB}.svg`)" :alt="`${item.tokenB} token`" class="aspect">
-              </v-sheet>
-              
-              <span class="bold tup">{{`${item.tokenA}-${item.tokenB}`}}</span>
-            </div>
-          </template>
-          
-          <template #[`item.staked`]="{ item }">
-            {{item.staked ? `$${item.staked.toLocaleString()}` : ""}}
-          </template>
-          
-          <template #[`item.wallet`]="{ item }">
-            {{item.wallet ? `$${item.wallet.toLocaleString()}` : ""}}
-          </template>
-          
-          <template #[`item.apr`]="{ item }">
-            {{item.apr ? `${item.apr.toLocaleString()}%` : ""}}
-          </template>
-          
-          <template #[`item.tvl`]="{ item }">
-            {{item.tvl ? `$${item.tvl.formatter()}` : ""}}
-          </template>
-          
-          <template #[`item.actions`]>
-            <div class="end" style="gap: 10px">
-              <v-btn icon style="--bg: #292724">
-                <v-icon size="1.2em">mdi-plus</v-icon>
+            <v-btn
+              class="btn" style="--fs: 1.3125em; --stroke: .4px; --br: 10px"
+            >
+              <img src="~/assets/sources/icons/download.svg" alt="claim icon" style="--w: .7em">
+              claim
+            </v-btn>
+          </div>
+        </template>
+        
+        <template #no-data>
+          <div class="divcol center tcenter align font1 nopevents">
+            <template v-if="filters.farms === 'my farms'">
+              <img src="~/assets/sources/icons/my-farms-empty.png" alt="empty icon" style="--w: 13.4375em">
+              <span class="h9_em bold mt-5 mb-2">You dont have any farms</span>
+              <span class="h11_em">See which pools are available to swap</span>
+              <v-btn class="btn mt-3 pevents font2" style="--w: 10.3125em; --h: 3.25em; --stroke: .4px">
+                Create LP
               </v-btn>
-              
-              <v-btn icon style="--bg: #292724">
-                <v-icon size="1.2em">mdi-minus</v-icon>
-              </v-btn>
-              
-              <v-btn
-                class="btn" style="--fs: 1.3125em; --stroke: .4px; --br: 10px"
-              >
-                <img src="~/assets/sources/icons/download.svg" alt="claim icon" style="--w: .7em">
-                claim
-              </v-btn>
-            </div>
-          </template>
-        </v-data-table>
-      </template>
+            </template>
+            
+            <template v-else>
+              <img src="~/assets/sources/icons/empty.png" alt="empty icon" style="--w: 13.4375em">
+              <span class="h9_em bold mt-5 mb-2">No results found</span>
+              <span class="h11_em">Try searching something else</span>
+            </template>
+          </div>
+        </template>
+      </v-data-table>
     </template>
   </div>
 </template>

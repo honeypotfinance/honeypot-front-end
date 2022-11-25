@@ -6,7 +6,7 @@
         Back
       </label>
 
-      <v-card class="card space gap2">
+      <v-card class="card space gap2" style="--br: 20px">
         <span class="acenter tup" style="gap: 5px">
           <img src="~/assets/sources/tokens/usdc.svg" alt="token" style="--w: 1.72em; --of: cover">
           usdc /
@@ -23,7 +23,8 @@
 
 
     <section id="pools-details-content" class="fwrap">
-      <v-card id="container-chart" class="card">
+      <!-- section left -->
+      <v-card id="container-chart" class="card" style="--br: 20px">
         <ChartsPoolsChart ref="chart"></ChartsPoolsChart>
 
         <aside class="gridauto" style="gap: 30px; --gs: 190px; align-items: start">
@@ -73,9 +74,10 @@
           </v-card>
         </aside>
       </v-card>
-      
-      
-      <v-card id="container-pool-options" class="card divcol" style="gap: 20px">
+
+
+      <!-- section right -->
+      <v-card id="container-pool-options" class="card divcol" style="gap: 20px; --br: 20px">
         <aside class="space wrap_inv" style="gap: 10px">
           <div class="center" style="gap: inherit">
             <v-sheet class="dual-tokens" color="transparent" style="--h-sheet: 30px">
