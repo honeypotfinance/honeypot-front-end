@@ -26,11 +26,11 @@ export default ({app}, inject) => {
 
   // alerts =========================================================================================================//
   const alerts = (key, {title, desc, color, centered, top, bottom, left, right} = {}) => {
-    if (key === "success" || key === "cancel") {
+    if (key === "success" || key === "cancel" || key === "warning") {
       app.router.app.$children.find(data=>data.$el === document.getElementById("layout")).$refs.alerts.
         GenerateAlert(key, title, desc, color, centered, top, bottom, left, right);
     } else {
-      throw new Error('Invalid key, try "success" or "cancel"')
+      throw new Error('Invalid key, try "success", "cancel", or "warning"')
     }
   }
   // usage $alert(key, {title, desc})

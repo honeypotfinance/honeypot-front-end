@@ -3,20 +3,23 @@
     <v-snackbar
       v-for="(item,i) in dataAlerts" :key="i"
       v-model="item.model"
-      :centered="item.centered"
-      :top="item.top"
-      :bottom="item.bottom"
-      :left="item.left"
-      :right="item.right"
       transition="slide-Y-reverse-transition"
-      :style="`--color-snackbar: ${item.color}`"
+      :style="`
+        --color-snackbar: ${item.color};
+        --bg-snackbar: ${item.key === 'success' ? '#072C13'
+        : item.key === 'warning' ? '#332500'
+        : item.key === 'cancel' ? '#1F1316'
+        : ''}`
+      "
     >
-      <!-- <v-icon :color="item.color" size="3.5em">{{ item.icon }}</v-icon> -->
-      <img :src="require(`~/assets/sources/icons/${item.icon}.svg`)" :alt="`${item.icon} Icon`">
-      <div class="divcol">
-        <h3 class="font1">{{item.title === item.key ? $t(item.title) : item.title}}</h3>
-        <p class="font2 p">{{item.desc === `text${item.key.replace(/^\w/, (c) => c.toUpperCase())}` ? $t(item.desc) : item.desc}}</p>
+      <div class="center font3" style="gap: 8px">
+        <v-icon :color="item.color" size="1.375em">{{ item.icon }}</v-icon>
+        <span class="hspan" :style="`--fs: 1em; --c: ${item.color}`">{{$t(item.message)}}</span>
       </div>
+      
+      <v-btn icon @click="dataAlerts.splice(i, 1)">
+        <v-icon :color="item.color" size="1.1875em">mdi-close</v-icon>
+      </v-btn>
     </v-snackbar>
   </div>
 </template>
@@ -30,22 +33,15 @@ export default {
     };
   },
   methods: {
-    GenerateAlert(
-      key, title = key,
-      desc = `text${key.replace(/^\w/, c => c.toUpperCase())}`,
-      color = key === 'success' ? '#A4FDDF' : 'rgb(200, 0, 0)',
-      centered = true, top = true, bottom, left, right
-    ) {
+    GenerateAlert(key, message = `${key}Message`, color = `var(--${key === 'cancel' ? 'error' : key})`) {
       // // create alert
       const alert = {
-        key, title, desc, centered, top, bottom, left, right, color, model: true,
-        icon: key, // ---> if img tag
-        // icon: key === 'success' ? 'mdi-check-circle' : 'mdi-close-circle', // ---> if mdi icon
+        key, message, color, model: true,
+        icon: key === 'success' ? 'mdi-check-circle' : 'mdi-information'
       }
-      if (alert.bottom) {alert.top = false}
       this.dataAlerts.push(alert)
       // clear alerts
-      setTimeout(() => this.dataAlerts.shift(), 5000);
+      setTimeout(() => this.dataAlerts?.shift(), 5000);
     },
   }
 };
