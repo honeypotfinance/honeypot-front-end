@@ -34,11 +34,10 @@ export const mutations = {
     //   state.dataUser.accountId = data;
     // };
   },
-  signIn(state, data = "0x39283....9302") {
+  signIn(state, data = "0x392832131231239302") {
     try {
       // make login <-----------------------------------------
-      if (/0+x/.test(data))
-        state.dataUser.accountId = data.limitString(7) + data.substring(data.length - 4, data.length);
+      if (/0+x/.test(data)) state.dataUser.accountId = data.cutString(7, 4);
       state.isLogged = true  // temporary
       // make login <-----------------------------------------
     // catch error

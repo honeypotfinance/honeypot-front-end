@@ -45,6 +45,16 @@ export default () => {
   // string.limitString(limit) <-- example
 
 
+  // cutString =========================================================================================================//
+  if (!String.prototype.cutString) {
+    String.prototype.cutString = function(start = 7, end = 4) {
+      if (this.length > start + end) return `${this.substring(0, start)}...${this.substring(this.length - end, this.length)}`;
+      return this
+    }
+  }
+  // string.cutString(start, end) <-- example
+
+
   // toMonthName =========================================================================================================//
   if (!Number.prototype.toMonthName) {
     Number.prototype.toMonthName = function(length = 'short', lang = 'en-US') {
