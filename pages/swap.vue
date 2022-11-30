@@ -171,7 +171,7 @@ export default {
       },
       dataTokens: [
         {
-          img: require('~/assets/sources/tokens/honeypot.svg'),
+          img: require('~/assets/sources/tokens/hny.svg'),
           name: "hny",
         },
         {

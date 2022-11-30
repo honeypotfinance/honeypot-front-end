@@ -128,12 +128,12 @@
             </div>
             
             <div class="divcol center" style="gap: 5px">
-              <h3 class="p">{{`${item.vol.formatter()}`}}</h3>
+              <h3 class="p">{{`${item.vol.formatter(true)}`}}</h3>
               <label>24h Vol.</label>
             </div>
             
             <div class="divcol center" style="gap: 5px">
-              <h3 class="p">{{`$${item.tvl.formatter()}`}}</h3>
+              <h3 class="p">{{`$${item.tvl.formatter(true)}`}}</h3>
               <label>TVL</label>
             </div>
           </aside>
@@ -155,16 +155,15 @@
         :items="filterDataFarms"
         hide-default-footer
         mobile-breakpoint="-1"
-        class="custome-table"
       >
-        <template #[`item.name`]="{ item }">
+        <template #[`item.poolName`]="{ item }">
           <div class="acenter font2" style="gap: 10px">
             <v-sheet class="dual-tokens" color="transparent" style="--h-sheet: 40px">
               <img :src="require(`~/assets/sources/tokens/${item.tokenA}.svg`)" :alt="`${item.tokenA} token`" class="aspect">
               <img :src="require(`~/assets/sources/tokens/${item.tokenB}.svg`)" :alt="`${item.tokenB} token`" class="aspect">
             </v-sheet>
             
-            <span class="bold tup">{{`${item.tokenA}-${item.tokenB}`}}</span>
+            <span class="bold tup">{{item.poolName}}</span>
           </div>
         </template>
         
@@ -181,7 +180,7 @@
         </template>
         
         <template #[`item.tvl`]="{ item }">
-          {{item.tvl ? `$${item.tvl.formatter()}` : ""}}
+          {{item.tvl ? `$${item.tvl.formatter(true)}` : ""}}
         </template>
         
         <template #[`item.actions`]>
@@ -255,7 +254,7 @@ export default {
       tabsFilter_model: 0,
       
       tableHeaders: [
-        { value: "name", text: "Name",  sortable: false },
+        { value: "poolName", text: "Name",  sortable: false },
         { value: "staked", text: "Staked", align: "center", sortable: false },
         { value: "wallet", text: "Wallet", align: "center", sortable: false },
         { value: "apr", text: "APR", align: "center", sortable: false },
@@ -264,6 +263,7 @@ export default {
       ],
       dataFarms: [
         {
+          poolName: "btc-usdc",
           tokenA: "btc",
           tokenB: "usdc",
           apr: 32,
@@ -274,6 +274,7 @@ export default {
           wallet: 10000,
         },
         {
+          poolName: "btc-usdc",
           tokenA: "btc",
           tokenB: "usdc",
           apr: 50,
@@ -284,6 +285,7 @@ export default {
           wallet: 10000,
         },
         {
+          poolName: "btc-usdc",
           tokenA: "btc",
           tokenB: "usdc",
           apr: 12,

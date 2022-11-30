@@ -43,7 +43,7 @@ export default {
       dataNavbar: [
         {
           name: "portfolio",
-          to: ""
+          to: "/portfolio"
         },
         {
           name: "swap",

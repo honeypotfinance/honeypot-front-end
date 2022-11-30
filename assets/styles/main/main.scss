@@ -17,46 +17,6 @@
 
 ///////////////////// global ///////////////////////
 
-//- custome tables -//
-.v-data-table.custome-table {
-  background-color: transparent !important;
-  table {border-spacing: 0 20px !important}
-
-  thead {
-    transform: translateY(20px) !important;
-    tr {
-      th {
-        border-bottom: none !important;
-        span {
-          font-size: 1.1em !important;
-          font-weight: bold !important;
-          color: var(--accent) !important;
-        }
-      }
-    }
-  }
-
-  tbody {
-    tr {
-      background-color: var(--secondary) !important;
-      td {
-        padding: 20px !important;
-        border-bottom: none !important;
-        &:not(:has(span)), span:not(.v-btn *) {font-size: 1.3125em !important}
-        &:first-of-type {border-radius: 30px 0 0 30px !important}
-        &:last-of-type {border-radius: 0 30px 30px 0 !important}
-      }
-    }
-  }
-
-  .v-btn {
-    &--icon {
-      --size: 40px;
-      width: var(--size) !important;
-      height: var(--size) !important;
-    }
-  }
-}
 
 //- controls -//
 .controls {
@@ -70,6 +30,9 @@
 //- dual tokens -//
 .dual-tokens.v-sheet {
   --h-sheet: 50.86px;
+  --b-img: 1px solid var(--clr-line);
+  --p-img: calc(var(--h-sheet) / 4.5);
+
   width: max-content !important;
   height: var(--h-sheet) !important;
   aspect-ratio: 2 / 1;
@@ -77,9 +40,9 @@
   & > img {
     --w: calc(var(--h-sheet) + 6px);
     --of: cover;
-    --p: calc(var(--h-sheet) / 4.5);
+    --p: var(--p-img);
     --br: 50%;
-    --b: 1px solid var(--clr-line);
+    --b: var(--b-img);
     --bg: var(--clr-card);
     
     position: absolute;

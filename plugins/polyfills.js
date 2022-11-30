@@ -85,13 +85,13 @@ export default () => {
 
   // formatter =========================================================================================================//
   if (!Number.prototype.formatter) {
-    Number.prototype.formatter = function() {
+    Number.prototype.formatter = function(bloqMayus, decimals = 1) {
       if (Math.abs(this) > 999999999) {
-        return Math.sign(this)*((Math.abs(this)/1000000000).toFixed(1)) + 'B'
+        return `${Math.sign(this)*((Math.abs(this)/1000000000).toFixed(decimals))}${bloqMayus ? 'B' : 'b'}`
       } else if (Math.abs(this) > 999999) {
-        return Math.sign(this)*((Math.abs(this)/1000000).toFixed(1)) + 'M'
+        return `${Math.sign(this)*((Math.abs(this)/1000000).toFixed(decimals))}${bloqMayus ? 'M' : 'm'}`
       } else if (Math.abs(this) > 999) {
-        return Math.sign(this)*((Math.abs(this)/1000).toFixed(1)) + 'k'
+        return `${Math.sign(this)*((Math.abs(this)/1000).toFixed(decimals))}${bloqMayus ? 'K' : 'k'}`
       } else {
         return Math.sign(this)*Math.abs(this)
       }

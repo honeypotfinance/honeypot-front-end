@@ -57,17 +57,16 @@
       :items="filterDataPools"
       hide-default-footer
       mobile-breakpoint="-1"
-      class="custome-table"
       @click:row="goTo($event)"
     >
-      <template #[`item.name`]="{ item }">
+      <template #[`item.poolName`]="{ item }">
         <div class="acenter font2" style="gap: 10px">
-          <v-sheet class="dual-tokens" color="transparent" style="--h-sheet: 40px">
+          <v-sheet class="dual-tokens" color="transparent" style="--h-sheet: 40px; --b-img: none; --p-img: 0;">
             <img :src="require(`~/assets/sources/tokens/${item.tokenA}.svg`)" :alt="`${item.tokenA} token`" class="aspect">
             <img :src="require(`~/assets/sources/tokens/${item.tokenB}.svg`)" :alt="`${item.tokenB} token`" class="aspect">
           </v-sheet>
           
-          <span class="bold tup">{{`${item.tokenA}-${item.tokenB}`}}</span>
+          <span class="bold tup">{{item.poolName}}</span>
         </div>
       </template>
       
@@ -125,7 +124,7 @@ export default {
       },
 
       tableHeaders: [
-        { value: "name", text: "Name",  sortable: false },
+        { value: "poolName", text: "Name", sortable: false },
         { value: "liquidity", text: "Liquidity", align: "start", sortable: false },
         { value: "volume", text: "Volume (24th)", align: "start", sortable: false },
         { value: "fees", text: "Fees (24th)", align: "start", sortable: false },
@@ -133,6 +132,7 @@ export default {
       ],
       dataPools: [
         {
+          poolName: "btc-usdc",
           tokenA: "btc",
           tokenB: "usdc",
           liquidity: 100000000,
@@ -141,6 +141,7 @@ export default {
           apr: 2335,
         },
         {
+          poolName: "btc-usdc",
           tokenA: "btc",
           tokenB: "usdc",
           liquidity: 100000000,
@@ -149,6 +150,7 @@ export default {
           apr: 2335,
         },
         {
+          poolName: "btc-usdc",
           tokenA: "btc",
           tokenB: "usdc",
           liquidity: 100000000,

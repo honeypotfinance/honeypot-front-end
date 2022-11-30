@@ -6,7 +6,7 @@
   padding-inline: var(--margin-global);
 
   &-header {
-    h1 {--fs: clamp(1.8em, 2vw + 1em, 2.2em)}
+    h1 {--fs: 2.2em}
     .container-profits {
       --max-w: 883px;
       --br: 20px;
@@ -65,7 +65,7 @@
     }
   }
 
-  .v-data-table.custome-table tbody tr:has(.nopevents) {
+  .v-data-table tbody tr:has(.nopevents) {
     background-color: transparent !important;
     td {padding: 40px !important}
   }

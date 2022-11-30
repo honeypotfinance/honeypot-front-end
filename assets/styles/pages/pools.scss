@@ -9,7 +9,7 @@
     --padding-left: 40px;
     h1 {
       padding-left: var(--padding-left);
-      --fs: clamp(1.8em, 2vw + 1em, 2.5em);
+      --fs: 2.5em;
     }
     
     .v-card.card {
@@ -29,11 +29,11 @@
     }
   }
 
-  .v-data-table.custome-table tbody tr:not(:has(.nopevents)) {
+  .v-data-table tbody tr:not(:has(.nopevents)) {
     cursor: pointer;
     &:hover {background-color: rgba($secondary, .35) !important}
   }
-  .v-data-table.custome-table tbody tr:has(.nopevents) {
+  .v-data-table tbody tr:has(.nopevents) {
     background-color: transparent !important;
     td {padding: 40px !important}
   }

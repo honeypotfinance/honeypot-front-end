@@ -71,7 +71,8 @@
   }
 }
 
-// #pools-chart {
-//   .apexcharts-canvas {
-//   }
-// }
+#pools-chart {
+  .apexcharts-canvas:not(:has(.apexcharts-tooltip-box)) .apexcharts-tooltip {
+    display: none !important;
+  }
+}
