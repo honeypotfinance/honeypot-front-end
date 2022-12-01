@@ -11,7 +11,7 @@
         <a
           v-for="(item, i) in dataNavbar" :key="i"
           :class="{active: $route.path.includes(item.to)}"
-          @click="$router.push(localePath(item.to))">
+          @click="item.name !== 'portfolio' ? $router.push(localePath(item.to)) : ''">
           {{item.name}}
         </a>
       </aside>

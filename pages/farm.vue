@@ -1,299 +1,242 @@
 <template>
-  <div id="farm">
-    <section id="farm-header" class="divcol" style="gap: 10px">
-      <h1 class="tcap font1 acenter" style="gap: inherit">my portfolio
-        <v-btn icon @click="hideProfits = !hideProfits">
-          <v-icon size="2.3em" color="var(--accent)">mdi-eye{{hideProfits ? "" : "-off"}}-outline</v-icon>
-        </v-btn>
-      </h1>
+  <div id="farm" class="divcol" style="gap: 30px">
+    <section id="farm-header" class="divcol" style="gap: inherit">
+      <h1 class="tcap font2 tcenter">dashboard</h1>
 
-      <v-card class="container-profits card grid" :class="{hide: hideProfits}">
-        <div class="divcol">
-          <label>deposits</label>
-          <span>${{profits.deposit.toString().split(".").join(",")}}</span>
-        </div>
-        <div class="divcol">
-          <label>rewards</label>
-          <span>${{profits.rewards}}</span>
-        </div>
-        <div class="divcol">
-          <label>monthly APY</label>
-          <span>{{profits.apy_monthly}}%</span>
-        </div>
-        <div class="divcol">
-          <label>daily APY</label>
-          <span>{{profits.apy_daily}}%</span>
-        </div>
-      </v-card>
-    </section>
-
-    <section class="controls divcol" style="gap: 15px; margin-block: 30px 20px">
-      <aside class="space" style="gap: inherit">
-        <div class="acenter wrap" style="gap: inherit">
-          <v-tabs v-model="tabsFarms_model" hide-slider>
-            <v-tab v-for="item in dataFilterFarms" :key="item" class="tcap" @change="filters.farms = item">
-              {{item}}
-            </v-tab>
-          </v-tabs>
+      <aside id="profits" class="fwrap space" style="gap: inherit">
+        <v-card class="card spacea acenter" style="gap: 20px">
+          <div class="divcol">
+            <label class="mb-1">Total Value Locked</label>
+            <span class="hspan my-2">{{valueLocked.current ? `$${valueLocked.current.formatter(false, 2)}` : ''}}</span>
+            <span>
+              {{valueLocked.percent.toString().includes("-") ? `${valueLocked.percent}%` : `+${valueLocked.percent}%`}}
+              this week
+            </span>
+          </div>
           
-          <v-tabs v-model="tabsFilter_model" hide-slider>
-            <v-tab v-for="item in dataFilter" :key="item" class="tcap" @change="filters.filter = item">
-              {{item}}
-            </v-tab>
-          </v-tabs>
-        </div>
-        
-        <v-btn class="btn2" @click="changeLayoutCells()">
-          <img :src="require(`~/assets/sources/icons/cells-${layoutCells ? '2' : '1'}.svg`)" alt="layout cells type">
-        </v-btn>
-      </aside>
-      
-      <aside class="space wrap" style="gap: inherit">
-        <v-text-field
-          v-model="filters.search"
-          label="Search"
-          class="font3"
-          style="--b: 1px solid #2D291D; --br: 10px; --max-w: 262px; --h: 46px; --fs: 14px; --c-label: var(--accent); --caret: var(--accent)"
-          hide-details solo
-          clearable
-          clear-icon="mdi-close"
-        >
-          <template #prepend-inner>
-            <img src="~/assets/sources/icons/search.svg" alt="search icon" class="mr-1">
-          </template>
-        </v-text-field>
-        
-        <div class="center alignr" style="gap: 10px">
-          <label class="plain">Sort by</label>
-          <v-tabs hide-slider style="--bg-active: transparent">
-            <v-tab v-for="item in dataSort" :key="item" class="tup" @change="filters.sort = item">
-              {{item}}
-            </v-tab>
-          </v-tabs>
-        </div>
-      </aside>
-    </section>
-
-    <!-- if not logged -->
-    <div v-if="!isLogged" class="divcol center tcenter align font1 nopevents maxsize_w">
-      <img src="~/assets/sources/icons/wallet-empty.png" alt="empty icon" style="--w: 13.4375em">
-      <span class="h9_em bold mt-5 mb-2">You haven't connected your wallet.</span>
-      <span class="h11_em">Connect to view eligible farms.</span>
-      <v-btn
-        class="btn mt-3 pevents font2" style="--w: 10.3125em; --h: 3.25em; --stroke: .4px"
-        @click="$store.dispatch('modalConnect')">
-        Connect Wallet
-      </v-btn>
-    </div>
-    
-    <!-- if empty -->
-    <div v-else-if="filterDataFarms.length < 1 && layoutCells" class="divcol center tcenter align font1 nopevents">
-      <template v-if="filters.farms === 'my farms'">
-        <img src="~/assets/sources/icons/my-farms-empty.png" alt="empty icon" style="--w: 13.4375em">
-        <span class="h9_em bold mt-5 mb-2">You dont have any farms</span>
-        <span class="h11_em">See which pools are available to swap</span>
-        <v-btn class="btn mt-3 pevents font2" style="--w: 10.3125em; --h: 3.25em; --stroke: .4px">
-          Create LP
-        </v-btn>
-      </template>
-      
-      <template v-else>
-        <img src="~/assets/sources/icons/empty.png" alt="empty icon" style="--w: 13.4375em">
-        <span class="h9_em bold mt-5 mb-2">No results found</span>
-        <span class="h11_em">Try searching something else</span>
-      </template>
-    </div>
-
-    <!-- content filled -->
-    <template v-else>
-      <!-- layoutcell 1 -->
-      <section v-if="layoutCells" id="farm-content" class="gridauto">
-        <v-card
-          v-for="(item, i) in filterDataFarms" :key="i"
-          class="card divcol"
-          style=" --w: 100%; gap: 20px">
-          <aside class="divcol align" style="gap: 10px">
-            <v-sheet class="dual-tokens" color="transparent">
-              <img :src="require(`~/assets/sources/tokens/${item.tokenA}.svg`)" :alt="`${item.tokenA} token`" class="aspect">
-              <img :src="require(`~/assets/sources/tokens/${item.tokenB}.svg`)" :alt="`${item.tokenB} token`" class="aspect">
-            </v-sheet>
-            
-            <h3 class="p tup">{{item.tokenA}}-{{item.tokenB}}</h3>
-          </aside>
-          
-          <aside class="space wrap">
-            <div class="divcol center" style="gap: 5px">
-              <h3 class="p">{{`${item.apr}%`}}</h3>
-              <label>APR</label>
-            </div>
-            
-            <div class="divcol center" style="gap: 5px">
-              <h3 class="p">{{`${item.vol.formatter(true)}`}}</h3>
-              <label>24h Vol.</label>
-            </div>
-            
-            <div class="divcol center" style="gap: 5px">
-              <h3 class="p">{{`$${item.tvl.formatter(true)}`}}</h3>
-              <label>TVL</label>
-            </div>
-          </aside>
-          
-          <aside class="fwrap space" style="gap: 10px; --max-w-child: 110px">
-            <v-btn class="btn">Deposit</v-btn>
-            <v-btn class="btn">Withdraw</v-btn>
-            <v-btn class="btn">Claim {{item.claim}}</v-btn>
-          </aside>
+          <v-sparkline
+            :value="valueLocked.grafic"
+            :color="calcColor(valueLocked.grafic)"
+            :smooth="15"
+            :line-width="5"
+            :height="isXMobile ? 150 : 200"
+          ></v-sparkline>
         </v-card>
-      </section>
-
-
-
-      <!-- layoutcell 2 -->
-      <v-data-table
-        v-else
-        :headers="tableHeaders"
-        :items="filterDataFarms"
-        hide-default-footer
-        mobile-breakpoint="-1"
-      >
-        <template #[`item.poolName`]="{ item }">
-          <div class="acenter font2" style="gap: 10px">
-            <v-sheet class="dual-tokens" color="transparent" style="--h-sheet: 40px">
-              <img :src="require(`~/assets/sources/tokens/${item.tokenA}.svg`)" :alt="`${item.tokenA} token`" class="aspect">
-              <img :src="require(`~/assets/sources/tokens/${item.tokenB}.svg`)" :alt="`${item.tokenB} token`" class="aspect">
-            </v-sheet>
-            
-            <span class="bold tup">{{item.poolName}}</span>
+        
+        <v-card class="card spacea acenter" style="gap: 20px">
+          <div class="divcol">
+            <label class="mb-1">Total Stakd</label>
+            <span class="hspan my-2">{{valueStaked.current ? `$${valueStaked.current.formatter(false, 2)}` : ''}}</span>
+            <span>
+              {{valueStaked.percent.toString().includes("-") ? `${valueStaked.percent}%` : `+${valueStaked.percent}%`}}
+              this week
+            </span>
           </div>
-        </template>
+
+          <v-sparkline
+            :value="valueStaked.grafic"
+            :color="calcColor(valueStaked.grafic)"
+            :smooth="15"
+            :line-width="5"
+            :height="isXMobile ? 150 : 200"
+          ></v-sparkline>
+        </v-card>
         
-        <template #[`item.staked`]="{ item }">
-          {{item.staked ? `$${item.staked.toLocaleString()}` : ""}}
-        </template>
-        
-        <template #[`item.wallet`]="{ item }">
-          {{item.wallet ? `$${item.wallet.toLocaleString()}` : ""}}
-        </template>
-        
-        <template #[`item.apr`]="{ item }">
-          {{item.apr ? `${item.apr.toLocaleString()}%` : ""}}
-        </template>
-        
-        <template #[`item.tvl`]="{ item }">
-          {{item.tvl ? `$${item.tvl.formatter(true)}` : ""}}
-        </template>
-        
-        <template #[`item.actions`]>
-          <div class="end" style="gap: 10px">
-            <v-btn icon style="--bg: #292724">
-              <v-icon size="1.2em">mdi-plus</v-icon>
-            </v-btn>
-            
-            <v-btn icon style="--bg: #292724">
-              <v-icon size="1.2em">mdi-minus</v-icon>
-            </v-btn>
-            
-            <v-btn
-              class="btn" style="--fs: 1.3125em; --stroke: .4px; --br: 10px"
-            >
-              <img src="~/assets/sources/icons/download.svg" alt="claim icon" style="--w: .7em">
-              claim
-            </v-btn>
+        <v-card class="card spacea acenter" style="gap: 20px">
+          <div class="divcol">
+            <label class="mb-1">Claimable Rewards</label>
+            <span class="hspan my-2">{{claimableRewards ? `$${claimableRewards.toLocaleString().split(".").join(",")}` : ''}}</span>
           </div>
-        </template>
-        
-        <template #no-data>
-          <div class="divcol center tcenter align font1 nopevents">
-            <template v-if="filters.farms === 'my farms'">
-              <img src="~/assets/sources/icons/my-farms-empty.png" alt="empty icon" style="--w: 13.4375em">
-              <span class="h9_em bold mt-5 mb-2">You dont have any farms</span>
-              <span class="h11_em">See which pools are available to swap</span>
-              <v-btn class="btn mt-3 pevents font2" style="--w: 10.3125em; --h: 3.25em; --stroke: .4px">
-                Create LP
-              </v-btn>
-            </template>
-            
-            <template v-else>
+
+          <v-btn
+            class="btn2 font3" style="--fs: 1em; --fw: 700; --bg: #292724; --br: 100px; --b: 1px solid rgba(78, 56, 156, 0.16); --p: 12px 14px"
+          >
+            Claim All <img src="~/assets/sources/icons/download.svg" alt="claim icon" class="flr" style="--w: .9em">
+          </v-btn>
+        </v-card>
+      </aside>
+    </section>
+
+
+    <section id="farm-content" class="fwrap" style="gap: inherit">
+      <!-- farm table -->
+      <v-sheet class="card divcol">
+        <h3 class="p" style="--fs: 21px; --fw: 700">Your Portfolio</h3>
+
+        <v-data-table
+          :headers="farmHeaders"
+          :items="dataFarm"
+          style="--spacing: 0px; --p-td: 10px; --fs-th: 14px; --fs-td: 16px; --fw: 700; --distance-th: 0px"
+          hide-default-footer
+        >
+          <template #[`item.fullName`]="{ item }">
+            <div class="acenter" style="gap: 10px">
+              <img :src="require(`~/assets/sources/tokens/${item.name}.svg`)" :alt="`${item.name} icon`" style="--w: 36.96px">
+              
+              <div class="divcol" style="--fw: 700; gap: 5px">
+                <span class="tcap">{{item.fullName}}</span>
+                <span class="hspan" style="font-size: 13px !important; --c: var(--accent)">
+                  {{item.percent ? `${item.percent}%` : ''}}
+                </span>
+              </div>
+            </div>
+          </template>
+          
+          <template #[`item.balance`]="{ item }">
+            {{item.balance}} {{item.name.toUpperCase()}}
+          </template>
+          
+          <template #[`item.price`]="{ item }">
+            {{item.price ? `$${item.price}` : ''}}
+          </template>
+          
+          <template #no-data>
+            <div class="divcol center tcenter align font1 nopevents mt-10">
               <img src="~/assets/sources/icons/empty.png" alt="empty icon" style="--w: 13.4375em">
               <span class="h9_em bold mt-5 mb-2">No results found</span>
               <span class="h11_em">Try searching something else</span>
-            </template>
+            </div>
+          </template>
+        </v-data-table>
+      </v-sheet>
+
+
+      <!-- farms table -->
+      <v-sheet class="card divcol">
+        <aside class="space" style="gap: 15px">
+          <div class="center" style="gap: inherit; --fw: 700">
+            <h3 class="hspan p" style="--fs: 21px; --under: underline">Farms</h3>
+            
+            <span class="hspan" style="--fs: 21px; --c: var(--accent)">My Farms</span>
           </div>
-        </template>
-      </v-data-table>
-    </template>
+          
+          <a @click="$router.push(localePath('/farm-details'))">View all</a>
+        </aside>
+
+        <v-data-table
+          :headers="farmsHeaders"
+          :items="dataFarms"
+          style="--spacing: 0px; --p-td: 10px; --fs-th: 14px; --fs-td: 16px; --fw: 700; --distance-th: 0px"
+          hide-default-footer
+        >
+          <template #[`item.poolName`]="{ item }">
+            <div class="acenter" style="gap: 10px">
+              <v-sheet class="dual-tokens" color="transparent" style="--h-sheet: 35px; --b-img: none; --p-img: 0;">
+                <img :src="require(`~/assets/sources/tokens/${item.tokenA}.svg`)" :alt="`${item.tokenA} token`" class="aspect">
+                <img :src="require(`~/assets/sources/tokens/${item.tokenB}.svg`)" :alt="`${item.tokenB} token`" class="aspect">
+              </v-sheet>
+              
+              <span class="tup">{{item.poolName}}</span>
+            </div>
+          </template>
+          
+          <template #[`item.apr`]="{ item }">
+            {{item.apr ? `${item.apr}%` : item.apr}}
+          </template>
+          
+          <template #[`item.tvl`]="{ item }">
+            {{item.tvl ? `$${item.tvl.formatter(true)}` : ''}}
+          </template>
+          
+          <template #[`item.ago`]="{ item }">
+            {{item.ago.formatter(true)}}
+          </template>
+          
+          <template #no-data>
+            <div class="divcol center tcenter align font1 nopevents">
+              <img src="~/assets/sources/icons/my-farms-empty.png" alt="empty icon" style="--w: 13.4375em">
+              <span class="h9_em bold mt-5 mb-2">You dont have any pools</span>
+              <span class="h11_em">Go to create a pool</span>
+              <v-btn class="btn mt-3 pevents font2" style="--w: 10.3125em; --h: 3.25em; --stroke: .4px">
+                Create Pool
+              </v-btn>
+            </div>
+          </template>
+        </v-data-table>
+      </v-sheet>
+    </section>
   </div>
 </template>
 
 <script>
 import computeds from '~/mixins/computeds'
+import isMobile from '~/mixins/isMobile'
 
 export default {
   name: "FarmPage",
-  mixins: [computeds],
+  mixins: [computeds, isMobile],
   data() {
     return {
-      hideProfits: false,
-      profits: {
-        deposit: 20.009,
-        rewards: 283,
-        apy_monthly: 30,
-        apy_daily: 20,
+      valueLocked: {
+        grafic: [2, 4, 3, 6, 7, 1, 7, 2, 9],
+        current: 42830000,
+        percent: 42
       },
-      dataFilterFarms: ["all farms", "my farms"],
-      dataFilter: ["featured", "stablecoin"],
-      dataSort: ["tvl", "apr"],
-      layoutCells: true,
-      filters: {
-        farms: "all farms",
-        filter: "featured",
-        search: undefined,
-        sort: "tvl",
+      valueStaked: {
+        grafic: [2, 4, 6, 1, 7, 1, 7, 9, 2],
+        current: 42830000,
+        percent: -42
       },
-      tabsFarms_model: 0,
-      tabsFilter_model: 0,
+      claimableRewards: 2000,
       
-      tableHeaders: [
-        { value: "poolName", text: "Name",  sortable: false },
-        { value: "staked", text: "Staked", align: "center", sortable: false },
-        { value: "wallet", text: "Wallet", align: "center", sortable: false },
-        { value: "apr", text: "APR", align: "center", sortable: false },
-        { value: "tvl", text: "TVL", align: "center", sortable: false },
-        { value: "actions", align: "center", sortable: false },
+      farmHeaders: [
+        { text: "Name", value: "fullName" },
+        { text: "Balance", value: "balance" },
+        { text: "Price", value: "price" },
+      ],
+      dataFarm: [
+        {
+          name: "btc",
+          fullName: "bitcoin",
+          percent: 25,
+          balance: 10,
+          price: 128.22,
+        },
+        {
+          name: "btc",
+          fullName: "bitcoin",
+          percent: 25,
+          balance: 10,
+          price: 128.22,
+        },
+        {
+          name: "btc",
+          fullName: "bitcoin",
+          percent: 25,
+          balance: 10,
+          price: 128.22,
+        },
+      ],
+      farmsHeaders: [
+        { text: "Pool", value: "poolName" },
+        { text: "APR", value: "apr" },
+        { text: "TVL", value: "tvl" },
+        { text: "24H", value: "ago" },
       ],
       dataFarms: [
         {
           poolName: "btc-usdc",
           tokenA: "btc",
           tokenB: "usdc",
-          apr: 32,
-          vol: 20000,
-          tvl: 32000000,
-          claim: 29.7,
-          staked: 1000,
-          wallet: 10000,
+          apr: 256,
+          tvl: 328000000,
+          ago: 100200,
+        },
+        {
+          poolName: "hny-bear",
+          tokenA: "hny",
+          tokenB: "database",
+          apr: 256,
+          tvl: 328000000,
+          ago: 100200,
         },
         {
           poolName: "btc-usdc",
           tokenA: "btc",
           tokenB: "usdc",
-          apr: 50,
-          vol: 20000,
-          tvl: 12000000,
-          claim: 29.7,
-          staked: 1000,
-          wallet: 10000,
-        },
-        {
-          poolName: "btc-usdc",
-          tokenA: "btc",
-          tokenB: "usdc",
-          apr: 12,
-          vol: 20000,
-          tvl: 22000000,
-          claim: 29.7,
-          staked: 1000,
-          wallet: 10000,
+          apr: 256,
+          tvl: 328000000,
+          ago: 100200,
         },
       ],
     }
@@ -304,44 +247,10 @@ export default {
       title,
     }
   },
-  computed: {
-    filterDataFarms() {
-      // filters
-      let filters = this.dataFarms;
-      // filter A
-      if (this.filters.farms === 'my farms') filters = filters.filter(data => data.mine)
-      // // filter B
-      // if (this.filters.filter === 'featured') filters = filters.filter(data => data.featured)
-      // else if (this.filters.filter === 'stablecoin')  filters = filters.filter(data => data.stablecoin)
-      // filter C
-      if (this.filters.sort === 'tvl') filters.sort((a, b) => b.tvl - a.tvl)
-      else if (this.filters.sort === 'apr') filters.sort((a, b) => b.apr - a.apr)
-      // search
-      if (this.filters.search) filters = filters.filter(data => `${data.tokenA}-${data.tokenB}`.includes(this.filters.search))
-
-      return filters
-    }
-  },
   methods: {
-    changeLayoutCells() {
-      if (this.layoutCells) {
-        this.dataFilterFarms = ["view all", "farms", "my farms"]
-        this.filters.farms = this.dataFilterFarms[0]
-        this.dataFilter.push("bluechip")
-        this.filters.filter = this.dataFilter[0]
-        this.layoutCells = false
-      } else {
-        this.dataFilterFarms = ["all farms", "my farms"]
-        this.filters.farms = this.dataFilterFarms[0]
-        this.dataFilter.pop()
-        this.filters.filter = this.dataFilter[0]
-        this.layoutCells = true
-      }
-      setTimeout(() => {
-        this.tabsFarms_model = 1
-        this.tabsFilter_model = 0
-      }, 100);
-    },
+    calcColor(grafic) {
+      return grafic[grafic.length-1] > grafic[grafic.length-2] ? '#4ABCA4' : '#D83429'
+    }
   }
 };
 </script>
