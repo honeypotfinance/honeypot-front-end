@@ -23,7 +23,9 @@
         --fs: 16px;
         --fw: 700;
         min-width: max-content;
+        font-family: var(--font1);
       }
+      span {font-family: var(--font2)}
       .hspan {
         --fw: 700;
         --fs: 2.25em;

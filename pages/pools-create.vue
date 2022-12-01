@@ -47,10 +47,10 @@
         >
       </v-sheet>
 
-      <v-card v-else id="container-chart" class="card" style="--br: 20px; --h: max-content; --p: 3.4em 1.5em">
+      <v-card v-else id="container-chart" class="card divcol jcenter" style="--br: 20px">
         <ChartsPoolsChart ref="chart" height="280px"></ChartsPoolsChart>
 
-        <aside class="fwrap" style="gap: 30px; --fb: 190px">
+        <aside class="fwrap font2" style="gap: 30px; --fb: 190px">
           <v-card class="card divcol center">
             <label style="--fs: 16px">TVL</label>
             <span class="hspan" style="--fs: 23.25px">
@@ -79,7 +79,10 @@
       <v-sheet id="container-right" class="card divcol acenter" style="--br: 20px; gap: 20px">
         <v-tabs
           v-model="currentTab" hide-slider
-          style="height: 54px !important; max-height: 54px !important; min-height: 54px !important; --bg-active: hsl(43 100% 65% / .15); --w-tab: 82px; --g: 5px; --fw: 500; --c: var(--accent)"
+          style="
+            height: 54px !important; max-height: 54px !important; min-height: 54px !important; --bg-active: hsl(43 100% 65% / .15);
+            --w-tab: 82px; --g: 5px; --fw: 500; --c: var(--accent); margin-bottom: auto
+          "
         >
           <v-tab v-for="item in dataControls" :key="item" class="tcap font3">
             {{item}}
@@ -215,7 +218,7 @@
         <v-sheet v-else id="container-remove" class="divcol fill_w" color="transparent" style="gap: 20px">
           <template v-if="!removeSelected">
             <v-card v-for="(item, i) in poolList" :key="i" class="card space" style="--b: 3px solid #292724; --br: 20px; --p: 20px; --h: 85px">
-              <div class="center" style="gap: 10px">
+              <div class="center font2" style="gap: 10px">
                 <v-sheet class="dual-tokens" color="transparent">
                   <img :src="require(`~/assets/sources/tokens/${item.tokenA}.svg`)" :alt="`${item.tokenA} token`" class="aspect">
                   <img :src="require(`~/assets/sources/tokens/${item.tokenB}.svg`)" :alt="`${item.tokenB} token`" class="aspect">
@@ -225,7 +228,7 @@
               </div>
               
               <v-btn
-                class="btn2" style="--b: 1px solid #292724; --br: 30px; --p: 11px 12px"
+                class="btn2 font3" style="--b: 1px solid #292724; --br: 30px; --p: 11px 12px"
                 @click="removeSelected = item"
               >
                 <span style="--c: var(--accent); --fw: 500: --fs: 14">Remove</span>
@@ -235,7 +238,7 @@
 
 
           <template v-else>
-            <h3 class="tcenter mt-6" style="--fs: 36px; --fw: 700">{{withdrawSelected}}%</h3>
+            <h3 class="font2 tcenter mb-10" style="--fs: 36px; --fw: 700">{{withdrawSelected}}%</h3>
 
             <aside id="withdraw-buttons" class="spacea fwrap align" style="gap: 10px">
               <v-btn
@@ -249,7 +252,7 @@
 
             <v-sheet class="card divcol align my-3" style="--br: 10px; --bg: #292724; --p: 1.1em; gap: 15px; --max-w: 362px; --w: 100%">
               <div class="space" style="gap: 20px">
-                <div class="center" style="gap: 10px">
+                <div class="center font2" style="gap: 10px">
                   <img
                     :src="require(`~/assets/sources/tokens/${removeSelected.tokenA}.svg`)" :alt="`${removeSelected.tokenA} token`"
                     style="--w: 27.79px; --of: cover"
@@ -261,7 +264,7 @@
               </div>
 
               <div class="space" style="gap: 20px">
-                <div class="center" style="gap: 10px">
+                <div class="center font2" style="gap: 10px">
                   <img
                     :src="require(`~/assets/sources/tokens/${removeSelected.tokenB}.svg`)" :alt="`${removeSelected.tokenB} token`"
                     style="--w: 27.79px; --of: cover"
@@ -311,9 +314,9 @@ export default {
           poolName: "btc-usdc",
         },
         {
-          tokenA: "btc",
-          tokenB: "usdc",
-          poolName: "btc-usdc",
+          tokenA: "hny",
+          tokenB: "database",
+          poolName: "hny-bear",
         },
         {
           tokenA: "btc",
@@ -341,7 +344,9 @@ export default {
     addLiquiidty(ref) {
       if (!ref.validate()) return this.$alert("cancel", "You must fill required fields")
       else if (!(this.firstToken.img && this.secondToken.img)) return this.$alert("cancel", "You must to select tokens to pool")
+      
       this.isLiquidityAdded = true
+      this.$alert("success", "Liquidity added successfuly")
     },
   }
 };

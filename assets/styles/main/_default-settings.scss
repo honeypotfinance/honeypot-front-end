@@ -54,8 +54,8 @@ div.v-card::before {background: transparent !important}
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
 @include reducedMotion {
   ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    width: var(--w-scroll);
+    height: var(--w-scroll);
     background: var(--clr-bg-scroll);
     // &:hover {background: var(--clr-bg-scroll)}
   }
@@ -65,8 +65,8 @@ div.v-card::before {background: transparent !important}
   }
   body {
     &::-webkit-scrollbar {
-      width: 10px;
-      height: 10px
+      width: calc(var(--w-scroll) + 2px);
+      height: calc(var(--w-scroll) + 2px)
     }
   }
 }

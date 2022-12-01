@@ -1,7 +1,7 @@
 <template>
   <div id="portfolio" class="divcol" style="gap: 30px">
     <section id="portfolio-header" class="divcol" style="gap: inherit">
-      <h1 class="tcap font1 tcenter">dashboard</h1>
+      <h1 class="tcap font2 tcenter">dashboard</h1>
 
       <aside id="profits" class="fwrap space" style="gap: inherit">
         <v-card class="card spacea acenter" style="gap: 20px">
@@ -49,7 +49,7 @@
           </div>
 
           <v-btn
-            class="btn2" style="--fs: 1em; --fw: 700; --bg: #292724; --br: 100px; --b: 1px solid rgba(78, 56, 156, 0.16); --p: 12px 14px"
+            class="btn2 font3" style="--fs: 1em; --fw: 700; --bg: #292724; --br: 100px; --b: 1px solid rgba(78, 56, 156, 0.16); --p: 12px 14px"
           >
             Claim All <img src="~/assets/sources/icons/download.svg" alt="claim icon" class="flr" style="--w: .9em">
           </v-btn>

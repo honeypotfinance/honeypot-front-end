@@ -48,7 +48,7 @@
         .v-card {
           --bg: #292724;
           --br: 20px;
-          gap: 10px;
+          gap: 5px;
           --fw: 700;
           --p: 1em 1.5em;
         }
@@ -56,10 +56,19 @@
     }
 
     #container-right {
-      @include media(min, small) {
-        max-width: 480px !important;
-        max-height: 37.8125em !important;
+      // filter
+      position: relative;
+      overflow: hidden;
+      &:not(:has(#withdraw-buttons))::after {
+        content: "";
+        position: absolute;
+        inset: 0 -50px;
+        box-shadow: inset 0px -70px 20px -30px var(--clr-card);
+        z-index: 2;
+        pointer-events: none;
       }
+      @include media(min, small) {max-width: 480px !important}
+      
       #container-liquidity {
         .container-options {
           .v-chip, .v-btn {
@@ -83,6 +92,7 @@
       #container-remove {
         &:not(:has(#withdraw-buttons)) {
           height: calc(37.8125em - (47px + 20px + 24px * 2));
+          padding-right: 5px;
           overflow-y: auto;
           overflow-x: hidden;
         }

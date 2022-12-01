@@ -27,7 +27,7 @@
       <v-card id="container-chart" class="card" style="--br: 20px">
         <ChartsPoolsChart ref="chart"></ChartsPoolsChart>
 
-        <aside class="gridauto" style="gap: 30px; --gs: 190px; align-items: start">
+        <aside class="gridauto font2" style="gap: 30px; --gs: 190px; align-items: start">
           <v-card class="card divcol center">
             <label style="--fs: 15px">TVL</label>
             <span class="hspan" style="--fs: 23.25px">
@@ -70,7 +70,9 @@
             </span>
             <label style="--fs: 15px">~$389.58 USD</label>
             
-            <v-btn class="btn mt-5" style="--w: 100%">Harvest</v-btn>
+            <v-btn class="btn mt-5" style="--w: 100%">
+              <span style="font-family: var(--font1) !important">Harvest</span>
+            </v-btn>
           </v-card>
         </aside>
       </v-card>
