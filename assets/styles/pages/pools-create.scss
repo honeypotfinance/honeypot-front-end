@@ -19,28 +19,90 @@
   }
 
   &-content {
+    $first-wrap: 1174px;
     gap: 50px;
-    // @include media(max, 1250px) {
-    //   flex-direction: column;
-    //   align-items: center;
-    // }
-    .container-liquidity {
-      .container-options {
-        .v-chip, .v-btn {
+    @include media(max, $first-wrap) {
+      justify-content: center;
+      > * {min-width: 100% !important}
+    }
+    @include media(max, small) {
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    #container-chart {
+      aside.fwrap {
+        --spacing: 30px;
+        position: relative;
+        margin-top: var(--spacing);
+        padding-top: var(--spacing);
+        @include media(max, 1495px) {justify-content: center !important}
+        
+        &::before {
+          content: "";
+          @include absolute(0,0,0);
+          background-color: var(--accent);
+          width: 100%;
+          height: 1px;
+        }
+        .v-card {
           --bg: #292724;
-          --br: 30px;
+          --br: 20px;
+          gap: 10px;
+          --fw: 700;
+          --p: 1em 1.5em;
         }
       }
-      
-      > div.space {
-        center {
-          transform: translateY(calc(62px / 2));
+    }
+
+    #container-right {
+      @include media(min, small) {
+        max-width: 480px !important;
+        max-height: 37.8125em !important;
+      }
+      #container-liquidity {
+        .container-options {
+          .v-chip, .v-btn {
+            --bg: #292724;
+            --br: 30px;
+          }
+        }
+        
+        > div.space {
+          center {
+            transform: translateY(calc(62px / 2));
+          }
+        }
+        
+        aside:has(.v-card) .v-card.card {
+          max-width: 183px !important;
+          width: 183px !important;
         }
       }
-      
-      aside:has(.v-card) .v-card.card {
-        max-width: 183px !important;
-        width: 183px !important;
+
+      #container-remove {
+        &:not(:has(#withdraw-buttons)) {
+          height: calc(37.8125em - (47px + 20px + 24px * 2));
+          overflow-y: auto;
+          overflow-x: hidden;
+        }
+
+        #withdraw-buttons {
+          max-width: 362px;
+          width: 100%;
+          .v-btn {
+            --bg: #292724;
+            --c: var(--accent) !important;
+            --br :30px;
+            --h: 40px;
+            max-width: 100px !important;
+            --fs: 14px;
+            &.active {
+              --bg: var(--primary);
+              --c: #000 !important;
+            }
+          }
+        }
       }
     }
   }

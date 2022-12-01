@@ -28,47 +28,47 @@
         <ChartsPoolsChart ref="chart"></ChartsPoolsChart>
 
         <aside class="gridauto" style="gap: 30px; --gs: 190px; align-items: start">
-          <v-card class="card divcol center" style="--bg: #292724; --br: 20px; gap: 10px; --fw: 700">
-            <label style="--fs: 14px">TVL</label>
+          <v-card class="card divcol center">
+            <label style="--fs: 15px">TVL</label>
             <span class="hspan" style="--fs: 23.25px">
               $1.2M
             </span>
           </v-card>
           
-          <v-card class="card divcol center" style="--bg: #292724; --br: 20px; gap: 10px; --fw: 700">
-            <label style="--fs: 14px">Pool APR</label>
+          <v-card class="card divcol center">
+            <label style="--fs: 15px">Pool APR</label>
             <span class="hspan" style="--fs: 23.25px">
               32%
             </span>
           </v-card>
           
-          <v-card class="card divcol center" style="--bg: #292724; --br: 20px; gap: 10px; --fw: 700">
-            <label style="--fs: 14px">HPOT APR</label>
+          <v-card class="card divcol center">
+            <label style="--fs: 15px">HPOT APR</label>
             <span class="hspan" style="--fs: 23.25px">
               2%
             </span>
           </v-card>
           
-          <v-card class="card divcol center" style="--bg: #292724; --br: 20px; gap: 10px; --fw: 700">
-            <label style="--fs: 14px">Total Staked</label>
+          <v-card class="card divcol center">
+            <label style="--fs: 15px">Total Staked</label>
             <span class="hspan" style="--fs: 23.25px">
               $38,000
             </span>
           </v-card>
           
-          <v-card class="card divcol center" style="--bg: #292724; --br: 20px; gap: 10px; --fw: 700">
-            <label style="--fs: 14px">Your Share</label>
+          <v-card class="card divcol center">
+            <label style="--fs: 15px">Your Share</label>
             <span class="hspan" style="--fs: 23.25px">
               &#60;0.93%
             </span>
           </v-card>
           
-          <v-card class="card divcol" style="--bg: #292724; --br: 20px; gap: 10px; --fw: 700">
-            <label style="--fs: 14px">Claimable Rewards</label>
+          <v-card class="card divcol">
+            <label style="--fs: 15px">Claimable Rewards</label>
             <span class="hspan" style="--fs: 23.25px">
               183.32 HPOT
             </span>
-            <label style="--fs: 14px">~$389.58 USD</label>
+            <label style="--fs: 15px">~$389.58 USD</label>
             
             <v-btn class="btn mt-5" style="--w: 100%">Harvest</v-btn>
           </v-card>
@@ -113,7 +113,7 @@
           </v-btn>
         </v-sheet>
 
-        <v-btn class="btn" style="--w: 100%; --fs: 21px">
+        <v-btn class="btn" style="--w: 100%; --h: 51px; --fs: 21px">
           Deposit
         </v-btn>
 

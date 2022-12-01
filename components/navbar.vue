@@ -10,7 +10,7 @@
       <aside class="middle tcap deletemobile">
         <a
           v-for="(item, i) in dataNavbar" :key="i"
-          :class="{active: item.to === $route.path}"
+          :class="{active: $route.path.includes(item.to)}"
           @click="$router.push(localePath(item.to))">
           {{item.name}}
         </a>

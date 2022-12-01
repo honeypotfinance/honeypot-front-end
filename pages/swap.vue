@@ -85,6 +85,7 @@
                     <template #default>
                       <img :src="swapTo.img" :alt="`${swapTo.name} token`" style="--w: 100%; --of: cover">
                     </template>
+                    
                     <template #placeholder>
                       <v-skeleton-loader type="avatar" />
                     </template>

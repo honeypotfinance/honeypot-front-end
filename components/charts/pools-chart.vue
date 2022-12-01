@@ -2,7 +2,7 @@
   <div id="pools-chart" class="charts">
     <aside class="controls space wrap_inv" style="gap: 10px">
       <div class="center" style="gap: inherit">
-        <v-tabs hide-slider style="--h: 54px; --bg-active: hsl(43 100% 65% / .5); --w-tab: 82px; --g: 5px">
+        <v-tabs hide-slider style="--h: 54px; --bg-active: hsl(43 100% 65% / .5); --w-tab: 82px; --g: 5px; --c: var(--accent)">
           <v-tab v-for="item in dataSort" :key="item" class="tup" @change="filtersChart.sort = item">
             {{item}}
           </v-tab>
@@ -31,7 +31,7 @@
 
     <VueApexCharts
       ref="chart"
-      height="185.1px"
+      :height="height"
       type="candlestick"
       :options="chartOptions"
       :series="chartSeries"
@@ -45,7 +45,7 @@ export default {
   props: {
     height: {
       type: String,
-      default: undefined
+      default: "185.1px"
     },
     closable: {
       type: Boolean,

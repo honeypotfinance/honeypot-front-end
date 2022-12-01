@@ -61,7 +61,7 @@
     >
       <template #[`item.poolName`]="{ item }">
         <div class="acenter font2" style="gap: 10px">
-          <v-sheet class="dual-tokens" color="transparent" style="--h-sheet: 40px; --b-img: none; --p-img: 0;">
+          <v-sheet class="dual-tokens" color="transparent" style="--h-sheet: 40px">
             <img :src="require(`~/assets/sources/tokens/${item.tokenA}.svg`)" :alt="`${item.tokenA} token`" class="aspect">
             <img :src="require(`~/assets/sources/tokens/${item.tokenB}.svg`)" :alt="`${item.tokenB} token`" class="aspect">
           </v-sheet>
