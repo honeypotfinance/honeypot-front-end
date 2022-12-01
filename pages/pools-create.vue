@@ -88,7 +88,9 @@
 
 
         <!-- create tab -->
-        <v-form v-if="currentTab === 0" id="container-liquidity" class="divcol jspace font1 fill_w" style="gap: 12px">
+        <v-form
+          v-if="currentTab === 0" id="container-liquidity" ref="form-pool" class="divcol jspace font1 fill_w" style="gap: 12px"
+          @submit.prevent="addLiquiidty($refs['form-pool'])">
           <div class="fnowrap space" style="gap: inherit">
             <!-- card pools left -->
             <aside
@@ -122,6 +124,7 @@
                     placeholder="0.00"
                     type="number"
                     class="custome"
+                    :rules="rules.required"
                   >
                     <template #counter>
                       <label class="font1" style="--fs: 21px">~${{firstToken.amount / 2 || 0}} USD</label>
@@ -168,6 +171,7 @@
                     placeholder="0.00"
                     type="number"
                     class="custome"
+                    :rules="rules.required"
                   >
                     <template #counter>
                       <label class="font1" style="--fs: 21px">~${{secondToken.amount / 2 || 0}} USD</label>
@@ -198,7 +202,7 @@
 
           <v-btn
             class="btn mb-3" style="--bg: #FFCD4D; --fs: 21px; --h: 51px"
-            @click="addLiquiidty()"
+            @click="addLiquiidty($refs['form-pool'])"
           >Add Liquidity</v-btn>
 
           <a class="hspan align" style="--c: var(--accent); --fs: 13px">
@@ -334,7 +338,9 @@ export default {
     }
   },
   methods: {
-    addLiquiidty() {
+    addLiquiidty(ref) {
+      if (!ref.validate()) return this.$alert("cancel", "You must fill required fields")
+      else if (!(this.firstToken.img && this.secondToken.img)) return this.$alert("cancel", "You must to select tokens to pool")
       this.isLiquidityAdded = true
     },
   }

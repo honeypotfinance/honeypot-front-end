@@ -33,11 +33,14 @@ export default {
     };
   },
   methods: {
-    GenerateAlert(key, message = `${key}Message`, color = `var(--${key === 'cancel' ? 'error' : key})`) {
+    GenerateAlert(key, message = `${key}Message`) {
       // // create alert
       const alert = {
-        key, message, color, model: true,
-        icon: key === 'success' ? 'mdi-check-circle' : 'mdi-information'
+        key,
+        message,
+        color: `var(--${key === 'cancel' ? 'error' : key})`,
+        icon: key === 'success' ? 'mdi-check-circle' : 'mdi-information',
+        model: true
       }
       this.dataAlerts.push(alert)
       // clear alerts
