@@ -20,11 +20,29 @@
 
 //- controls -//
 .controls {
+  // font-size: var(--resize);
+  
   :not(label.plain) {font-family: 'Inter', sans-serif}
   .v-btn {
     --b: 1px solid var(--clr-line)
   }
   & + * {min-height: 25em}
+  
+  > aside:first-of-type {
+    @include media(max, 500px) {
+      align-items: flex-start;
+      column-gap: 0 !important;
+    }
+  }
+  
+  .v-input, .v-tabs {
+    --fs: 0.875em !important;
+  }
+  
+  .v-input, .v-tabs, .v-btn {
+    --h: 46px !important;
+    @include media(max, small) {--h: clamp(40px, 3vw, 46px) !important}
+  }
 }
 
 //- dual tokens -//

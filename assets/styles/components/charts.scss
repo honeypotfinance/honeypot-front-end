@@ -69,6 +69,13 @@
       }
     }
   }
+  
+}
+
+#swap-chart {
+  .apexcharts-canvas path {
+    stroke: var(--c-trend) !important;
+  }
 }
 
 #pools-chart {

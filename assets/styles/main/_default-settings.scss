@@ -667,11 +667,13 @@ img:not(.not_html, .not) {
 .v-menu__content {overscroll-behavior: contain}
 
 .v-select-list {
+  font-size: var(--resize);
   font-family: var(--font2) !important;
   background: var(--secondary) !important;
   border-radius: $border-btn !important;
   overflow: hidden;
   :is(.v-list-item__title, span) {
+    font-size: 1em;
     color: #ffffff !important;
     &::first-letter {text-transform: uppercase}
   }

@@ -1,12 +1,12 @@
 <template>
-  <div class="charts fill">
+  <div id="swap-chart" class="charts fill" :style="`--c-trend: ${isTrendUp ? 'var(--success)' : 'var(--error)'}`">
     <section class="charts-header jspace">
       <div class="divcol font2">
         <span>HNY/POT</span>
-        <span>$200</span>
+        <span>{{currentPrice ? `$${currentPrice}` : ''}}</span>
         <div class="acenter">
-          <v-icon color="var(--success)">mdi-trending-up</v-icon>
-          <span style="--c: var(--success)">22%</span>
+          <v-icon :color="isTrendUp ? 'var(--success)' : 'var(--error)'">mdi-trending-{{isTrendUp ? 'up' : 'down'}}</v-icon>
+          <span style="--c: var(--c-trend)">{{trendingPercent}}</span>
         </div>
       </div>
 
@@ -161,27 +161,45 @@ export default {
       },
     };
   },
+  computed: {
+    data() {
+      return this.chartSeries[0].data;
+    },
+    currentPrice() {
+      return this.data[this.data.length-1][1]
+    },
+    isTrendUp() {
+      return this.data[this.data.length-1][1] > this.data[this.data.length-2][1]
+    },
+    trendingPercent() {
+      return `
+        ${((this.data[this.data.length-1][1] / this.data[this.data.length-2][1])
+        * 100).toFixed(0)}%
+      `;
+    }
+  },
   methods: {
     updateData(timeline) {
       switch (timeline) {
         case '1d': {
-          this.$refs.chart.zoomX(new Date('28 Jan 2017').getTime());
           this.selection = 0
+          this.$refs.chart.zoomX(new Date(this.data[this.data.length-2][0]).getTime());
           break
         }
         case '1w': {
-          this.$refs.chart.zoomX(new Date('27 Sep 2017').getTime());
           this.selection = 1
+          this.$refs.chart.zoomX(new Date(this.data[this.data.length-(1 + 7)][0]).getTime());
           break
         }
         case '1y': {
-          this.$refs.chart.zoomX(new Date('27 Feb 2017').getTime());
           this.selection = 2
+          if (this.data.length-1 > this.data.length-(1 + 365)) return this.$alert('cancel', 'No data available');
+          this.$refs.chart.zoomX(new Date(this.data[this.data.length-(1 + 365)][0]).getTime());
           break
         }
         default: {
-          this.$refs.chart.resetSeries();
           this.selection = 3
+          this.$refs.chart.resetSeries();
         }
       }
     },

@@ -62,6 +62,8 @@
   --font4: 'Poppins', sans-serif;
   --fw: initial;
   /* // // sizes // // */
+  --resize: clamp(12px, 1vw, 16px);
+  --resize-mobile: clamp(10px, 1.5vw, 12px);
   --margin-global: 9em; // too can use 6em
   @include media(max, small) {--margin-global: clamp(1em, 5vw, 4em)}
   --parent: 1600px;

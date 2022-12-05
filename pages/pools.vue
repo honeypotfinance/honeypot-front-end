@@ -31,7 +31,7 @@
           v-model="filters.search"
           label="Search"
           class="font3"
-          style="--b: 1px solid #2D291D; --br: 10px; --h: 46px; --fs: 14px; --c-label: var(--accent); --caret: var(--accent)"
+          style="--b: 1px solid #2D291D; --br: 10px; --c-label: var(--accent); --caret: var(--accent)"
           hide-details solo
           clearable
           clear-icon="mdi-close"
@@ -42,7 +42,7 @@
         </v-text-field>
         
         <v-btn
-          class="btn" style="--fs: .875em;--b: 1px solid #2D291D; --br: 10px; --g: .625em; --h: 46px"
+          class="btn" style="--fs: 1em;--b: 1px solid #2D291D; --br: 10px; --g: .25em"
           @click="$router.push(localePath('/pools-create'))"
         >
           <v-icon size="1.5em">mdi-plus</v-icon>
@@ -92,7 +92,9 @@
             <img src="~/assets/sources/icons/my-farms-empty.png" alt="empty icon" style="--w: 13.4375em">
             <span class="h9_em bold mt-5 mb-2">You dont have any pools</span>
             <span class="h11_em">Go to create a pool</span>
-            <v-btn class="btn mt-3 pevents font2" style="--w: 10.3125em; --h: 3.25em; --stroke: .4px">
+            <v-btn
+              class="btn mt-3 pevents font2" style="--w: 10.3125em; --h: 3.25em; --stroke: .4px"
+              @click="$router.push(localePath('/pools-create'))">
               Create Pool
             </v-btn>
           </template>

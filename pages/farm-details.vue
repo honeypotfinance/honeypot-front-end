@@ -53,7 +53,7 @@
           v-model="filters.search"
           label="Search"
           class="font3"
-          style="--b: 1px solid #2D291D; --br: 10px; --max-w: 262px; --h: 46px; --fs: 14px; --c-label: var(--accent); --caret: var(--accent)"
+          style="--b: 1px solid #2D291D; --br: 10px; --max-w: 262px; --c-label: var(--accent); --caret: var(--accent)"
           hide-details solo
           clearable
           clear-icon="mdi-close"

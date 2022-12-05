@@ -9,7 +9,7 @@
   .v-main {
     & > * {
       @include media(max,small) {
-        font-size: clamp(10px, 1.5vw, 12px)
+        font-size: var(--resize-mobile)
       }
     }
   }

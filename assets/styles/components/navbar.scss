@@ -2,7 +2,7 @@
 // // // navbar // // // 
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
 #navbar {
-  font-size: clamp(12px, 1vw, 16px);
+  font-size: var(--resize);
   height: var(--h-navbar) !important;
   animation: movedown .5s $ease-return;
   transition: 0.4s ease-in-out;

@@ -7,6 +7,10 @@
         <img src="~/assets/sources/logos/logo.svg" alt="logo" style="--w: clamp(10em, 13vw, 13.414375em)">
       </nuxt-link>
 
+      <!-- <v-btn class="btn showmobile" @click="$refs.menu.drawer = true">
+        <v-icon>mdi-menu</v-icon>
+      </v-btn> -->
+
       <aside class="middle tcap deletemobile">
         <a
           v-for="(item, i) in dataNavbar" :key="i"

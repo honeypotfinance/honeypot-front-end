@@ -2,7 +2,7 @@
   <div id="pools-chart" class="charts">
     <aside class="controls space wrap_inv" style="gap: 10px">
       <div class="center" style="gap: inherit">
-        <v-tabs hide-slider style="--h: 54px; --bg-active: hsl(43 100% 65% / .5); --w-tab: 82px; --g: 5px; --c: var(--accent)">
+        <v-tabs hide-slider style="--h: 54px; --bg-active: hsl(43 100% 65% / .5); --w-tab: 5.125em; --g: 5px; --c: var(--accent)">
           <v-tab v-for="item in dataSort" :key="item" class="tup" @change="filtersChart.sort = item">
             {{item}}
           </v-tab>
@@ -14,7 +14,7 @@
           hide-details solo
           :menu-props="{offsetY: true}"
           class="font3"
-          style="--fs: 14px; --w: 124px; --h: 54px; --p: 0 20px; --bg: #292724; --br: 10px; --tt: capitalize; --fw: 400"
+          style="font-size: var(--resize) !important; --w: 7.75em; --h: 54px; --p: 0 1.25em; --bg: #292724; --br: 10px; --tt: capitalize; --fw: 400"
           @input="updateData(filtersChart.filter)"
         >
           <template #append>
