@@ -119,6 +119,7 @@
 
         <v-btn
           class="btn" style="--bg: linear-gradient(109.68deg, #F7931A 5.56%, #FFCD4D 85.08%); --fs: 21px"
+          @click="isMobile ? $router.push(localePath('/swap-checkout')) : ''"
         >swap</v-btn>
       </v-form>
 
@@ -153,10 +154,11 @@
 
 <script>
 import computeds from '~/mixins/computeds'
+import isMobile from '~/mixins/isMobile'
 
 export default {
   name: "SwapPage",
-  mixins: [computeds],
+  mixins: [computeds, isMobile],
   data() {
     return {
       heightChart: undefined,

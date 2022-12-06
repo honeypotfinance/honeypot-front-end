@@ -1,0 +1,12 @@
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
+// // // swap-checkout // // // 
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
+#swap-checkout {
+  @include parent;
+  padding-inline: var(--margin-global);
+
+  &-content {
+    margin-top: 1em;
+    gap: 2.5em;
+  }
+}
