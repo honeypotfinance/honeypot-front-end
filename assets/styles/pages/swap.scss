@@ -20,9 +20,9 @@
     @include media(max, small) {
       padding-bottom: 80px;
       flex-direction: column;
-      > :nth-child(1) {order: 0}
-      > :nth-child(2) {order: 1}
-      > :nth-child(3) {order: 2}
+      > :nth-child(1) {display: none}
+      > :nth-child(2) {order: 0}
+      > :nth-child(3) {display: none}
       > * {
         --size: clamp(280px, 1vw, 300px);
         width: var(--size) !important;
