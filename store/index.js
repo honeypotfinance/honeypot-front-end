@@ -68,16 +68,20 @@ export const actions = {
 
 export const getters = {
   pagination: () => ({items, currentPage, itemsPerPage, search, filterA, filterB}) => {
-    // search
-    if (search) items = items.filter(data => data.name.includes(search))
+    let filters = [...items]
 
-    return items.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
+    // search
+    if (search) filters = filters.filter(data => data.name.includes(search))
+
+    return filters.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
   },
   filters: () => ({items, search, filterA, filterB}) => {
-    // search
-    if (search) items = items.filter(data => data.name.includes(search))
+    let filters = [...items]
 
-    return items
+    // search
+    if (search) filters = filters.filter(data => data.name.includes(search))
+
+    return filters
   }
 };
 
