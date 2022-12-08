@@ -753,6 +753,23 @@
     right: var(--r, 0) !important;
     margin: var(--m, auto) !important;
   }
+  .anchorlinemobile {
+    --t: 0; --b: 0; --l: 0; --r: 0; --m: auto; --w--line: 100%; --h-line: 1px; --bg-line: var(--clr-line);
+  
+    position: relative !important;
+    &::before {
+      content: '' !important;
+      position: absolute !important;
+      top: var(--t, 0) !important;
+      bottom: var(--b, 0) !important;
+      left: var(--l), 0 !important;
+      right: var(--r), 0 !important;
+      margin: var(--m), auto !important;
+      width: var(--w--line) !important;
+      height: var(--h-line) !important;
+      background-color: var(--bg-line) !important;
+    }
+  }
 }
 
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
