@@ -53,7 +53,7 @@
             <v-card class="card">
               <div class="divcol">
                 <v-text-field
-                  v-model="swapFrom.price"
+                  v-model="swapFrom.amount"
                   solo counter
                   placeholder="0.00"
                   type="number"
@@ -62,7 +62,7 @@
                   @keyup="$event => $event.key === 'Enter' ? swap() : ''"
                 >
                   <template #counter>
-                    <label class="font1" style="--fs: 21px">~${{(swapFrom.price / 2).formatter(true) || 0}} USD</label>
+                    <label class="font1" style="--fs: 21px">~${{(swapFrom.amount / 2).formatter(true) || 0}} USD</label>
                   </template>
                 </v-text-field>
               </div>
@@ -106,7 +106,7 @@
             <v-card class="card">
               <div class="divcol">
                 <v-text-field
-                  v-model="swapTo.price"
+                  v-model="swapTo.amount"
                   solo counter
                   placeholder="0.00"
                   type="number"
@@ -114,7 +114,7 @@
                   disabled
                 >
                   <template #counter>
-                    <label class="font1" style="--fs: 21px">~${{(swapTo.price / 2).formatter(true) || 0}} USD</label>
+                    <label class="font1" style="--fs: 21px">~${{(swapTo.amount / 2).formatter(true) || 0}} USD</label>
                   </template>
                 </v-text-field>
               </div>
@@ -123,7 +123,7 @@
           </aside>
         </div>
 
-        <v-btn class="btn stylish" :disabled="!(swapFrom.price && swapTo.price)" @click="swap()">swap</v-btn>
+        <v-btn class="btn stylish" :disabled="!(swapFrom.amount && swapTo.amount)" @click="swap()">swap</v-btn>
       </v-form>
 
 
@@ -168,12 +168,12 @@ export default {
       swapFrom: {
         img: require('~/assets/sources/tokens/database.svg'),
         name: "bear",
-        price: undefined,
+        amount: undefined,
       },
       swapTo: {
         img: require('~/assets/sources/tokens/btc.svg'),
         name: "btc",
-        price: undefined,
+        amount: undefined,
       },
       dataTokens: [
         {
@@ -271,15 +271,15 @@ export default {
     calcPriceTo(event) {
       const item = this.swapFrom
       console.log(item)
-      this.swapTo.price = (event / 1.5).toFixed(2)
+      this.swapTo.amount = (event / 1.5).toFixed(2)
     },
     swap() {
-      if (!(this.swapFrom.price && this.swapTo.price)) return;
+      if (!(this.swapFrom.amount && this.swapTo.amount)) return;
       const data = {
         tokenFrom: this.swapFrom.name,
-        priceFrom: this.swapFrom.price,
+        priceFrom: this.swapFrom.amount,
         tokenTo: this.swapTo.name,
-        priceTo: this.swapTo.price,
+        priceTo: this.swapTo.amount,
       }
 
       this.$store.commit("setSwapReview", data)
