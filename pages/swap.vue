@@ -16,7 +16,7 @@
 
 
       <!-- middle -->
-      <v-form class="middle divcol jspace" style="gap: 12px">
+      <v-form ref="swapForm" class="middle divcol jspace" style="gap: 12px" @submit.prevent="swap()">
         <div class="fnowrap space" style="gap: inherit">
           <!-- card swap left -->
           <aside
@@ -38,26 +38,31 @@
                   </v-img>
                   <span>{{swapFrom.name}}</span>
                 </v-chip>
-                <v-btn class="btn2">
-                  <span>half</span>
-                </v-btn>
-                <v-btn class="btn2">
-                  <span>max</span>
-                </v-btn>
+
+                <div class="center" style="gap: 10px">
+                  <v-btn class="btn2">
+                    <span>half</span>
+                  </v-btn>
+                  <v-btn class="btn2">
+                    <span>max</span>
+                  </v-btn>
+                </div>
               </div>
             </div>
 
             <v-card class="card">
               <div class="divcol">
                 <v-text-field
-                  v-model="swapFrom.amount"
+                  v-model="swapFrom.price"
                   solo counter
                   placeholder="0.00"
                   type="number"
                   class="custome"
+                  @input="calcPriceTo($event)"
+                  @keyup="$event => $event.key === 'Enter' ? swap() : ''"
                 >
                   <template #counter>
-                    <label class="font1" style="--fs: 21px">~${{swapFrom.amount / 2 || 0}} USD</label>
+                    <label class="font1" style="--fs: 21px">~${{(swapFrom.price / 2).formatter(true) || 0}} USD</label>
                   </template>
                 </v-text-field>
               </div>
@@ -101,14 +106,15 @@
             <v-card class="card">
               <div class="divcol">
                 <v-text-field
-                  v-model="swapTo.amount"
+                  v-model="swapTo.price"
                   solo counter
                   placeholder="0.00"
                   type="number"
                   class="custome"
+                  disabled
                 >
                   <template #counter>
-                    <label class="font1" style="--fs: 21px">~${{swapTo.amount / 2 || 0}} USD</label>
+                    <label class="font1" style="--fs: 21px">~${{(swapTo.price / 2).formatter(true) || 0}} USD</label>
                   </template>
                 </v-text-field>
               </div>
@@ -117,10 +123,7 @@
           </aside>
         </div>
 
-        <v-btn
-          class="btn" style="--bg: linear-gradient(109.68deg, #F7931A 5.56%, #FFCD4D 85.08%); --fs: 21px"
-          @click="isMobile ? $router.push(localePath('/swap-checkout')) : ''"
-        >swap</v-btn>
+        <v-btn class="btn stylish" :disabled="!(swapFrom.price && swapTo.price)" @click="swap()">swap</v-btn>
       </v-form>
 
 
@@ -154,23 +157,23 @@
 
 <script>
 import computeds from '~/mixins/computeds'
-import isMobile from '~/mixins/isMobile'
+// import isMobile from '~/mixins/isMobile'
 
 export default {
   name: "SwapPage",
-  mixins: [computeds, isMobile],
+  mixins: [computeds],
   data() {
     return {
       heightChart: undefined,
       swapFrom: {
         img: require('~/assets/sources/tokens/database.svg'),
         name: "bear",
-        amount: undefined,
+        price: undefined,
       },
       swapTo: {
         img: require('~/assets/sources/tokens/btc.svg'),
         name: "btc",
-        amount: undefined,
+        price: undefined,
       },
       dataTokens: [
         {
@@ -265,6 +268,23 @@ export default {
         token.name = this.currentDrag.alt.split(" token")[0]
       }
     },
+    calcPriceTo(event) {
+      const item = this.swapFrom
+      console.log(item)
+      this.swapTo.price = (event / 1.5).toFixed(2)
+    },
+    swap() {
+      if (!(this.swapFrom.price && this.swapTo.price)) return;
+      const data = {
+        tokenFrom: this.swapFrom.name,
+        priceFrom: this.swapFrom.price,
+        tokenTo: this.swapTo.name,
+        priceTo: this.swapTo.price,
+      }
+
+      this.$store.commit("setSwapReview", data)
+      this.$router.push(this.localePath('/swap-review'))
+    }
   }
 };
 </script>

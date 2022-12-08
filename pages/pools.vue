@@ -42,7 +42,7 @@
         </v-text-field>
         
         <v-btn
-          class="btn" style="--fs: 1em;--b: 1px solid #2D291D; --br: 10px; --g: .25em"
+          class="btn" style="--fs: max(11px, 1em);--b: 1px solid #2D291D; --br: 10px; --g: .25em"
           @click="$router.push(localePath('/pools-create'))"
         >
           <v-icon size="1.5em">mdi-plus</v-icon>

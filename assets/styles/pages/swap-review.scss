@@ -1,0 +1,19 @@
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
+// // // swap-review // // // 
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
+#swap-review {
+  @include media(max, small) {padding-inline: var(--margin-global)}
+  width: min(100%, 480px);
+  margin-inline: auto;
+
+  &-content {
+    --distance: 2.8em;
+    margin-top: var(--distance);
+    gap: var(--distance);
+    
+    > section:first-of-type {
+      height: 200px;
+      justify-content: space-around;
+    }
+  }
+}

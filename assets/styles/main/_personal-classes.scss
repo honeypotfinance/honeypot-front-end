@@ -41,22 +41,10 @@
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
 /* // // desktop // // */ 
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
-.font1 {
-  font-family:var(--font1) !important;
-  * {font-family:var(--font1) !important}
-}
-.font2 {
-  font-family:var(--font2) !important;
-  * {font-family:var(--font2) !important}
-}
-.font3 {
-  font-family:var(--font3) !important;
-  * {font-family:var(--font3) !important}
-}
-.font4 {
-  font-family:var(--font4) !important;
-  * {font-family:var(--font4) !important}
-}
+.font1 {font-family:var(--font1) !important}
+.font2 {font-family:var(--font2) !important}
+.font3 {font-family:var(--font3) !important}
+.font4 {font-family:var(--font4) !important}
 .h1 {font-size: var(--step-8) !important}
 .h2 {font-size: var(--step-7) !important}
 .h3 {font-size: var(--step-6) !important}
@@ -380,6 +368,41 @@
 .nopevents {pointer-events: none}
 .tdeco {text-decoration: underline !important}
 .notdeco {text-decoration: none !important}
+.close {
+  --d: 0; --t: var(--d); --r: var(--d);
+
+  position: absolute !important;
+  top: var(--t) !important;
+  right: var(--r) !important;
+}
+.absolute {
+  --t: 0; --l: 0; --r: 0; --b: 0; --m: auto;
+
+  position: absolute !important;
+  top: var(--t, 0) !important;
+  bottom: var(--b, 0) !important;
+  left: var(--l, 0) !important;
+  right: var(--r, 0) !important;
+  margin: var(--m, auto) !important;
+}
+.anchorline {
+  --t: 0; --b: 0; --l: 0; --r: 0; --m: auto; --w--line: 100%; --h-line: 1px; --bg-line: var(--clr-line);
+
+  position: relative;
+  &::before {
+    content: '';
+    position: absolute;
+    top: var(--t, 0);
+    bottom: var(--b, 0);
+    left: var(--l), 0;
+    right: var(--r), 0;
+    margin: var(--m), auto;
+    width: var(--w--line);
+    height: var(--h-line);
+    background-color: var(--bg-line);
+  }
+}
+
 
 
 
@@ -390,22 +413,10 @@
 @include media(min, 881px) {.showmobile {display: none !important}}
 @include media(max, small) {
   .deletemobile {display: none !important}
-  .font1mobile {
-    font-family:var(--font1) !important;
-    * {font-family:var(--font1) !important}
-  }
-  .font2mobile {
-    font-family:var(--font2) !important;
-    * {font-family:var(--font2) !important}
-  }
-  .font3mobile {
-    font-family:var(--font3) !important;
-    * {font-family:var(--font3) !important}
-  }
-  .font4mobile {
-    font-family:var(--font4) !important;
-    * {font-family:var(--font4) !important}
-  }
+  .font1mobile {font-family:var(--font1) !important}
+  .font2mobile {font-family:var(--font2) !important}
+  .font3mobile {font-family:var(--font3) !important}
+  .font4mobile {font-family:var(--font4) !important}
   .h1mobile {font-size: var(--step-8) !important}
   .h2mobile {font-size: var(--step-7) !important}
   .h3mobile {font-size: var(--step-6) !important}
@@ -725,6 +736,23 @@
   .nopeventsmobile {pointer-events: none !important}
   .tdecomobile {text-decoration: underline !important}
   .notdecomobile {text-decoration: none !important}
+  .closemobile {
+    --d: 0; --t: var(--d); --r: var(--d);
+  
+    position: absolute !important;
+    top: var(--t) !important;
+    right: var(--r) !important;
+  }
+  .absolutemobile {
+    --t: 0; --l: 0; --r: 0; --b: 0; --m: auto;
+  
+    position: absolute !important;
+    top: var(--t, 0) !important;
+    bottom: var(--b, 0) !important;
+    left: var(--l, 0) !important;
+    right: var(--r, 0) !important;
+    margin: var(--m, auto) !important;
+  }
 }
 
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /

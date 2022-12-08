@@ -63,6 +63,9 @@
           display: flex;
           flex-direction: column;
           justify-content: center;
+          @include media(max, small) {
+            * {text-align: center !important}
+          }
           > label {
             margin-top: 10px;
             padding-inline: 12px;

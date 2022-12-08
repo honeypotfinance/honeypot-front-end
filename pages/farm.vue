@@ -61,17 +61,18 @@
     <section id="farm-content" class="fwrap" style="gap: inherit">
       <!-- farm table -->
       <v-sheet class="card divcol">
-        <h3 class="p" style="--fs: 21px; --fw: 700">Your Portfolio</h3>
+        <h3 class="p" style="--fs: max(19px, 1.3125em); --fw: 700">Your Portfolio</h3>
 
         <v-data-table
           :headers="farmHeaders"
           :items="dataFarm"
-          style="--spacing: 0px; --p-td: 10px; --fs-th: 14px; --fs-td: 16px; --fw: 700; --distance-th: 0px"
+          style="--spacing: 0px; --p-td: 10px; --fw: 700; --distance-th: 0px"
           hide-default-footer
+          :mobile-breakpoint="-1"
         >
           <template #[`item.fullName`]="{ item }">
             <div class="acenter" style="gap: 10px">
-              <img :src="require(`~/assets/sources/tokens/${item.name}.svg`)" :alt="`${item.name} icon`" style="--w: 36.96px">
+              <img :src="require(`~/assets/sources/tokens/${item.name}.svg`)" :alt="`${item.name} icon`" class="solo-token">
               
               <div class="divcol" style="--fw: 700; gap: 5px">
                 <span class="tcap">{{item.fullName}}</span>
@@ -105,9 +106,9 @@
       <v-sheet class="card divcol">
         <aside class="space" style="gap: 15px">
           <div class="center" style="gap: inherit; --fw: 700">
-            <h3 class="hspan p" style="--fs: 21px; --under: underline">Farms</h3>
+            <h3 class="hspan p" style="--fs: max(19px, 1.3125em); --under: underline">Farms</h3>
             
-            <span class="hspan" style="--fs: 21px; --c: var(--accent)">My Farms</span>
+            <span class="hspan" style="--fs: max(19px, 1.3125em); --c: var(--accent)">My Farms</span>
           </div>
           
           <a @click="$router.push(localePath('/farm-details'))">View all</a>
@@ -116,12 +117,13 @@
         <v-data-table
           :headers="farmsHeaders"
           :items="dataFarms"
-          style="--spacing: 0px; --p-td: 10px; --fs-th: 14px; --fs-td: 16px; --fw: 700; --distance-th: 0px"
+          style="--spacing: 0px; --p-td: 10px; --fw: 700; --distance-th: 0px"
           hide-default-footer
+          :mobile-breakpoint="-1"
         >
           <template #[`item.poolName`]="{ item }">
             <div class="acenter" style="gap: 10px">
-              <v-sheet class="dual-tokens" color="transparent" style="--h-sheet: 35px; --b-img: none; --p-img: 0;">
+              <v-sheet class="dual-tokens" color="transparent">
                 <img :src="require(`~/assets/sources/tokens/${item.tokenA}.svg`)" :alt="`${item.tokenA} token`" class="aspect">
                 <img :src="require(`~/assets/sources/tokens/${item.tokenB}.svg`)" :alt="`${item.tokenB} token`" class="aspect">
               </v-sheet>

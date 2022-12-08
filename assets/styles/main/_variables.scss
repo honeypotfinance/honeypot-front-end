@@ -247,7 +247,7 @@ $skew-left: skewX(-12deg) translateX(-1px);
   --g: 5px;
   --br: 30px;
   --bs: none;
-  --fs: 1em;
+  --fs: max(13px, 1em);
   --fw: 700;
   --tt: capitalize !important;
   --ls: normal;
@@ -283,6 +283,13 @@ $skew-left: skewX(-12deg) translateX(-1px);
     display: flex;
     gap: var(--g);
   }
+
+  &.stylish {
+    --bg: linear-gradient(109.68deg, #F7931A 5.56%, #FFCD4D 85.08%);
+    --fs: 21px;
+    --h: 51px;
+    @include media(max, small) {--c: #fff !important}
+  }
 }
 
 @mixin btn2() {
@@ -300,7 +307,7 @@ $skew-left: skewX(-12deg) translateX(-1px);
   --br: 30px;
   &:has(> .v-btn__content > :only-child) {--br: 10px};
   --bs: none;
-  --fs: 1em;
+  --fs: max(13px, 1em);
   --fw: 400;
   --ls: normal;
   --lh: 1;

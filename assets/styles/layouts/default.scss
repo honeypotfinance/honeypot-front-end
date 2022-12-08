@@ -15,10 +15,12 @@
   }
   // footer margin modifiable
   & .with {
-    padding-block: calc(var(--h-navbar) + 60px) var(--h-footer, 80px) !important
+    padding-block: calc(var(--h-navbar) + 60px) var(--h-footer, 80px) !important;
+    @include media(max, small) {padding-block: var(--h-navbar) var(--h-footer, 80px) !important}
   }
   & .without {
-    padding-block: calc(var(--h-navbar) + 60px) 0 !important
+    padding-block: calc(var(--h-navbar) + 60px) 0 !important;
+    @include media(max, small) {padding-block: var(--h-navbar) 0 !important}
   }
 
   #swap-floating-button {
@@ -26,7 +28,7 @@
     --br: 30px 30px 15px 15px / 30px 30px 30px 30px;
     --c: #574F42 !important;
     --fw: 700;
-    --fs: clamp(1.15em, calc(1.3vw + .5em), 1.3125em);
+    --fs: max(16px, 1.3125em);
     --t: rotate(-90deg);
     --g: 0;
     --p: clamp(.5em, calc(1vw + .75em), .75em);

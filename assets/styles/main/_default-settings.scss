@@ -170,56 +170,58 @@ body {background: var(--bg-ap)}
 .v-tab, .v-input .v-input__slot *, .v-data-footer__select, .v-data-footer__pagination, .v-data-footer__icons::before):not(.not_typography, .not) {
   font-weight: var(--fw);
 }
-* {font-family: var(--font1)}
-img:not(.not_typography, .not) {font-family: var(--font2)}
-a:not(.not_typography, .not) {text-decoration: none}
-button:not(.not_typography, .not) {&::first-letter, & ::first-letter {text-transform: uppercase}}
-:is(p, a, span, h1, h2, h3, h4, h5, h6):not(.not_typography, .not) {line-height: 1}
+#__layout > * {font-family: var(--font1)} // default font family
+* {font-family: inherit}
+button:not(.not_typography, .not) {
+  &::first-letter, & ::first-letter {
+    text-transform: var(--tt-first, uppercase)
+  }
+}
+:is(a, span, h1, h2, h3, h4, h5, h6):not(.not_typography, .not) {line-height: 1}
 h1:not(.not_typography, .not) {
-  --fw: 700;
-
+  font-weight: var(--fw, 700);
   font-family: var(--font2);
-  font-size: var(--fs, 2.2em);
+  font-size: var(--fs, max(16px, 2.2em));
   letter-spacing: 0.03em;
 }
 h2:not(.not_typography, .not) {
-  --fw: 400;
-
+  font-weight: var(--fw, 400);
   font-family: var(--font1);
-  font-size: var(--fs, 1.3125em);
+  font-size: var(--fs, max(16px, 1.3125em));
   letter-spacing: 0.03em;
 }
 h3:not(.not_typography, .not) {
-  --fw: 400;
-
+  font-weight: var(--fw, 400);
   font-family: var(--font1);
-  font-size: var(--fs, 1.2em);
+  font-size: var(--fs, max(16px, 1.2em));
   letter-spacing: 0.03em;
 }
 p:not(.not_typography, .not) {
-  --fw: 400;
-  
+  font-weight: var(--fw, 400);
   font-family: var(--font1);
-  font-size: var(--fs, 1.05em);
+  font-size: var(--fs, max(13px, 1.05em));
   line-height: 1.1;
 }
+a:not(.not_typography, .not) {
+  text-decoration: none;
+  font-weight: var(--fw, 400);
+  font-family: var(--font1);
+  font-size: var(--fs, max(13px, 1em));
+}
 label:not(.v-input .v-label, .not_typography, .not) {
-  --fw: 700;
   --c: var(--accent);
   
+  font-weight: var(--fw, 700);
   font-family: var(--font2);
-  font-size: var(--fs, 0.8em);
+  font-size: var(--fs, max(12.8px, 0.8em));
   &.plain {
-    --fs: 1em;
-    --fw: 700;
+    font-size: var(--fs, 16px);
     --c: #fff;
   }
 }
 .hspan {
-  --under: initial;
-
   font-size: var(--fs, 16px);
-  text-decoration: var(--under);
+  text-decoration: var(--under, initial);
 }
 
 
@@ -272,13 +274,13 @@ img:not(.not_html, .not) {
   --bg: transparent;
   --spacing: 20px;
   // th
-  --fs-th: 1.1em;
+  --fs-th: max(14px, 1.1em);
   --distance-th: 20px;
   // td
   --bg-td: var(--secondary);
   --p-td: 20px;
   --br-td: 30px;
-  --fs-td: 1.3125em;
+  --fs-td: max(16px, 1.3125em);
 
   background-color: var(--bg) !important;
   table {border-spacing: 0 var(--spacing) !important}
@@ -418,7 +420,7 @@ img:not(.not_html, .not) {
         overflow: var(--overflow);
         text-transform: var(--tt);
         color: var(--c);
-        font-size: var(--fs, 14px);
+        font-size: var(--fs, max(14px, 1em));
         & > * {
           font-size: 1em;
           color: var(--c);
@@ -491,7 +493,7 @@ img:not(.not_html, .not) {
   --mr: none;
 
   color: var(--c);
-  font-size: var(--fs, 1em);
+  font-size: var(--fs, max(14px, 1em));
   max-height: 2.25em;
   transform: var(--t);
   filter: var(--f);
@@ -587,7 +589,7 @@ img:not(.not_html, .not) {
   // text //
   & :is(input[type], button[type], textarea, .v-select__selection) {
     color: var(--c);
-    font-size: var(--fs, 1.2em);
+    font-size: var(--fs, max(14px, 1.2em));
     font-weight: var(--fw);
     font-family: var(--ff);
     text-transform: var(--tt);
@@ -652,7 +654,7 @@ img:not(.not_html, .not) {
     color: var(--c) !important;
     border: var(--b) !important;
     border-radius: 50%;
-    font-size: var(--fs, 0.75em);
+    font-size: var(--fs, max(14px, 0.75em));
     font-weight: var(--fw);
     transform: var(--t);
     -webkit-text-stroke: var(--stroke) var(--c);
@@ -709,14 +711,4 @@ img:not(.not_html, .not) {
 //- cards -//
 .card {
   @include card;
-}
-
-//- close -//
-.close {
-  --d: 0;
-  --t: var(--d);
-  --r: var(--d);
-  position: absolute !important;
-  top: var(--t) !important;
-  right: var(--r) !important;
 }

@@ -16,6 +16,12 @@ export const state = () => ({
     balance: 0,
     dataSocial: [],
   },
+  swapReview: {
+    tokenFrom: undefined,
+    priceFrom: undefined,
+    tokenTo: undefined,
+    priceTo: undefined,
+  }
 });
 
 export const mutations = {
@@ -27,6 +33,9 @@ export const mutations = {
     // overlay
     if (theme === "light") { state.overlay.opacity = 0.2; state.overlay.color = "white" }
     else { state.overlay.opacity = 0.5; state.overlay.color = "black" }
+  },
+  setSwapReview(state, data) {
+    state.swapReview = data
   },
   setData(state, data) {
     // if (window.$nuxt.$wallet.isSignedIn() && typeof data === 'string') {

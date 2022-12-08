@@ -42,5 +42,16 @@
       height: max-content !important;
       &:has(.nopevents) {min-height: 462.13px !important}
     }
+
+    .solo-token {
+      --w: 36.96px;
+      @include media(max, x-small) {--w: 32px}
+    }
+    .dual-tokens {
+      --h-sheet: 35px;
+      @include media(max, x-small) {--h-sheet: 30px}
+      --b-img: none;
+      --p-img: 0;
+    }
   }
 }
