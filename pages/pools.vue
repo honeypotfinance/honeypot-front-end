@@ -91,7 +91,7 @@
           <template v-if="filters.pools === 'my pools'">
             <img src="~/assets/sources/icons/my-farms-empty.png" alt="empty icon" style="--w: 13.4375em">
             <span class="h9_em bold mt-5 mb-2">You dont have any pools</span>
-            <span class="h11_em">Go to create a pool</span>
+            <span class="hspan" style="--fs: max(13px, 1em)">Go to create a pool</span>
             <v-btn
               class="btn mt-3 pevents font2" style="--w: 10.3125em; --h: 3.25em; --stroke: .4px"
               @click="$router.push(localePath('/pools-create'))">
@@ -102,7 +102,7 @@
           <template v-else>
             <img src="~/assets/sources/icons/empty.png" alt="empty icon" style="--w: 13.4375em">
             <span class="h9_em bold mt-5 mb-2">No results found</span>
-            <span class="h11_em">Try searching something else</span>
+            <span class="hspan" style="--fs: max(13px, 1em)">Try searching something else</span>
           </template>
         </div>
       </template>

@@ -1,29 +1,74 @@
 <template>
   <div id="farm-details">
     <section id="farm-details-header" class="divcol" style="gap: 10px">
-      <h1 class="tcap font1 acenter" style="gap: inherit">my portfolio
+      <h1 class="font1 acenter deletemobile" style="gap: inherit">My Portfolio
         <v-btn icon @click="hideProfits = !hideProfits">
           <v-icon size="2.3em" color="var(--accent)">mdi-eye{{hideProfits ? "" : "-off"}}-outline</v-icon>
         </v-btn>
       </h1>
 
-      <v-card class="container-profits card grid" :class="{hide: hideProfits}">
-        <div class="divcol">
-          <label>deposits</label>
-          <span>${{profits.deposit.toString().split(".").join(",")}}</span>
+      <v-card class="container-profits card divcol">
+        <div class="grid showmobile pl-4">
+          <h1 class="p font1 acenter">Portfolio
+            <v-btn icon max-width="max-content" height="max-content" @click="hideProfits = !hideProfits">
+              <v-icon size=".6em" color="var(--accent)">mdi-eye{{hideProfits ? "" : "-off"}}-outline</v-icon>
+            </v-btn>
+          </h1>
         </div>
-        <div class="divcol">
-          <label>rewards</label>
-          <span>${{profits.rewards}}</span>
-        </div>
-        <div class="divcol">
-          <label>monthly APY</label>
-          <span>{{profits.apy_monthly}}%</span>
-        </div>
-        <div class="divcol">
-          <label>daily APY</label>
-          <span>{{profits.apy_daily}}%</span>
-        </div>
+
+        <v-sheet color="transparent" class="grid" :class="{hide: hideProfits}">
+          <div class="divcol">
+            <label>deposits
+              <v-tooltip bottom max-width="174px" color="#574F42">
+                <template #activator="{on, attrs}">
+                  <img src="~/assets/sources/icons/info.svg" alt="info" style="--w: max(11px, .8em)" v-bind="attrs" v-on="on">
+                </template>
+                
+                <span>info</span>
+              </v-tooltip>
+            </label>
+            <span>${{profits.deposit.toString().split(".").join(",")}}</span>
+          </div>
+          
+          <div class="divcol">
+            <label>rewards
+              <v-tooltip bottom max-width="174px" color="#574F42">
+                <template #activator="{on, attrs}">
+                  <img src="~/assets/sources/icons/info.svg" alt="info" style="--w: max(11px, .8em)" v-bind="attrs" v-on="on">
+                </template>
+                
+                <span>info</span>
+              </v-tooltip>
+            </label>
+            <span>${{profits.rewards}}</span>
+          </div>
+          
+          <div class="divcol">
+            <label>monthly APY
+              <v-tooltip bottom max-width="174px" color="#574F42">
+                <template #activator="{on, attrs}">
+                  <img src="~/assets/sources/icons/info.svg" alt="info" style="--w: max(11px, .8em)" v-bind="attrs" v-on="on">
+                </template>
+                
+                <span>info</span>
+              </v-tooltip>
+            </label>
+            <span>{{profits.apy_monthly}}%</span>
+          </div>
+          
+          <div class="divcol">
+            <label>daily APY
+              <v-tooltip bottom max-width="174px" color="#574F42">
+                <template #activator="{on, attrs}">
+                  <img src="~/assets/sources/icons/info.svg" alt="info" style="--w: max(11px, .8em)" v-bind="attrs" v-on="on">
+                </template>
+                
+                <span>info</span>
+              </v-tooltip>
+            </label>
+            <span>{{profits.apy_daily}}%</span>
+          </div>
+        </v-sheet>
       </v-card>
     </section>
 
@@ -43,17 +88,17 @@
           </v-tabs>
         </div>
         
-        <v-btn class="btn2" @click="changeLayoutCells()">
+        <v-btn class="btn2 deletemobile" @click="changeLayoutCells()">
           <img :src="require(`~/assets/sources/icons/cells-${layoutCells ? '2' : '1'}.svg`)" alt="layout cells type">
         </v-btn>
       </aside>
       
-      <aside class="space wrap" style="gap: inherit">
+      <aside class="space" style="gap: inherit">
         <v-text-field
           v-model="filters.search"
           label="Search"
-          class="font3"
-          style="--b: 1px solid #2D291D; --br: 10px; --max-w: 262px; --c-label: var(--accent); --caret: var(--accent)"
+          class="search font3"
+          style="--b: 1px solid #2D291D; --br: 10px; --max-w: 16.375em; --c-label: var(--accent); --caret: var(--accent)"
           hide-details solo
           clearable
           clear-icon="mdi-close"
@@ -63,9 +108,9 @@
           </template>
         </v-text-field>
         
-        <div class="center alignr" style="gap: 10px">
-          <label class="plain">Sort by</label>
-          <v-tabs hide-slider style="--bg-active: transparent">
+        <div class="center alignr contentsmoible" style="gap: 10px">
+          <label class="plain deletemobile">Sort by</label>
+          <v-tabs hide-slider class="tab2" style="--bg-active: transparent">
             <v-tab v-for="item in dataSort" :key="item" class="tup" @change="filters.sort = item">
               {{item}}
             </v-tab>
@@ -78,7 +123,7 @@
     <div v-if="!isLogged" class="divcol center tcenter align font1 nopevents maxsize_w">
       <img src="~/assets/sources/icons/wallet-empty.png" alt="empty icon" style="--w: 13.4375em">
       <span class="h9_em bold mt-5 mb-2">You haven't connected your wallet.</span>
-      <span class="h11_em">Connect to view eligible farms.</span>
+      <span class="hspan" style="--fs: max(13px, 1em)">Connect to view eligible farms.</span>
       <v-btn
         class="btn mt-3 pevents font2" style="--w: 10.3125em; --h: 3.25em; --stroke: .4px"
         @click="$store.dispatch('modalConnect')">
@@ -91,7 +136,7 @@
       <template v-if="filters.farms === 'my farms'">
         <img src="~/assets/sources/icons/my-farms-empty.png" alt="empty icon" style="--w: 13.4375em">
         <span class="h9_em bold mt-5 mb-2">You dont have any farms</span>
-        <span class="h11_em">See which pools are available to swap</span>
+        <span class="hspan" style="--fs: max(13px, 1em)">See which pools are available to swap</span>
         <v-btn class="btn mt-3 pevents font2" style="--w: 10.3125em; --h: 3.25em; --stroke: .4px">
           Create LP
         </v-btn>
@@ -100,7 +145,7 @@
       <template v-else>
         <img src="~/assets/sources/icons/empty.png" alt="empty icon" style="--w: 13.4375em">
         <span class="h9_em bold mt-5 mb-2">No results found</span>
-        <span class="h11_em">Try searching something else</span>
+        <span class="hspan" style="--fs: max(13px, 1em)">Try searching something else</span>
       </template>
     </div>
 
@@ -121,7 +166,7 @@
             <h3 class="p tup">{{item.tokenA}}-{{item.tokenB}}</h3>
           </aside>
           
-          <aside class="space wrap">
+          <aside class="spacea wrap" style="gap: 5px">
             <div class="divcol center" style="gap: 5px">
               <h3 class="p">{{`${item.apr}%`}}</h3>
               <label>APR</label>
@@ -196,7 +241,7 @@
             <v-btn
               class="btn" style="--fs: 1.3125em; --stroke: .4px; --br: 10px"
             >
-              <img src="~/assets/sources/icons/download.svg" alt="claim icon" style="--w: .7em">
+              <img src="~/assets/sources/icons/download.svg" alt="claim icon" style="--w: .8em">
               claim
             </v-btn>
           </div>
@@ -207,7 +252,7 @@
             <template v-if="filters.farms === 'my farms'">
               <img src="~/assets/sources/icons/my-farms-empty.png" alt="empty icon" style="--w: 13.4375em">
               <span class="h9_em bold mt-5 mb-2">You dont have any farms</span>
-              <span class="h11_em">See which pools are available to swap</span>
+              <span class="hspan" style="--fs: max(13px, 1em)">See which pools are available to swap</span>
               <v-btn class="btn mt-3 pevents font2" style="--w: 10.3125em; --h: 3.25em; --stroke: .4px">
                 Create LP
               </v-btn>
@@ -216,7 +261,7 @@
             <template v-else>
               <img src="~/assets/sources/icons/empty.png" alt="empty icon" style="--w: 13.4375em">
               <span class="h9_em bold mt-5 mb-2">No results found</span>
-              <span class="h11_em">Try searching something else</span>
+              <span class="hspan" style="--fs: max(13px, 1em)">Try searching something else</span>
             </template>
           </div>
         </template>

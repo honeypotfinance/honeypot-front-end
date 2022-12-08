@@ -41,7 +41,19 @@
   
   .v-input, .v-tabs, .v-btn {
     --h: 46px !important;
-    @include media(max, small) {--h: clamp(40px, 3vw, 46px) !important}
+    @include media(max, small) {--h: 52px !important}
+  }
+  
+  @include media(max, small) {
+    .tab2 {--fs: 13px !important}
+    
+    .v-tabs {
+      --c: var(--accent) !important;
+      .v-tabs-bar {
+        --b: none;
+        --p: 8px;
+      }
+    }
   }
 }
 
