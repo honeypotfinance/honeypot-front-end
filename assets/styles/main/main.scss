@@ -20,7 +20,7 @@
 
 //- controls -//
 .controls {
-  // font-size: var(--resize);
+  // font-size: var(--resizer);
   
   :not(label.plain) {font-family: 'Inter', sans-serif}
   .v-btn {
@@ -49,10 +49,8 @@
     
     .v-tabs {
       --c: var(--accent) !important;
-      .v-tabs-bar {
-        --b: none;
-        --p: 8px;
-      }
+      --b: none !important;
+      --p: 8px !important;
     }
   }
 }

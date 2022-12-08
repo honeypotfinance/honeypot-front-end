@@ -20,6 +20,12 @@
 
   &-content {
     gap: 30px;
+    font-size: var(--resizer);
+    @include media(max, small) {
+      flex-direction: column;
+      align-items: center;
+      > * {min-width: 100% !important}
+    }
     
     .controls {
       .v-input.v-select {
@@ -30,7 +36,7 @@
     
     #container-chart {
       aside.gridauto {
-        --spacing: 30px;
+        --spacing: 1.875em;
         position: relative;
         margin-top: var(--spacing);
         padding-top: var(--spacing);
@@ -47,6 +53,8 @@
           gap: 5px;
           --fw: 700;
           --p: 1em 1.5em;
+          label {--fs: max(16px, 1em)}
+          .hspan {--fs: max(22px, 1.453125em)}
         }
       }
     }

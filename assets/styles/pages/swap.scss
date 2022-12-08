@@ -35,6 +35,7 @@
 
     .middle {
       --size: max-content;
+      @include media(max, 500px) {--size: 100%}
       width: var(--size) !important;
       max-width: var(--size) !important;
       > div.space {
@@ -53,6 +54,7 @@
       aside.target_drag {
         --size: 13em;
         @include media(max, 1360px) {--size: 288px}
+        @include media(max, 500px) {--size: 100%}
         width: var(--size) !important;
         max-width: var(--size) !important;
         min-width: var(--size) !important;

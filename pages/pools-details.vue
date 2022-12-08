@@ -29,46 +29,34 @@
 
         <aside class="gridauto font2" style="gap: 30px; --gs: 190px; align-items: start">
           <v-card class="card divcol center">
-            <label style="--fs: 15px">TVL</label>
-            <span class="hspan" style="--fs: 23.25px">
-              $1.2M
-            </span>
+            <label>TVL</label>
+            <span class="hspan">$1.2M</span>
           </v-card>
           
           <v-card class="card divcol center">
-            <label style="--fs: 15px">Pool APR</label>
-            <span class="hspan" style="--fs: 23.25px">
-              32%
-            </span>
+            <label>Pool APR</label>
+            <span class="hspan">32%</span>
           </v-card>
           
           <v-card class="card divcol center">
-            <label style="--fs: 15px">HPOT APR</label>
-            <span class="hspan" style="--fs: 23.25px">
-              2%
-            </span>
+            <label>HPOT APR</label>
+            <span class="hspan">2%</span>
           </v-card>
           
           <v-card class="card divcol center">
-            <label style="--fs: 15px">Total Staked</label>
-            <span class="hspan" style="--fs: 23.25px">
-              $38,000
-            </span>
+            <label>Total Staked</label>
+            <span class="hspan">$38,000</span>
           </v-card>
           
           <v-card class="card divcol center">
-            <label style="--fs: 15px">Your Share</label>
-            <span class="hspan" style="--fs: 23.25px">
-              &#60;0.93%
-            </span>
+            <label>Your Share</label>
+            <span class="hspan">&#60;0.93%</span>
           </v-card>
           
           <v-card class="card divcol">
-            <label style="--fs: 15px">Claimable Rewards</label>
-            <span class="hspan" style="--fs: 23.25px">
-              183.32 HPOT
-            </span>
-            <label style="--fs: 15px">~$389.58 USD</label>
+            <label>Claimable Rewards</label>
+            <span class="hspan">183.32 HPOT</span>
+            <label>~$389.58 USD</label>
             
             <v-btn class="btn mt-5" style="--w: 100%">
               <span style="font-family: var(--font1) !important">Harvest</span>
@@ -87,10 +75,13 @@
               <img :src="require(`~/assets/sources/tokens/usdc.svg`)" :alt="`usdc token`" class="aspect">
             </v-sheet>
             
-            <span class="hspan" style="--fs: 28px; --fw: 700">BTC-USD</span>
+            <span class="hspan" style="--fs: max(18px, 1.75em); --fw: 700">BTC-USD</span>
           </div>
           
-          <v-tabs class="alignr" hide-slider style="--h: 54px; --bg-active: hsl(43 100% 65% / .15); --w-tab: 82px; --g: 5px; --fw: 500; --c: var(--accent)">
+          <v-tabs
+            class="alignr" hide-slider
+            style="--h: max(50px, 3.375em); --bg-active: hsl(43 100% 65% / .15); --fs: max(10px, 1em); --w-tab: 5.125em; --g: 5px; --fw: 500; --c: var(--accent)"
+          >
             <v-tab v-for="item in dataPoolOptions" :key="item" class="tcap font3">
               {{item}}
             </v-tab>

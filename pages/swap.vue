@@ -16,7 +16,7 @@
 
 
       <!-- middle -->
-      <v-form ref="swapForm" class="middle divcol jspace" style="gap: 12px" @submit.prevent="swap()">
+      <v-form ref="form-swap" class="middle divcol jspace" style="gap: 12px" @submit.prevent="swap()">
         <div class="fnowrap space" style="gap: inherit">
           <!-- card swap left -->
           <aside

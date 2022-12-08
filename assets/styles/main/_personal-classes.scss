@@ -402,6 +402,7 @@
     background-color: var(--bg-line);
   }
 }
+.resizer {font-size: var(--resizer) !important}
 
 
 
@@ -770,6 +771,7 @@
       background-color: var(--bg-line) !important;
     }
   }
+  .resizermobile {font-size: var(--resizer) !important}
 }
 
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /

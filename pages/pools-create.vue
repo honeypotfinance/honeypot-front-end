@@ -52,24 +52,18 @@
 
         <aside class="fwrap font2" style="gap: 30px; --fb: 190px">
           <v-card class="card divcol center">
-            <label style="--fs: 16px">TVL</label>
-            <span class="hspan" style="--fs: 23.25px">
-              $1.2M
-            </span>
+            <label>TVL</label>
+            <span class="hspan">$1.2M</span>
           </v-card>
           
           <v-card class="card divcol center">
-            <label style="--fs: 16px">Pool APR</label>
-            <span class="hspan" style="--fs: 23.25px">
-              32%
-            </span>
+            <label>Pool APR</label>
+            <span class="hspan">32%</span>
           </v-card>
           
           <v-card class="card divcol center">
-            <label style="--fs: 16px">Fees</label>
-            <span class="hspan" style="--fs: 23.25px">
-              $1290
-            </span>
+            <label>Fees</label>
+            <span class="hspan">$1290</span>
           </v-card>
         </aside>
       </v-card>
@@ -93,13 +87,13 @@
         <!-- create tab -->
         <v-form
           v-if="currentTab === 0" id="container-liquidity" ref="form-pool" class="divcol jspace font1 fill_w" style="gap: 12px"
-          @submit.prevent="addLiquiidty($refs['form-pool'])">
+          @submit.prevent="addLiquiidty()">
           <div class="fnowrap space" style="gap: inherit">
             <!-- card pools left -->
             <aside
               class="divcol" style="gap: inherit">
               <div class="container-options">
-                <label>Input</label>
+                <label>input</label>
                 <div class="fnowrap" style="gap: 10px; --fb: max-content">
                   <v-chip
                     close close-icon="mdi-chevron-down" class="btn2 center" @click="$refs.tokens.openModalTokens(firstToken)"
@@ -119,7 +113,7 @@
                 </div>
               </div>
 
-              <v-card class="card" style="--bg: #292724">
+              <v-card class="card divcol" style="--bg: #292724">
                 <div class="divcol">
                   <v-text-field
                     v-model="firstToken.amount"
@@ -127,10 +121,10 @@
                     placeholder="0.00"
                     type="number"
                     class="custome"
-                    :rules="rules.required"
+                    @keyup="$event => $event.key === 'Enter' ? addLiquiidty() : ''"
                   >
                     <template #counter>
-                      <label class="font1" style="--fs: 21px">~${{firstToken.amount / 2 || 0}} USD</label>
+                      <label class="font1" style="--fs: max(18px, 1em)">~${{(firstToken.amount / 2).formatter(true) || 0}} USD</label>
                     </template>
                   </v-text-field>
                 </div>
@@ -147,7 +141,7 @@
             <!-- card pools right -->
             <aside class="divcol" style="gap: inherit">
               <div class="container-options">
-                <label>Input</label>
+                <label>input</label>
                 <div class="fnowrap" style="gap: 10px; --fb: max-content">
                   <v-chip
                     close close-icon="mdi-chevron-down" class="btn2 center" @click="$refs.tokens.openModalTokens(secondToken)"
@@ -166,7 +160,7 @@
                 </div>
               </div>
 
-              <v-card class="card" style="--bg: #292724">
+              <v-card class="card divcol" style="--bg: #292724">
                 <div class="divcol">
                   <v-text-field
                     v-model="secondToken.amount"
@@ -174,10 +168,10 @@
                     placeholder="0.00"
                     type="number"
                     class="custome"
-                    :rules="rules.required"
+                    @keyup="$event => $event.key === 'Enter' ? addLiquiidty() : ''"
                   >
                     <template #counter>
-                      <label class="font1" style="--fs: 21px">~${{secondToken.amount / 2 || 0}} USD</label>
+                      <label class="font1" style="--fs: max(18px, 1em)">~${{(secondToken.amount / 2).formatter(true) || 0}} USD</label>
                     </template>
                   </v-text-field>
                 </div>
@@ -186,7 +180,7 @@
             </aside>
           </div>
 
-          <v-card class="card space my-5" style="--bg: #292724; --br: 20px; --fs: 14px; gap: 10px">
+          <v-card class="card space my-5 deletemobile" style="--bg: #292724; --br: 20px; --fs: 14px; gap: 10px">
             <div class="divcol" style="gap: 5px">
               <span class="hspan" style="--fw: 700">1306.67</span>
               <span class="hspan" style="--fw: 400">BERA per HONEY</span>
@@ -204,6 +198,7 @@
           </v-card>
 
           <v-btn
+            :disabled="!(firstToken.amount && firstToken.img && secondToken.amount && secondToken.img)"
             class="btn mb-3" style="--bg: #FFCD4D; --fs: 21px; --h: 51px"
             @click="addLiquiidty($refs['form-pool'])"
           >Add Liquidity</v-btn>
@@ -341,8 +336,8 @@ export default {
     }
   },
   methods: {
-    addLiquiidty(ref) {
-      if (!ref.validate()) return this.$alert("cancel", "You must fill required fields")
+    addLiquiidty() {
+      if (!(this.firstToken.amount && this.firstToken.img && this.secondToken.amount && this.secondToken.img)) return;
       else if (!(this.firstToken.img && this.secondToken.img)) return this.$alert("cancel", "You must to select tokens to pool")
       
       this.isLiquidityAdded = true

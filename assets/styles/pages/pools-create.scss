@@ -21,6 +21,7 @@
   &-content {
     $first-wrap: 1174px;
     gap: 50px;
+    font-size: var(--resizer);
     @include media(max, $first-wrap) {
       justify-content: center;
       > * {min-width: 100% !important}
@@ -32,11 +33,15 @@
     
     #container-chart {
       aside.fwrap {
-        --spacing: 30px;
+        --spacing: 1.875em;
         position: relative;
         margin-top: var(--spacing);
         padding-top: var(--spacing);
         @include media(max, 1495px) {justify-content: center !important}
+        @include media(max, small) {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+        }
         
         &::before {
           content: "";
@@ -48,14 +53,24 @@
         .v-card {
           --bg: #292724;
           --br: 20px;
-          gap: 5px;
           --fw: 700;
           --p: 1em 1.5em;
+          gap: 5px;
+          label {--fs: max(16px, 1em)}
+          .hspan {--fs: max(22px, 1.453125em)}
+          @include media(max, small) {
+            --bg: transparent;
+            --p: 0;
+            padding-bottom: 1em;
+          }
         }
       }
     }
 
     #container-right {
+      height: max-content !important;
+      max-height: max-content !important;
+      @include media(max, 500px) {background-color: transparent !important}
       // filter
       position: relative;
       overflow: hidden;
@@ -78,14 +93,30 @@
         }
         
         > div.space {
-          center {
-            transform: translateY(calc(62px / 2));
+          center {transform: translateY(calc(62px / 2))}
+          @include media(max, 500px) {
+            flex-direction: column;
+            center {transform: translateY(10px)}
+            .btn2 {
+              max-width: max-content !important;
+              --bg: #1A1917 !important;
+            }
+            .btn2 + .btn2 {display: none !important}
           }
         }
         
         aside:has(.v-card) .v-card.card {
-          max-width: 183px !important;
-          width: 183px !important;
+          --size: 183px;
+          max-width: var(--size) !important;
+          width: var(--size) !important;
+          @include media(max, $first-wrap) {--size: 20em}
+          @include media(max, small) {--size: clamp(183px, 35vw, 20em)}
+          @include media(max, 500px) {
+            --bg: #1A1917 !important;
+            --size: 100%;
+            justify-content: center;
+            * {text-align: center !important}
+          }
         }
       }
 
