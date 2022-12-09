@@ -11,13 +11,26 @@
       font-size: var(--resizer);
       @include media(max, 1159px) {justify-content: center !important}
       .v-card {
+        --h: 150px;
         --width: 21.875em;
         max-width: var(--width) !important;
         min-width: var(--width) !important;
-        --h: 150px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        place-items: center;
         &:last-of-type {--width: 24em}
+        &:first-of-type .divcol,
+        &:first-of-type + .v-card .divcol {min-width: 144.19px}
+        
         @include media(max, 1159px) {--width: 24em}
-        @include media(max, x-small) {--width: 100% !important}
+        @include media(max, small) {--width: 100% !important}
+
+        svg {
+          @include media(max, small) {
+            -webkit-filter: drop-shadow(0px 6px 6px var(--c-path)) drop-shadow(0px 6px 6px var(--c-path));
+            filter: drop-shadow(0px 6px 6px var(--c-path)) drop-shadow(0px 6px 6px var(--c-path));
+          }
+        }
       }
       label {
         --fs: 16px;
@@ -45,13 +58,25 @@
 
     .solo-token {
       --w: 36.96px;
-      @include media(max, x-small) {--w: 32px}
+      @include media(max, x-small) {--w: 30px}
     }
     .dual-tokens {
       --h-sheet: 35px;
-      @include media(max, x-small) {--h-sheet: 30px}
+      @include media(max, x-small) {--h-sheet: 25px}
       --b-img: none;
       --p-img: 0;
+    }
+
+    > .v-sheet.card {
+      @include media(max, x-small) {
+        width: 100% !important;
+      }
+    }
+
+    .v-data-table {
+      @include media(max, x-small) {
+        --fs-td: 14px;
+      }
     }
   }
 }

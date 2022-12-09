@@ -4,7 +4,7 @@
       <h1 class="tcap font2 tcenter">dashboard</h1>
 
       <aside id="profits" class="fwrap space" style="gap: inherit">
-        <v-card class="card spacea acenter" style="gap: 20px">
+        <v-card class="card" style="gap: 20px">
           <div class="divcol">
             <label class="mb-1">Total Value Locked</label>
             <span class="hspan my-2">{{valueLocked.current ? `$${valueLocked.current.formatter(false, 2)}` : ''}}</span>
@@ -18,12 +18,13 @@
             :value="valueLocked.grafic"
             :color="calcColor(valueLocked.grafic)"
             :smooth="15"
-            :line-width="5"
-            :height="isXMobile ? 150 : 200"
+            :line-width="isXMobile ? 5 : isMobile ? 2 : 5"
+            :height="isXMobile ? 200 : isMobile ? 80 : 240"
+            :style="`--c-path: ${calcColor(valueLocked.grafic)}`"
           ></v-sparkline>
         </v-card>
         
-        <v-card class="card spacea acenter" style="gap: 20px">
+        <v-card class="card" style="gap: 20px">
           <div class="divcol">
             <label class="mb-1">Total Stakd</label>
             <span class="hspan my-2">{{valueStaked.current ? `$${valueStaked.current.formatter(false, 2)}` : ''}}</span>
@@ -37,12 +38,13 @@
             :value="valueStaked.grafic"
             :color="calcColor(valueStaked.grafic)"
             :smooth="15"
-            :line-width="5"
-            :height="isXMobile ? 150 : 200"
+            :line-width="isXMobile ? 5 : isMobile ? 2 : 5"
+            :height="isXMobile ? 200 : isMobile ? 80 : 240"
+            :style="`--c-path: ${calcColor(valueStaked.grafic)}`"
           ></v-sparkline>
         </v-card>
         
-        <v-card class="card spacea acenter" style="gap: 20px">
+        <v-card class="card" style="gap: 20px">
           <div class="divcol">
             <label class="mb-1">Claimable Rewards</label>
             <span class="hspan my-2">{{claimableRewards ? `$${claimableRewards.toLocaleString().split(".").join(",")}` : ''}}</span>
@@ -59,13 +61,13 @@
 
 
     <section id="farm-content" class="fwrap" style="gap: inherit">
-      <!-- farm table -->
+      <!-- portfolio table -->
       <v-sheet class="card divcol">
         <h3 class="p" style="--fs: max(19px, 1.3125em); --fw: 700">Your Portfolio</h3>
 
         <v-data-table
-          :headers="farmHeaders"
-          :items="dataFarm"
+          :headers="portfolioHeaders"
+          :items="dataPortfolio"
           style="--spacing: 0px; --p-td: 10px; --fw: 700; --distance-th: 0px"
           hide-default-footer
           :mobile-breakpoint="-1"
@@ -115,7 +117,7 @@
         </aside>
 
         <v-data-table
-          :headers="farmsHeaders"
+          :headers="isXMobile ? farmsHeaders.slice(0, 3) : farmsHeaders"
           :items="dataFarms"
           style="--spacing: 0px; --p-td: 10px; --fw: 700; --distance-th: 0px"
           hide-default-footer
@@ -181,12 +183,12 @@ export default {
       },
       claimableRewards: 2000,
       
-      farmHeaders: [
+      portfolioHeaders: [
         { text: "Name", value: "fullName" },
         { text: "Balance", value: "balance" },
         { text: "Price", value: "price" },
       ],
-      dataFarm: [
+      dataPortfolio: [
         {
           name: "btc",
           fullName: "bitcoin",
@@ -252,7 +254,7 @@ export default {
   methods: {
     calcColor(grafic) {
       return grafic[grafic.length-1] > grafic[grafic.length-2] ? '#4ABCA4' : '#D83429'
-    }
+    },
   }
 };
 </script>
