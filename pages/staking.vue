@@ -7,24 +7,24 @@
 
     <v-form id="staking-content" class="divcol">
       <v-sheet class="btn space" style="--br: 20px; --fw: 700; --p: 15px 25px">
-        <span style="font-size: 21px">Staking APR</span>
-        <span style="font-size: 28px">17%</span>
+        <span style="font-size: max(19px, 1.3125em)">Staking APR</span>
+        <span style="font-size: max(18px, 1.75em)">17%</span>
       </v-sheet>
 
       <div class="fwrap space" style="gap: 20px">
         <v-sheet class="card divcol center" style="gap: 5px">
-          <label style="--fs: 14px">Total Staked HPOT</label>
-          <span class="hspan" style="--fs: 28px; --fw: 700">10.3M</span>
+          <label style="--fs: max(12px, 0.875em)">Total Staked HPOT</label>
+          <span class="hspan" style="--fs: max(22px, 1.75em); --fw: 700">10.3M</span>
         </v-sheet>
 
         <v-sheet class="card divcol center" style="gap: 5px">
-          <label style="--fs: 14px">My XHPOT Balance</label>
-          <span class="hspan" style="--fs: 28px; --fw: 700">920k</span>
+          <label style="--fs: max(12px, 0.875em)">My XHPOT Balance</label>
+          <span class="hspan" style="--fs: max(22px, 1.75em); --fw: 700">920k</span>
         </v-sheet>
       </div>
 
       <aside id="controls" class="space">
-        <span class="hspan" style="--fs: 28px; --fw: 700">Stake HPOT</span>
+        <span class="hspan" style="--fs: max(22px, 1.75em); --fw: 700">Stake HPOT</span>
         
         <div class="center" style="gap: 10px">
           <v-btn

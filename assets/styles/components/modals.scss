@@ -127,6 +127,7 @@
       width: max-content;
       margin-inline: auto;
     }
+    @include media(max, 500px) {width: 100% !important}
     > div.space {
       center {
         transform: translateY(calc(62px / 2));
@@ -142,6 +143,7 @@
     }
     aside:has(> .container-options) {
       --size: 13em;
+      @include media(max, 500px) {--size: 100%}
       width: var(--size) !important;
       max-width: var(--size) !important;
       min-width: var(--size) !important;
@@ -152,6 +154,9 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
+        @include media(max, 500px) {
+          * {text-align: center !important}
+        }
         > label {
           margin-top: 10px;
           padding-inline: 12px;
