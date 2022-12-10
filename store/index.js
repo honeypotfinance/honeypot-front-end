@@ -51,8 +51,8 @@ export const mutations = {
       // make login <-----------------------------------------
     // catch error
     } catch (err) {
-      this.$alert("cancel", {desc: err.message})
       console.error(err);
+      this.$alert("cancel", {desc: err.message})
     }
     // window.$nuxt.$wallet.requestSignIn(   <---- near version
     //   'contract.globaldv.testnet'
