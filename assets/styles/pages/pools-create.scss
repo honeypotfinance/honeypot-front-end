@@ -1,0 +1,150 @@
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
+// // // pools-create // // // 
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
+#pools-create {
+  @include parent;
+  padding-inline: var(--margin-global);
+
+  &-header {
+    --padding-left: 40px;
+    .v-card.card {
+      --p: 10px var(--padding-left);
+      --br: 20px;
+      @include media(max, 600px) {flex-direction: column}
+      span {
+        font-size: 1.75em;
+        --fw: 700;
+      }
+    }
+  }
+
+  &-content {
+    $first-wrap: 1174px;
+    gap: 50px;
+    font-size: var(--resizer);
+    @include media(max, $first-wrap) {
+      justify-content: center;
+      > * {min-width: 100% !important}
+    }
+    @include media(max, small) {
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    #container-chart {
+      aside.fwrap {
+        --spacing: 1.875em;
+        position: relative;
+        margin-top: var(--spacing);
+        padding-top: var(--spacing);
+        @include media(max, 1495px) {justify-content: center !important}
+        @include media(max, small) {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+        }
+        
+        &::before {
+          content: "";
+          @include absolute(0,0,0);
+          background-color: var(--accent);
+          width: 100%;
+          height: 1px;
+        }
+        .v-card {
+          --bg: #292724;
+          --br: 20px;
+          --fw: 700;
+          --p: 1em 1.5em;
+          gap: 5px;
+          label {--fs: max(16px, 1em)}
+          .hspan {--fs: max(22px, 1.453125em)}
+          @include media(max, small) {
+            --bg: transparent;
+            --p: 0;
+            padding-bottom: 1em;
+          }
+        }
+      }
+    }
+
+    #container-right {
+      height: max-content !important;
+      max-height: max-content !important;
+      @include media(max, 500px) {background-color: transparent !important}
+      // filter
+      position: relative;
+      overflow: hidden;
+      &:not(:has(#withdraw-buttons))::after {
+        content: "";
+        position: absolute;
+        inset: 0 -50px;
+        box-shadow: inset 0px -70px 20px -30px var(--clr-card);
+        z-index: 2;
+        pointer-events: none;
+      }
+      @include media(min, small) {max-width: 480px !important}
+      
+      #container-liquidity {
+        .container-options {
+          .v-chip, .v-btn {
+            --bg: #292724;
+            --br: 30px;
+          }
+        }
+        
+        > div.space {
+          center {transform: translateY(calc(62px / 2))}
+          @include media(max, 500px) {
+            flex-direction: column;
+            center {transform: translateY(10px)}
+            .btn2 {
+              max-width: max-content !important;
+              --bg: #1A1917 !important;
+            }
+            .btn2 + .btn2 {display: none !important}
+          }
+        }
+        
+        aside:has(.v-card) .v-card.card {
+          --size: 183px;
+          max-width: var(--size) !important;
+          width: var(--size) !important;
+          @include media(max, $first-wrap) {--size: 20em}
+          @include media(max, small) {--size: clamp(183px, 35vw, 20em)}
+          @include media(max, 500px) {
+            --bg: #1A1917 !important;
+            --size: 100%;
+            justify-content: center;
+            * {text-align: center !important}
+          }
+        }
+      }
+
+      #container-remove {
+        &:not(:has(#withdraw-buttons)) {
+          height: calc(37.8125em - (47px + 20px + 24px * 2));
+          padding-right: 5px;
+          overflow-y: auto;
+          overflow-x: hidden;
+        }
+
+        #withdraw-buttons {
+          max-width: 362px;
+          width: 100%;
+          .v-btn {
+            --bg: #292724;
+            --c: var(--accent) !important;
+            --br :30px;
+            --h: 40px;
+            max-width: 100px !important;
+            --fs: 14px;
+            &.active {
+              --bg: var(--primary);
+              --c: #000 !important;
+            }
+          }
+        }
+      }
+    }
+  }
+}

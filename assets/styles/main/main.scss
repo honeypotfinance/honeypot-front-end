@@ -17,6 +17,77 @@
 
 ///////////////////// global ///////////////////////
 
+
+//- controls -//
+.controls {
+  // font-size: var(--resizer);
+  
+  :not(label.plain) {font-family: 'Inter', sans-serif}
+  .v-btn {
+    --b: 1px solid var(--clr-line)
+  }
+  & + * {min-height: 25em}
+  
+  > aside:first-of-type {
+    @include media(max, 500px) {
+      align-items: flex-start;
+      column-gap: 0 !important;
+    }
+  }
+  
+  .v-input, .v-tabs {
+    --fs: max(14px, 1em) !important;
+  }
+  
+  .v-input, .v-tabs, .v-btn {
+    --h: 46px !important;
+    @include media(max, small) {--h: 52px !important}
+  }
+  
+  @include media(max, small) {
+    .tab2 {--fs: 13px !important}
+    
+    .v-tabs {
+      --c: var(--accent) !important;
+      --b: none !important;
+      --p: 8px !important;
+    }
+  }
+}
+
+//- dual tokens -//
+.dual-tokens.v-sheet {
+  --h-sheet: 50.86px;
+  --b-img: 1px solid var(--clr-line);
+  --p-img: calc(var(--h-sheet) / 4.5);
+
+  width: max-content !important;
+  height: var(--h-sheet) !important;
+  aspect-ratio: 2 / 1;
+  position: relative;
+  & > img {
+    --w: calc(var(--h-sheet) + 6px);
+    --of: cover;
+    --p: var(--p-img);
+    --br: 50%;
+    --b: var(--b-img);
+    --bg: var(--clr-card);
+    
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    &:first-of-type {
+      left: 0;
+      z-index: 1;
+    }
+    &:last-of-type {
+      right: 0;
+      z-index: 0;
+    }
+  }
+}
+
 //- tooltip -//
 .v-tooltip__content {
   line-height: 1 !important;
@@ -52,99 +123,4 @@
     --c: var(--clr) !important;
   }
   & > div {width: 100%}
-}
-
-//- drawer -//  --> under testing
-.v-navigation-drawer:not(.not_vuetify, .not) {
-  --w-drawer: 300px;
-  @include media(max, x-small) {--w-drawer: 100vw}
-  width: var(--w-drawer) !important;
-  background: var(--secondary) !important;
-  .v-navigation-drawer__content {
-    --h-drawer-navbar: 170px;
-    //
-    --padding-drawer-navbar: 1.5em;
-    --margin-bottom-drawer-navbar: .5em;
-    &--navbar {
-      padding: 1em;
-      padding-block: var(--padding-drawer-navbar);
-      margin-bottom: var(--margin-bottom-drawer-navbar);
-      position: relative;
-      // line
-      &::before {
-        content: "";
-        @include absolute(0,auto,0,0);
-        height: 1px;
-        width: 60%;
-        background-color: var(--clr-line);
-        border-radius: 50% / 3vmax;
-      }
-      .v-btn.btn {
-        transition: .5s $ease-return;
-        &::after, &::before {display: none !important}
-        &:active {
-          // --bg: linear-gradient(to top, hsl(0, 84%, 57%) 80%, rgba(0,0,0,.4));
-          --bs: inset 0 6px 4px 0px rgba(0, 0, 0, .3);
-        }
-      }
-    }
-
-    &--content {
-      height: calc(100% - (var(--h-drawer-navbar) + var(--padding-drawer-navbar) + var(--margin-bottom-drawer-navbar)) );
-      & > :is(.v-expansion-panels, .v-list .v-list-item) {
-        span, img {
-          font-weight: 400;
-          color: #FFFFFF;
-        }
-      }
-      .v-expansion-panels {
-        .conttitle {
-          max-width: 60%;
-          margin-inline: auto;
-          padding: 0 !important;
-          .icon {
-            --br: 50%;
-            --max-w: 28px;
-            aspect-ratio: 1 / 1;
-            &.active {--bg: var(--primary) !important}
-          }
-        }
-        // list //
-        & > .v-list {
-          padding: 0;
-          .v-list-item {margin-top: 18px}
-        }
-        // expansion menu //
-        .v-expansion-panel {
-          background-color: transparent !important;
-          &::after, &::before {display: none !important}
-          .v-expansion-panel-header {
-            padding: 0 clamp(1em, 1vw, 1.5em);
-          }
-          .v-expansion-panel-content__wrap {padding-inline: 0}
-          .v-list {
-            background-color: transparent !important;
-            .v-list-item {
-              background-color: transparent;
-              padding-inline: clamp(1em, 1vw, 1.5em);
-            }
-          }
-        }
-      }
-    }
-
-    &--footer {
-      padding-block: 1.5em 2em;
-      position: relative;
-      // line
-      &::before {
-        content: "";
-        @include absolute(0,0,0,auto);
-        height: 1px;
-        width: 60%;
-        background-color: var(--clr-line);
-        border-radius: 50% / 3vmax;
-      }
-    }
-  }
 }

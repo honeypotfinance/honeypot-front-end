@@ -54,8 +54,8 @@ div.v-card::before {background: transparent !important}
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
 @include reducedMotion {
   ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    width: var(--w-scroll);
+    height: var(--w-scroll);
     background: var(--clr-bg-scroll);
     // &:hover {background: var(--clr-bg-scroll)}
   }
@@ -65,8 +65,8 @@ div.v-card::before {background: transparent !important}
   }
   body {
     &::-webkit-scrollbar {
-      width: 10px;
-      height: 10px
+      width: calc(var(--w-scroll) + 2px);
+      height: calc(var(--w-scroll) + 2px)
     }
   }
 }
@@ -76,7 +76,7 @@ div.v-card::before {background: transparent !important}
 /* // // defautl color // // */ 
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
 :is(span, p, a, h1, h2, h3, h4, h5, h6, button, label, ul, img, button i, div i, input, textarea, th, td, .v-list-item__title,
-.v-input .v-input__slot *, .v-data-footer__select, .v-data-footer__pagination, .v-data-footer__icons::before):not(.not_clr, .not) {
+.v-tab, .v-input .v-input__slot *, .v-data-footer__select, .v-data-footer__pagination, .v-data-footer__icons::before):not(.not_clr, .not) {
   color: var(--c);
   -webkit-text-stroke: var(--stroke, initial);
   -moz-text-stroke: var(--stroke, initial);
@@ -167,53 +167,61 @@ body {background: var(--bg-ap)}
 /* // // typography // // */ 
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
 :is(span, p, a, h1, h2, h3, h4, h5, h6, button, label, ul, img, button i, div i, input, textarea, th, td, .v-list-item__title,
-.v-input .v-input__slot *, .v-data-footer__select, .v-data-footer__pagination, .v-data-footer__icons::before):not(.not_typography, .not) {
+.v-tab, .v-input .v-input__slot *, .v-data-footer__select, .v-data-footer__pagination, .v-data-footer__icons::before):not(.not_typography, .not) {
   font-weight: var(--fw);
 }
-* {font-family: var(--font1)}
-img:not(.not_typography, .not) {font-family: var(--font2)}
-a:not(.not_typography, .not) {text-decoration: none}
-button:not(.not_typography, .not) {&::first-letter, & ::first-letter {text-transform: uppercase}}
-:is(p, a, span, h1, h2, h3, h4, h5, h6):not(.not_typography, .not) {line-height: 1}
+#__layout > * {font-family: var(--font1)} // default font family
+* {font-family: inherit}
+button:not(.not_typography, .not) {
+  &::first-letter, & ::first-letter {
+    text-transform: var(--tt-first, uppercase)
+  }
+}
+:is(a, span, h1, h2, h3, h4, h5, h6):not(.not_typography, .not) {line-height: 1}
 h1:not(.not_typography, .not) {
-  --fw: 700;
-
+  font-weight: var(--fw, 700);
   font-family: var(--font2);
-  font-size: var(--fs, clamp(1.8em, calc(2vw + 1em), 2em));
+  font-size: var(--fs, max(16px, 2.2em));
   letter-spacing: 0.03em;
 }
 h2:not(.not_typography, .not) {
-  --fw: 400;
-
+  font-weight: var(--fw, 400);
   font-family: var(--font1);
-  font-size: var(--fs, clamp(1.1em, calc(1.3125vw + 1em), 1.3125em));
+  font-size: var(--fs, max(16px, 1.3125em));
   letter-spacing: 0.03em;
 }
 h3:not(.not_typography, .not) {
-  --fw: 400;
-
+  font-weight: var(--fw, 400);
   font-family: var(--font1);
-  font-size: var(--fs, clamp(1em, calc(1.3125vw + 1em), 1.2em));
+  font-size: var(--fs, max(16px, 1.2em));
   letter-spacing: 0.03em;
 }
 p:not(.not_typography, .not) {
-  --fw: 400;
-  
+  font-weight: var(--fw, 400);
   font-family: var(--font1);
-  font-size: var(--fs, 1.05em);
+  font-size: var(--fs, max(13px, 1.05em));
   line-height: 1.1;
 }
+a:not(.not_typography, .not) {
+  text-decoration: none;
+  font-weight: var(--fw, 400);
+  font-family: var(--font1);
+  font-size: var(--fs, max(13px, 1em));
+}
 label:not(.v-input .v-label, .not_typography, .not) {
-  --fw: 700;
   --c: var(--accent);
   
+  font-weight: var(--fw, 700);
   font-family: var(--font2);
-  font-size: var(--fs, 0.8em);
+  font-size: var(--fs, max(12.8px, 0.8em));
   &.plain {
-    --fs: 1em;
-    --fw: 700;
+    font-size: var(--fs, 16px);
     --c: #fff;
   }
+}
+.hspan {
+  font-size: var(--fs, 16px);
+  text-decoration: var(--under, initial);
 }
 
 
@@ -260,6 +268,58 @@ img:not(.not_html, .not) {
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
 /* // //  vuetify classes (components) // // */ 
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
+
+//- data table -//
+.v-data-table {
+  --bg: transparent;
+  --spacing: 20px;
+  // th
+  --fs-th: max(14px, 1.1em);
+  --distance-th: 20px;
+  // td
+  --bg-td: var(--secondary);
+  --p-td: 20px;
+  --br-td: 30px;
+  --fs-td: max(16px, 1.3125em);
+
+  background-color: var(--bg) !important;
+  table {border-spacing: 0 var(--spacing) !important}
+
+  thead {
+    transform: translateY(var(--distance-th)) !important;
+    tr {
+      th {
+        border-bottom: none !important;
+        span {
+          font-size: var(--fs-th) !important;
+          font-weight: bold !important;
+          color: var(--accent) !important;
+        }
+      }
+    }
+  }
+
+  tbody {
+    tr {
+      background-color: var(--bg-td) !important;
+      td {
+        padding: var(--p-td) !important;
+        border-bottom: none !important;
+        &:not(:has(span)), span:not(.v-btn *) {font-size: var(--fs-td) !important}
+        &:first-of-type {border-radius: var(--br-td) 0 0 var(--br-td) !important}
+        &:last-of-type {border-radius: 0 var(--br-td) var(--br-td) 0 !important}
+      }
+    }
+  }
+
+  .v-btn {
+    &--icon {
+      --size: 40px;
+      width: var(--size) !important;
+      height: var(--size) !important;
+    }
+  }
+}
 
 //- avatar -//
 .v-avatar:not(.not_vuetify, .not) {
@@ -329,6 +389,8 @@ img:not(.not_html, .not) {
   --g: 1em;
   --tt: none;
   // tab
+  --w-tab: initial;
+  --h-tab: 100%;
   --p-tab: calc(var(--p) * 2);
   --br-tab: var(--br);
   --overflow: hidden;
@@ -352,11 +414,13 @@ img:not(.not_html, .not) {
       .v-tab {
         padding: var(--p-tab);
         min-width: max-content;
+        width: var(--w-tab);
+        height: var(--h-tab);
         border-radius: var(--br-tab);
         overflow: var(--overflow);
         text-transform: var(--tt);
         color: var(--c);
-        font-size: var(--fs, 14px);
+        font-size: var(--fs, max(14px, 1em));
         & > * {
           font-size: 1em;
           color: var(--c);
@@ -429,7 +493,7 @@ img:not(.not_html, .not) {
   --mr: none;
 
   color: var(--c);
-  font-size: var(--fs, 1em);
+  font-size: var(--fs, max(14px, 1em));
   max-height: 2.25em;
   transform: var(--t);
   filter: var(--f);
@@ -441,6 +505,11 @@ img:not(.not_html, .not) {
   }
   .v-btn__content {
     display: flex;
+  }
+  
+  &.v-btn--disabled {
+    opacity: .5;
+    background-color: var(--bg, var(--primary)) !important;
   }
 }
 
@@ -479,7 +548,7 @@ img:not(.not_html, .not) {
   // icon
   --fs-icon: var(--fs, 1.2em);
   // label
-  --fs-label: 1em;
+  --fs-label: var(--fs);
   --fw-label: var(--fw);
   --ff-label: var(--ff);
   --tt-label: var(--tt);
@@ -520,7 +589,7 @@ img:not(.not_html, .not) {
   // text //
   & :is(input[type], button[type], textarea, .v-select__selection) {
     color: var(--c);
-    font-size: var(--fs, 1.2em);
+    font-size: var(--fs, max(14px, 1.2em));
     font-weight: var(--fw);
     font-family: var(--ff);
     text-transform: var(--tt);
@@ -585,7 +654,7 @@ img:not(.not_html, .not) {
     color: var(--c) !important;
     border: var(--b) !important;
     border-radius: 50%;
-    font-size: var(--fs, 0.75em);
+    font-size: var(--fs, max(14px, 0.75em));
     font-weight: var(--fw);
     transform: var(--t);
     -webkit-text-stroke: var(--stroke) var(--c);
@@ -600,17 +669,22 @@ img:not(.not_html, .not) {
 .v-menu__content {overscroll-behavior: contain}
 
 .v-select-list {
+  font-size: var(--resizer);
   font-family: var(--font2) !important;
   background: var(--secondary) !important;
-  border-radius: 0 $border-btn $border-btn $border-btn !important;
+  border-radius: $border-btn !important;
   overflow: hidden;
   :is(.v-list-item__title, span) {
+    font-size: 1em;
     color: #ffffff !important;
     &::first-letter {text-transform: uppercase}
   }
-  .v-list-item--active {
-    background: $clr-btn !important;
-    :is(.v-list-item__title, span) {color: $clr-text-btn !important}
+  .v-list-item {
+    min-height: 3em;
+    &--active {
+      background: $clr-btn !important;
+      :is(.v-list-item__title, span) {color: $clr-text-btn !important}
+    }
   }
 }
 
@@ -640,14 +714,4 @@ img:not(.not_html, .not) {
 //- cards -//
 .card {
   @include card;
-}
-
-//- close -//
-.close {
-  --d: 0;
-  --t: var(--d);
-  --r: var(--d);
-  position: absolute !important;
-  top: var(--t) !important;
-  right: var(--r) !important;
 }

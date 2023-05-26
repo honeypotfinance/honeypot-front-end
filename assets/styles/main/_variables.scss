@@ -9,9 +9,9 @@
   --secondary: #1A1917;
   --accent: #574F42;
   --active: var(--primary);
-  --error: #ff4081;
-  --warning: #FFC260;
-  --success: #00A478;
+  --error: #B65C58;
+  --warning: #FFD566;
+  --success: #38A169;
   // --clr-gradient: linear-gradient(to right top,#356D74,#2A505C,#21394A,#1A293D,#172035,#161D33,#161E34,#192539,#1E3143,#244251,#2D5862,#387378,#449492,#53B9B1,#63E2D2);
   --c: var(--clr);
   /* // // themes // // */
@@ -58,14 +58,19 @@
   /* // // fonts // // */
   --font1: 'DM Sans', sans-serif;
   --font2: 'Segoe', sans-serif;
+  --font3: 'Inter', sans-serif;
+  --font4: 'Poppins', sans-serif;
   --fw: initial;
   /* // // sizes // // */
+  --resizer: clamp(12px, 1vw, 16px);
+  --resizer-mobile: clamp(10px, 1.5vw, 12px);
   --margin-global: 9em; // too can use 6em
   @include media(max, small) {--margin-global: clamp(1em, 5vw, 4em)}
   --parent: 1600px;
   --subparent: 1900px;
   --h-navbar: 100px;
   @include media(max, small) {--h-navbar: 80px}
+  --w-scroll: 8px;
   /* // // shadows // // */
   --sombra-filter: drop-shadow(0px 4px 1px rgba(0, 0, 0, 0.3));
   --sombra-card: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -85,9 +90,9 @@ $sombra-filter: drop-shadow(0px 4px 1px rgba(0, 0, 0, 0.3));
 $primary:           #FFCD4D;
 $secondary:         #1A1917;
 $accent:            #574F42;
-$error:             #ff4081;
-$warning:           #FFC260;
-$success:           #00A478;
+$error:             #B65C58;
+$warning:           #FFD566;
+$success:           #38A169;
 $info:              #9013FE;
 $label:             #6e6e6e;
 $text-grey:         #b9b9b9;
@@ -118,7 +123,7 @@ $border-card: 4vmax;
 //========== Buttons ==========//
 $button-shadow: 0px 3px 11px 0px #E8EAFC, 0 3px 3px -2px #B2B2B21A, 0 1px 8px 0 #9A9A9A1A;
 $sombra-btn: 0px 4px 4px rgba(0, 0, 0, 0.25);
-$border-btn: 2vmax;
+$border-btn: 10px;
 
 //========== boxes ==========//
 $clip-path: polygon(
@@ -242,7 +247,7 @@ $skew-left: skewX(-12deg) translateX(-1px);
   --g: 5px;
   --br: 30px;
   --bs: none;
-  --fs: 1em;
+  --fs: max(13px, 1em);
   --fw: 700;
   --tt: capitalize !important;
   --ls: normal;
@@ -278,6 +283,13 @@ $skew-left: skewX(-12deg) translateX(-1px);
     display: flex;
     gap: var(--g);
   }
+
+  &.stylish {
+    --bg: linear-gradient(109.68deg, #F7931A 5.56%, #FFCD4D 85.08%);
+    --fs: 21px;
+    --h: 51px;
+    @include media(max, small) {--c: #fff !important}
+  }
 }
 
 @mixin btn2() {
@@ -295,7 +307,7 @@ $skew-left: skewX(-12deg) translateX(-1px);
   --br: 30px;
   &:has(> .v-btn__content > :only-child) {--br: 10px};
   --bs: none;
-  --fs: 1em;
+  --fs: max(13px, 1em);
   --fw: 400;
   --ls: normal;
   --lh: 1;

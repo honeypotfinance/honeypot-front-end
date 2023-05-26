@@ -1,0 +1,40 @@
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
+// // // pools // // // 
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
+#pools {
+  @include parent;
+  padding-inline: var(--margin-global);
+
+  &-header {
+    --padding-left: 40px;
+    h1 {
+      padding-left: var(--padding-left);
+      --fs: 2.5em;
+    }
+    
+    .v-card.card {
+      --p: 10px var(--padding-left);
+      --br: 20px;
+      @include media(max, 600px) {flex-direction: column}
+      label {
+        --fs: 1.3125em;
+        --fw: 300;
+        font-family: var(--font4);
+        text-transform: capitalize;
+      }
+      span {
+        font-size: 2.6025em;
+        --fw: 700;
+      }
+    }
+  }
+
+  .v-data-table tbody tr:not(:has(.nopevents)) {
+    cursor: pointer;
+    &:hover {background-color: rgba($secondary, .35) !important}
+  }
+  .v-data-table tbody tr:has(.nopevents) {
+    background-color: transparent !important;
+    td {padding: 40px !important}
+  }
+}

@@ -20,9 +20,9 @@
     @include media(max, small) {
       padding-bottom: 80px;
       flex-direction: column;
-      > :nth-child(1) {order: 0}
-      > :nth-child(2) {order: 1}
-      > :nth-child(3) {order: 2}
+      > :nth-child(1) {display: none}
+      > :nth-child(2) {order: 0}
+      > :nth-child(3) {display: none}
       > * {
         --size: clamp(280px, 1vw, 300px);
         width: var(--size) !important;
@@ -35,6 +35,7 @@
 
     .middle {
       --size: max-content;
+      @include media(max, 500px) {--size: 100%}
       width: var(--size) !important;
       max-width: var(--size) !important;
       > div.space {
@@ -53,6 +54,7 @@
       aside.target_drag {
         --size: 13em;
         @include media(max, 1360px) {--size: 288px}
+        @include media(max, 500px) {--size: 100%}
         width: var(--size) !important;
         max-width: var(--size) !important;
         min-width: var(--size) !important;
@@ -63,6 +65,9 @@
           display: flex;
           flex-direction: column;
           justify-content: center;
+          @include media(max, small) {
+            * {text-align: center !important}
+          }
           > label {
             margin-top: 10px;
             padding-inline: 12px;

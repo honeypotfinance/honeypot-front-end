@@ -21,6 +21,8 @@
   }
 
   .apexcharts-canvas {
+    width: 100% !important;
+    > svg {width: 100% !important}
     [class*="tooltip"] {
       padding: 12px;
       border-radius: 5px;
@@ -66,5 +68,62 @@
         span {color: #fff !important}
       }
     }
+  }
+  
+}
+
+#swap-chart {
+  .apexcharts-canvas path {
+    stroke: var(--c-trend) !important;
+  }
+}
+
+#pools-chart {
+  .controls {
+    .v-tabs {
+      --h: max(30px, 3.375em) !important;
+      --bg-active: hsl(43 100% 65% / .5);
+      --g: 5px;
+      --c: var(--accent);
+      @include media(max, small) {
+        --h: max(30px, 3.2em) !important;
+        --b: 1px solid #2D291D !important;
+        --p: 1px !important;
+        --p-tab: 0 5px !important;
+      }
+    }
+    .v-input {
+      font-size: var(--resizer) !important;
+      --w: 7.75em;
+      --h: 3.5em !important;
+      --p: 0 1.25em;
+      --bg: #292724;
+      --br: 10px;
+      --tt: capitalize;
+      --fw: 400;
+      @include media(max, small) {
+        --h: 3em !important;
+        --p: 0 5px;
+      }
+    }
+    @include media(max, small) {
+      .v-input, .v-tabs {
+        --fs: max(10px, 1em) !important;
+        --br: 4.85967px;
+      }
+    }
+
+    > div > span {
+      --fs: 28px;
+      @include media(max, 500px) {--fs: max(16px, 1.75em)}
+    }
+    > div > span + label {
+      --fs: 14px;
+      @include media(max, 500px) {--fs: max(10px, .875em)}
+    }
+  }
+  
+  .apexcharts-canvas:not(:has(.apexcharts-tooltip-box)) .apexcharts-tooltip {
+    display: none !important;
   }
 }

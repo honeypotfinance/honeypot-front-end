@@ -1,0 +1,32 @@
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
+// // // staking // // // 
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
+#staking {
+  @include parent;
+  padding-inline: var(--margin-global);
+  gap: 30px;
+
+  &-content {
+    margin-top: 1em;
+    gap: inherit;
+    max-width: 622px;
+    width: 100%;
+    margin-inline: auto;
+    
+    #controls {
+      .v-btn {
+        --bg: #292724;
+        --fs: 14px;
+        --br: 10px;
+        --h: 35px;
+        --p: 9px;
+        --min-w: 66px;
+        span {--c: #574F42}
+        &.active {
+          --bg: var(--primary);
+          span {--c: #000}
+        }
+      }
+    }
+  }
+}

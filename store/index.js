@@ -16,6 +16,12 @@ export const state = () => ({
     balance: 0,
     dataSocial: [],
   },
+  swapReview: {
+    tokenFrom: undefined,
+    priceFrom: undefined,
+    tokenTo: undefined,
+    priceTo: undefined,
+  }
 });
 
 export const mutations = {
@@ -28,23 +34,25 @@ export const mutations = {
     if (theme === "light") { state.overlay.opacity = 0.2; state.overlay.color = "white" }
     else { state.overlay.opacity = 0.5; state.overlay.color = "black" }
   },
+  setSwapReview(state, data) {
+    state.swapReview = data
+  },
   setData(state, data) {
     // if (window.$nuxt.$wallet.isSignedIn() && typeof data === 'string') {
     //   state.dataUser.avatar = require('~/assets/sources/avatars/avatar.png');
     //   state.dataUser.accountId = data;
     // };
   },
-  signIn(state, data = "0x39283....9302") {
+  signIn(state, data = "0x392832131231239302") {
     try {
       // make login <-----------------------------------------
-      if (/0+x/.test(data))
-        state.dataUser.accountId = data.limitString(7) + data.substring(data.length - 4, data.length);
+      if (/0+x/.test(data)) state.dataUser.accountId = data.cutString(7, 4);
       state.isLogged = true  // temporary
       // make login <-----------------------------------------
     // catch error
     } catch (err) {
-      this.$alert("cancel", {desc: err.message})
       console.error(err);
+      this.$alert("cancel", {desc: err.message})
     }
     // window.$nuxt.$wallet.requestSignIn(   <---- near version
     //   'contract.globaldv.testnet'
@@ -68,27 +76,19 @@ export const actions = {
 };
 
 export const getters = {
-  pagination: () => ({items, currentPage, itemsPerPage, search, filterA, filterB, filterC}) => {
-    // filters
-    let filters = items;
+  pagination: () => ({items, currentPage, itemsPerPage, search, filterA, filterB}) => {
+    let filters = [...items]
+
     // search
     if (search) filters = filters.filter(data => data.name.includes(search))
 
     return filters.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
   },
-  filters: () => ({items, search, filterA, filterB, filterC}) => {
-    // filters
-    let filters = items;
-    // filter A
-    if (filterA === 'my farms') filters = filters.filter(data => data.mine)
-    // // filter B
-    // if (filterB === 'featured') filters = filters.filter(data => data.featured)
-    // else if (filterB === 'stablecoin')  filters = filters.filter(data => data.stablecoin)
-    // // filter C
-    // if (filterC === 'tvl') filters = filters.filter(data => data.tvl)
-    // else if (filterC === 'apr')  filters = filters.filter(data => data.apr)
+  filters: () => ({items, search, filterA, filterB}) => {
+    let filters = [...items]
+
     // search
-    if (search) filters = filters.filter(data => `${data.tokenA}-${data.tokenB}`.includes(search))
+    if (search) filters = filters.filter(data => data.name.includes(search))
 
     return filters
   }

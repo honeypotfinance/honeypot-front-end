@@ -16,6 +16,7 @@
       v-model="filterA_model"
       :items="filterA"
       hide-details solo
+      clearable clear-icon="mdi-close"
       label="by Tier:"
       style="--p: 0 1em 0 2em"
       @change="$emit('filterA', filterA_model)"
@@ -51,6 +52,7 @@
       v-model="filterB_model"
       :items="filterB"
       hide-details solo
+      clearable clear-icon="mdi-close"
       label="Sort by:"
       style="--p: 0 1em 0 2em"
       @change="$emit('filterB', filterB_model)"

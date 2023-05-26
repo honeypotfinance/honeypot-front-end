@@ -1,0 +1,105 @@
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
+// // // farm-details // // // 
+// // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // /
+#farm-details {
+  @include parent;
+  padding-inline: var(--margin-global);
+
+  &-header {
+    h1 {
+      --fs: 2.2em;
+      @include media(max, small) {--fs: max(26px, 1.625em)}
+    }
+    
+    .container-profits {
+      font-size: clamp(12px, 1vw, 16px);
+      --fw: 700;
+      --max-w: 883px;
+      --br: 20px;
+      gap: 5px;
+
+      .grid {
+        --gtc: repeat(4, 1fr);
+        gap: 5px;
+        &.hide {
+          pointer-events: none;
+          filter: blur(10px)
+        }
+        @include media(max, 600px) {
+          --pi: center;
+          --gtc: repeat(2, 1fr);
+        }
+        @include media(max, 300px) {--gtc: 1fr}
+        
+        > div {min-width: 9.375em}
+      }
+      
+      * {font-family: var(--font1) !important}
+      label {
+        --fs: 1.3125em;
+        text-transform: capitalize;
+      }
+      span {
+        font-size: clamp(2em, 2.6vw, 2.6025em);
+        --fw: 700;
+      }
+    }
+  }
+
+  .controls {
+    @include media(max, small) {
+      > aside:first-child + aside {
+        flex-direction: row-reverse;
+        @include media(max, 300px) {
+          flex-direction: column-reverse;
+          align-items: flex-start;
+          justify-content: flex-start;
+        }
+        
+        .search {--bg: #1A1917}
+        
+        div.alignr {margin-left: 0 !important}
+      }
+    }
+  }
+
+  &-content {
+    --gs: clamp(20em, 20vw, 23.25em);
+    --pi: start center;
+    gap: 30px;
+    &:has(> :only-child, > :first-child:nth-last-child(2)) {
+      display: flex;
+      align-items: center;
+      > * {max-width: 23.25em !important}
+    }
+    // &:empty {
+    //   background: center no-repeat url(../../sources/icons/empty.png);
+    //   background-size: 12em;
+    // }
+    
+    :not(.v-btn span) {font-family: var(--font2)}
+    h3 {
+      --fs: 21px;
+      --fw: bold;
+      --stroke: .4px;
+    }
+    label:not(.plain) {--fs: 13px}
+
+    .v-btn {
+      margin-inline: auto;
+      &:not(:first-of-type) {
+        --bg: hsl(43, 100%, 65%, .5);
+        --c: #FFD566 !important;
+      }
+      @include media(max, small) {
+        --bg: hsl(43, 100%, 65%, .13) !important;
+        --c: #FFD566 !important;
+      }
+    }
+  }
+
+  .v-data-table tbody tr:has(.nopevents) {
+    background-color: transparent !important;
+    td {padding: 40px !important}
+  }
+}

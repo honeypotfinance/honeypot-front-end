@@ -4,8 +4,7 @@ export default {
   otherError: "An error ocurred",
   buttonTitle: "Home page",
   // alert component //
-  success: "SUCCESS!",
-  textSuccess: "Your changes have been successfully saved",
-  cancel: "ERROR!",
-  textCancel: "Something strange has happened, try again",
+  successMessage: "Transaction complete. View tx!",
+  warningMessage: "Pending Transaction",
+  cancelMessage: "Transaction failed. Please try again",
 };

@@ -7,7 +7,7 @@
     
     <v-main :class="wrapperSpace?'with':'without'" class="parent">
       <v-btn
-        v-show="$route.path !== '/swap'" id="swap-floating-button" class="btn" @click="$refs.swap.modalSwap = true"
+        v-show="!$route.path.includes('/swap')" id="swap-floating-button" class="btn" @click="$refs.swap.modalSwap = true"
         @mousedown="dragFloatingBtn($event)" @touchstart="dragFloatingBtn($event)">
         <v-icon>mdi-chevron-up</v-icon>
         <span>Swap</span>

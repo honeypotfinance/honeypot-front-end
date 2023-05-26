@@ -6,91 +6,76 @@
   padding-inline: var(--margin-global);
 
   &-header {
-    h1 {--fs: clamp(1.8em, 2vw + 1em, 2.2em)}
-    .container-profits {
-      --max-w: 883px;
-      --br: 20px;
-      --gaf: column;
-      gap: 5px;
-      @include media(max, small) {
-        text-align: center;
-        --gaf: row;
-        --gtc: repeat(2, 1fr);
-      }
-      @include media(max, 300px) {--gtc: 1fr}
-      &.hide {
-        filter: blur(10px)
-      }
-      
-      * {font-family: var(--font1) !important}
-      label {
-        --fs: 1.3125em;
-        text-transform: capitalize;
-      }
-      span {
-        font-size: 2.6025em;
-        --fw: 700;
-      }
-    }
-  }
+    h1 {--fs: 2.2em}
+    #profits {
+      font-size: var(--resizer);
+      @include media(max, 1159px) {justify-content: center !important}
+      .v-card {
+        --h: 150px;
+        --width: 21.875em;
+        max-width: var(--width) !important;
+        min-width: var(--width) !important;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        place-items: center;
+        &:last-of-type {--width: 24em}
+        &:first-of-type .divcol,
+        &:first-of-type + .v-card .divcol {min-width: 144.19px}
+        
+        @include media(max, 1159px) {--width: 24em}
+        @include media(max, small) {--width: 100% !important}
 
-  &-controls {
-    :not(label.plain) {font-family: 'Inter', sans-serif}
-    .v-btn {
-      --b: 1px solid var(--clr-line)
+        svg {
+          @include media(max, small) {
+            -webkit-filter: drop-shadow(0px 6px 6px var(--c-path)) drop-shadow(0px 6px 6px var(--c-path));
+            filter: drop-shadow(0px 6px 6px var(--c-path)) drop-shadow(0px 6px 6px var(--c-path));
+          }
+        }
+      }
+      label {
+        --fs: 16px;
+        --fw: 700;
+        min-width: max-content;
+        font-family: var(--font1);
+      }
+      span {font-family: var(--font2)}
+      .hspan {
+        --fw: 700;
+        --fs: 2.25em;
+        & + span {
+          --fw: 700;
+          font-size: 12px;
+        }
+      }
     }
   }
 
   &-content {
-    --gs: clamp(20em, 20vw, 23.25em);
-    --pi: start center;
-    gap: 30px;
-    min-height: 25em;
-    &:has(> :only-child, > :first-child:nth-last-child(2)) {
-      display: flex;
-      align-items: center;
-      > * {max-width: 23.25em !important}
+    > * {
+      height: max-content !important;
+      &:has(.nopevents) {min-height: 462.13px !important}
     }
-    // &:empty {
-    //   background: center no-repeat url(../../sources/icons/empty.png);
-    //   background-size: 12em;
-    // }
-    
-    :not(.v-btn span) {font-family: var(--font2)}
-    h3 {
-      --fs: 21px;
-      --fw: bold;
-      --stroke: .4px;
-    }
-    label:not(.plain) {--fs: 12px}
 
-    .v-sheet > img {
-      --w: calc(var(--w-sheet) / 2 + 6px);
-      --of: cover;
-      --p: 12px;
-      --br: 50%;
-      --b: 1px solid var(--clr-line);
-      --bg: var(--clr-card);
-      
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      margin: auto;
-      &:first-of-type {
-        left: 0;
-        z-index: 1;
-      }
-      &:last-of-type {
-        right: 0;
-        z-index: 0;
+    .solo-token {
+      --w: 36.96px;
+      @include media(max, x-small) {--w: 30px}
+    }
+    .dual-tokens {
+      --h-sheet: 35px;
+      @include media(max, x-small) {--h-sheet: 25px}
+      --b-img: none;
+      --p-img: 0;
+    }
+
+    > .v-sheet.card {
+      @include media(max, x-small) {
+        width: 100% !important;
       }
     }
 
-    .v-btn {
-      margin-inline: auto;
-      &:not(:first-of-type) {
-        --bg: hsl(43, 100%, 65%, .5) !important;
-        --c: #FFD566 !important;
+    .v-data-table {
+      @include media(max, x-small) {
+        --fs-td: 14px;
       }
     }
   }

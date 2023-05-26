@@ -7,7 +7,7 @@
 export default {
   name: "HomePage",
   beforeMount() {
-    this.$router.push("/swap")
+    this.$router.push(this.localePath("/swap"))
   }
 };
 </script>
